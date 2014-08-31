@@ -1,4 +1,4 @@
-package issuetracking.org.business;
+package issuetracking.org.service.generic;
 
 import java.util.List;
 

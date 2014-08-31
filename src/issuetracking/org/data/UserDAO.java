@@ -1,28 +1,32 @@
-package issuetracking.org.business;
+package issuetracking.org.data;
 
-import issuetracking.org.model.Comment;
+import issuetracking.org.model.User;
 import java.util.List;
 
-public class CommentService  implements GenericService<Comment>{
+/**
+ *
+ * @author peta
+ */
+public class UserDAO implements GenericDAO<User> {
 
     @Override
-    public boolean create(Comment obj) {
+    public long create(User obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Comment find(int id) {
+    public User find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Comment> findAll() {
+    public List<User> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Comment obj) {
+    public void update(User obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
