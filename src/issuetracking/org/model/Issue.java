@@ -1,4 +1,4 @@
-package issuetracking.org.datalayer;
+package issuetracking.org.model;
 
 import java.io.Serializable;
 import java.util.Date;

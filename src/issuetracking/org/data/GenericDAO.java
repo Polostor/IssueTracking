@@ -1,4 +1,4 @@
-package issuetracking.org.datalayer;
+package issuetracking.org.data;
 
 import java.util.List;
 

@@ -7,9 +7,9 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/issuetrack?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">pass</property>
-    <mapping class="issuetracking.org.datalayer.Comment"/>
-    <mapping class="issuetracking.org.datalayer.Issue"/>
-    <mapping class="issuetracking.org.datalayer.Project"/>
-    <mapping class="issuetracking.org.datalayer.User"/>
+    <mapping class="issuetracking.org.model.Comment"/>
+    <mapping class="issuetracking.org.model.Issue"/>
+    <mapping class="issuetracking.org.model.Project"/>
+    <mapping class="issuetracking.org.model.User"/>
   </session-factory>
 </hibernate-configuration>

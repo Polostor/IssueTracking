@@ -1,4 +1,4 @@
-package issuetracking.org.businesslayer;
+package issuetracking.org.business;
 
 import java.util.List;
 

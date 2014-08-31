@@ -1,6 +1,6 @@
-package issuetracking.org.businesslayer;
+package issuetracking.org.business;
 
-import issuetracking.org.datalayer.User;
+import issuetracking.org.model.User;
 import java.util.List;
 
 public class UserService implements GenericService<User>{

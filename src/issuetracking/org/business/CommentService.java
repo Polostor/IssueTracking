@@ -1,27 +1,27 @@
-package issuetracking.org.businesslayer;
+package issuetracking.org.business;
 
-import issuetracking.org.datalayer.Project;
+import issuetracking.org.model.Comment;
 import java.util.List;
 
-public class ProjectService implements GenericService<Project>{
+public class CommentService  implements GenericService<Comment>{
 
     @Override
-    public boolean create(Project obj) {
+    public boolean create(Comment obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Project find(int id) {
+    public Comment find(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Project> findAll() {
+    public List<Comment> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Project obj) {
+    public boolean update(Comment obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
