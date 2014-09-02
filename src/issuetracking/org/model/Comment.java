@@ -24,9 +24,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Comment.findByComment", query = "SELECT c FROM Comment c WHERE c.comment = :comment"),
     @NamedQuery(name = "Comment.findByCommentdate", query = "SELECT c FROM Comment c WHERE c.commentdate = :commentdate")})
 public class Comment implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idcomment")
     private Integer idcomment;
@@ -45,8 +46,11 @@ public class Comment implements Serializable {
     public Comment() {
     }
 
-    public Comment(Integer idcomment) {
-        this.idcomment = idcomment;
+    public Comment(String comment, Date commentdate, User author, Issue issue) {
+        this.comment = comment;
+        this.commentdate = commentdate;
+        this.author = author;
+        this.issue = issue;
     }
 
     public Integer getIdcomment() {
@@ -111,7 +115,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.Comment[ idcomment=" + idcomment + " ]";
+        return "issuetracking.org.datalayer.Comment[ idcomment=" + idcomment + " comment=" + comment + " date=" + commentdate + " ]";
     }
-    
+
 }

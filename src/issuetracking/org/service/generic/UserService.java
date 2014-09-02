@@ -1,32 +1,20 @@
 package issuetracking.org.service.generic;
 
+import issuetracking.org.dao.UserDAO;
 import issuetracking.org.model.User;
-import java.util.List;
 
-public class UserService implements GenericService<User>{
+public class UserService extends GenericService<User> {
 
-    @Override
-    public boolean create(User obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UserService() {
+        this.gDAO = new UserDAO();
     }
 
-    @Override
-    public User find(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<User> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean update(User obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public boolean authenticate(String name, String pass) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User u = (User) ((UserDAO) gDAO).findByNick(name);
+        if (u == null) {
+            return false;
+        }
+        return u.getPass().equals(pass);
     }
-    
+
 }

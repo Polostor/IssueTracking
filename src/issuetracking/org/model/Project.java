@@ -40,12 +40,7 @@ public class Project implements Serializable {
     public Project() {
     }
 
-    public Project(Integer idproject) {
-        this.idproject = idproject;
-    }
-
-    public Project(Integer idproject, String name) {
-        this.idproject = idproject;
+    public Project(String name) {
         this.name = name;
     }
 

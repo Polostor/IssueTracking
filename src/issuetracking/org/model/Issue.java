@@ -62,12 +62,7 @@ public class Issue implements Serializable {
     public Issue() {
     }
 
-    public Issue(Integer idissue) {
-        this.idissue = idissue;
-    }
-
-    public Issue(Integer idissue, int status, int priority) {
-        this.idissue = idissue;
+    public Issue(int status, int priority) {
         this.status = status;
         this.priority = priority;
     }

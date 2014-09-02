@@ -44,13 +44,8 @@ public class User implements Serializable {
 
     public User() {
     }
-
-    public User(Integer iduser) {
-        this.iduser = iduser;
-    }
-
-    public User(Integer iduser, String nick, String pass) {
-        this.iduser = iduser;
+    
+    public User(String nick, String pass) {
         this.nick = nick;
         this.pass = pass;
     }
@@ -128,7 +123,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.User[ iduser=" + iduser + " ]";
+        return "issuetracking.org.datalayer.User[ iduser=" + iduser + " nick="+nick+" pass="+ pass +" ]";
     }
     
 }
