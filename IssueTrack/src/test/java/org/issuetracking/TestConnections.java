@@ -22,7 +22,7 @@ public class TestConnections {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("Where is your MySQL JDBC Driver?");
+            System.out.println("TEST: Where is MySQL JDBC Driver?");
             e.printStackTrace();
             return;
         }
@@ -35,46 +35,51 @@ public class TestConnections {
                     .getConnection("jdbc:mysql://localhost:3306/issuetrack", "root", "pass");
 
         } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
+            System.out.println("TEST: Connection Failed! Check output console");
             e.printStackTrace();
             return;
         }
 
         if (connection != null) {
-            System.out.println("You made it, take control your database now!");
+            System.out.println("TEST: Everything was done just well enought!");
         } else {
-            System.out.println("Failed to make connection!");
+            System.out.println("TEST: Failed to make connection!");
         }
+        System.out.println("---------------------------------------\n");
     }
 
     @Test
-    public void testNewUser() {
-        Connection connection = null;
-
-        try {
-            connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/issuetrack", "root", "pass");
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
-            e.printStackTrace();
-            return;
-        }
+    public void testUserService() {
         UserService us;
         us = new UserService();
         try {
             us.setUp();
         } catch (Exception e) {
-            System.out.println("MY legs fail me! Check output console for Hibernate.");
+            System.out.println("MY Services fail me! Check output console for Hibernate.");
             e.printStackTrace();
-            return;
         }
+        System.out.println("TEST: Everything was done just well enought!");
+        System.out.println("---------------------------------------\n");
+    }
 
-        if (us != null) {
-            System.out.println("Everything was done just well enought!");
-        } else {
-            System.out.println("Failed to make connection with Hibernate!");
+    @Test
+    public void testQueryUserService() {
+        UserService us;
+        us = new UserService();
+        try {
+            us.setUp();
+        } catch (Exception e) {
+            System.out.println("MY Services fail me! Check output console for Hibernate.");
+            e.printStackTrace();
         }
+        try {
+            System.out.println("\n" + us.getObj(1) + "\n");
+        } catch (Exception e) {
+            System.out.println("MY DB fail me! Check output console for Hibernate.");
+            e.printStackTrace();
+        }
+        System.out.println("TEST: Everything was done just well enought!");
+        System.out.println("---------------------------------------\n");
     }
 
 }

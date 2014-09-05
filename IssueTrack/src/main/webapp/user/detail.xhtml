@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head>
-	<title>IssueTracking</title>
+    <h:head>
+        <title>IssueTracking</title>
         <f:metadata>
-            <f:viewParam name="user_id" value="#{userService.user}" converter="#{userConverter}" />
+            <f:viewParam name="id" value="#{userService.getObj(id)}" converter="#{userConverter}"/>
         </f:metadata>
-</h:head>
-<h:body>
+    </h:head>
+    <h:body>
+        <h:message for="id" />
         <h2>IssueTracking website - User detail</h2>
         <h3>JSF made IssueTracking website</h3>
         <a href="list.xhtml">user list</a> <a href="new.xhtml">create new</a> <a href="edit.xhtml">edit</a><br/>
@@ -27,7 +28,7 @@
                 <h:inputText id="pass" value="#{userService.user.pass}" label="Password"  />
             </h:panelGrid>
         </h:form>
-        
+
         <a href="../index.xhtml">index</a>
-</h:body>
+    </h:body>
 </html>

@@ -14,7 +14,7 @@ import org.issuetracking.service.Generic.GenericServiceInterface;
 @SessionScoped
 public class GenericService<E> implements GenericServiceInterface<E>, Serializable {
 
-    protected E o;
+    protected E obj;
 
     @Inject
     GenericDAO gDAO;
@@ -25,24 +25,24 @@ public class GenericService<E> implements GenericServiceInterface<E>, Serializab
     }
 
     @Override
-    public boolean createO(E obj) throws Exception {
+    public boolean createObj(E obj) throws Exception {
         gDAO.create(obj);
         // TODO change as it is updted or not
         return true;
     }
 
     @Override
-    public E getO(int id) throws Exception {
+    public E getObj(int id) throws Exception {
         return (E) gDAO.find(id);
     }
 
     @Override
-    public List<E> getAllOs() throws Exception {
+    public List<E> getAllObjs() throws Exception {
         return gDAO.findAll();
     }
 
     @Override
-     public boolean updateO(E o) throws Exception {
+     public boolean updateObj(E o) throws Exception {
      gDAO.update(o);
      // TODO change as it is updted or not
      return true;
