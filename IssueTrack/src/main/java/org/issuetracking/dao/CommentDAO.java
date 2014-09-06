@@ -1,7 +1,7 @@
 package org.issuetracking.dao;
 
-import javax.ejb.Stateful;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 import org.issuetracking.model.Comment;
 
@@ -9,7 +9,7 @@ import org.issuetracking.model.Comment;
  *
  * @author peta
  */
-@Stateful
+@Stateless
 public class CommentDAO extends GenericDAO<Comment> {
 
     @Override

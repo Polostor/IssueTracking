@@ -1,28 +1,15 @@
-package org.issuetracking.service;
+package org.issuetracking.service.base;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import org.issuetracking.dao.GenericDAO;
-import org.issuetracking.service.Generic.GenericServiceInterface;
+import org.issuetracking.service.GenericServiceInterface;
 
-@ManagedBean
-@SessionScoped
 public class GenericService<E> implements GenericServiceInterface<E>, Serializable {
 
     protected E obj;
 
-    @Inject
     GenericDAO gDAO;
-
-    protected void setUp() throws Exception {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("IssueTrackingPU");
-        gDAO.setEntityManager(entityManagerFactory.createEntityManager());
-    }
 
     @Override
     public boolean createObj(E obj) throws Exception {

@@ -1,6 +1,7 @@
 package org.issuetracking.dao;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 import org.issuetracking.model.Project;
 
@@ -8,6 +9,7 @@ import org.issuetracking.model.Project;
  *
  * @author peta
  */
+@Stateless
 public class ProjectDAO extends GenericDAO<Project> {
 
     @Override

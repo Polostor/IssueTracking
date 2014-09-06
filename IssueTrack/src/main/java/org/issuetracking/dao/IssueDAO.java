@@ -1,6 +1,7 @@
 package org.issuetracking.dao;
 
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 import org.issuetracking.model.Issue;
 
@@ -8,6 +9,7 @@ import org.issuetracking.model.Issue;
  *
  * @author peta
  */
+@Stateless
 public class IssueDAO extends GenericDAO<Issue> {
 
     @Override

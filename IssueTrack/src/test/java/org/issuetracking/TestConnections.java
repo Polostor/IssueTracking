@@ -8,7 +8,7 @@ package org.issuetracking;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.issuetracking.service.UserService;
+import org.issuetracking.service.base.UserService;
 import org.junit.Test;
 
 /**
@@ -50,14 +50,8 @@ public class TestConnections {
 
     @Test
     public void testUserService() {
-        UserService us;
-        us = new UserService();
-        try {
-            us.setUp();
-        } catch (Exception e) {
-            System.out.println("MY Services fail me! Check output console for Hibernate.");
-            e.printStackTrace();
-        }
+        UserService us = new UserService();
+        // TODO - Proc the DB
         System.out.println("TEST: Everything was done just well enought!");
         System.out.println("---------------------------------------\n");
     }
@@ -67,12 +61,7 @@ public class TestConnections {
         UserService us;
         us = new UserService();
         try {
-            us.setUp();
-        } catch (Exception e) {
-            System.out.println("MY Services fail me! Check output console for Hibernate.");
-            e.printStackTrace();
-        }
-        try {
+            // TODO - find the problem!
             System.out.println("\n" + us.getObj(1) + "\n");
         } catch (Exception e) {
             System.out.println("MY DB fail me! Check output console for Hibernate.");

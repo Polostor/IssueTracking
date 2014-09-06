@@ -6,7 +6,6 @@
     <persistence-unit name="IssueTrackingPU">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/issuetrack"/>
@@ -14,6 +13,7 @@
             <property name="javax.persistence.jdbc.password" value="pass"/>
       
             <!-- Scan for annotated classes -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
