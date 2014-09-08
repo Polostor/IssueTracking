@@ -9,7 +9,7 @@ import javax.persistence.Query;
 public class GenericDAO<E> implements GenericDAOInterface<E> {
 
     @PersistenceContext(unitName = "IssueTrackingPU", type = PersistenceContextType.EXTENDED)
-    protected EntityManager entityManager;
+    public EntityManager entityManager;
 
     @Override
     public void create(E obj) {

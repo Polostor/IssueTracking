@@ -1,19 +1,22 @@
 package org.issuetracking.service.base;
 
+import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import org.issuetracking.dao.CommentDAO;
 import org.issuetracking.model.Comment;
 
-@Stateless
-public class CommentService extends GenericService<Comment> {
+@ManagedBean
+@ViewScoped
+public class CommentService extends GenericService<Comment> implements Serializable {
 
-    @Inject
+    @EJB
     CommentDAO gDAO;
 
     @Override
-    public boolean createObj(Comment obj) throws Exception {
+    public boolean create(Comment obj) throws Exception {
         gDAO.create(obj);
         // TODO change as it is updted or not
         return true;
@@ -25,20 +28,14 @@ public class CommentService extends GenericService<Comment> {
     }
 
     @Override
-    public List<Comment> getAllObjs() throws Exception {
+    public List<Comment> getAll() throws Exception {
         return gDAO.findAll();
     }
 
     @Override
-    public boolean updateObj(Comment o) throws Exception {
+    public boolean update(Comment o) throws Exception {
         gDAO.update(o);
         // TODO change as it is updted or not
         return true;
     }
-
-//    @Override
-//    public void setUp() throws Exception {
-//        gDAO = new CommentDAO();
-//        super.setUp();
-//    }
 }

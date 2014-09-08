@@ -1,19 +1,22 @@
 package org.issuetracking.service.base;
 
+import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import org.issuetracking.dao.UserDAO;
 import org.issuetracking.model.User;
 
-@Stateless
-public class UserService extends GenericService<User> {
+@ManagedBean
+@ViewScoped
+public class UserService extends GenericService<User> implements Serializable {
 
-    @Inject
-    UserDAO gDAO;
+    @EJB
+    public UserDAO gDAO;
 
     @Override
-    public boolean createObj(User obj) throws Exception {
+    public boolean create(User obj) throws Exception {
         gDAO.create(obj);
         // TODO change as it is updted or not
         return true;
@@ -25,20 +28,14 @@ public class UserService extends GenericService<User> {
     }
 
     @Override
-    public List<User> getAllObjs() throws Exception {
+    public List<User> getAll() throws Exception {
         return gDAO.findAll();
     }
 
     @Override
-    public boolean updateObj(User o) throws Exception {
+    public boolean update(User o) throws Exception {
         gDAO.update(o);
         // TODO change as it is updted or not
         return true;
     }
-
-//    @Override
-//    public void setUp() throws Exception {
-//        gDAO = new UserDAO();
-//        super.setUp();
-//    }
 }

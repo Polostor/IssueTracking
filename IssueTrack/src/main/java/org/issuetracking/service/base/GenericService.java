@@ -5,14 +5,14 @@ import java.util.List;
 import org.issuetracking.dao.GenericDAO;
 import org.issuetracking.service.GenericServiceInterface;
 
-public class GenericService<E> implements GenericServiceInterface<E>, Serializable {
+public abstract class GenericService<E> implements GenericServiceInterface<E>, Serializable {
 
     protected E obj;
 
     GenericDAO gDAO;
 
     @Override
-    public boolean createObj(E obj) throws Exception {
+    public boolean create(E obj) throws Exception {
         gDAO.create(obj);
         // TODO change as it is updted or not
         return true;
@@ -24,12 +24,12 @@ public class GenericService<E> implements GenericServiceInterface<E>, Serializab
     }
 
     @Override
-    public List<E> getAllObjs() throws Exception {
+    public List<E> getAll() throws Exception {
         return gDAO.findAll();
     }
 
     @Override
-     public boolean updateObj(E o) throws Exception {
+     public boolean update(E o) throws Exception {
      gDAO.update(o);
      // TODO change as it is updted or not
      return true;

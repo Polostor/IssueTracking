@@ -1,19 +1,22 @@
 package org.issuetracking.service.base;
 
+import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import org.issuetracking.dao.ProjectDAO;
 import org.issuetracking.model.Project;
 
-@Stateless
-public class ProjectService extends GenericService<Project> {
-    
-    @Inject
+@ManagedBean
+@ViewScoped
+public class ProjectService extends GenericService<Project> implements Serializable {
+
+    @EJB
     ProjectDAO gDAO;
 
     @Override
-    public boolean createObj(Project obj) throws Exception {
+    public boolean create(Project obj) throws Exception {
         gDAO.create(obj);
         // TODO change as it is updted or not
         return true;
@@ -25,20 +28,14 @@ public class ProjectService extends GenericService<Project> {
     }
 
     @Override
-    public List<Project> getAllObjs() throws Exception {
+    public List<Project> getAll() throws Exception {
         return gDAO.findAll();
     }
 
     @Override
-    public boolean updateObj(Project o) throws Exception {
+    public boolean update(Project o) throws Exception {
         gDAO.update(o);
         // TODO change as it is updted or not
         return true;
     }
-
-//    @Override
-//    public void setUp() throws Exception {
-//        gDAO = new ProjectDAO();
-//        super.setUp();
-//    }
 }
