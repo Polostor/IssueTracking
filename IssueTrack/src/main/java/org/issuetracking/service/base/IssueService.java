@@ -1,18 +1,13 @@
 package org.issuetracking.service.base;
 
-import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.ejb.Stateless;
 import org.issuetracking.dao.IssueDAO;
 import org.issuetracking.model.Issue;
 
-@ManagedBean
-@ViewScoped
-public class IssueService extends GenericService<Issue> implements Serializable {
+@Stateless
+public class IssueService extends GenericService<Issue> {
 
-    @EJB
     IssueDAO gDAO;
 
     @Override

@@ -81,7 +81,7 @@ public class TestConnections {
             us.gDAO.entityManager = Persistence.createEntityManagerFactory(null).createEntityManager();
             System.out.println("EntityManager OKey");
             
-            // If problem is there, it'll be most probably NamedQuery 
+            // If problem is there, it'll be most probably NamedQuery - SELECT u FROM User u
             List<User> l = us.getAll();
             System.out.println("+++++++++++++++++++++++++++++++++++++++");
             for (User u : l) {

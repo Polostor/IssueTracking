@@ -1,18 +1,13 @@
 package org.issuetracking.service.base;
 
-import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.ejb.Stateless;
 import org.issuetracking.dao.CommentDAO;
 import org.issuetracking.model.Comment;
 
-@ManagedBean
-@ViewScoped
-public class CommentService extends GenericService<Comment> implements Serializable {
-
-    @EJB
+@Stateless
+public class CommentService extends GenericService<Comment> {
+    
     CommentDAO gDAO;
 
     @Override
