@@ -20,9 +20,9 @@ public class TestConnections {
     @Test
     public void testNewConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("TEST: Where is MySQL JDBC Driver?");
+            System.out.println("TEST: Where is PGSQL JDBC Driver?");
             e.printStackTrace();
             return;
         }
@@ -32,7 +32,7 @@ public class TestConnections {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/issuetrack", "root", "pass");
+                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgres", "apassword");
 
         } catch (SQLException e) {
             System.out.println("TEST: Connection Failed! Check output console");
@@ -73,7 +73,7 @@ public class TestConnections {
             e.printStackTrace();
         }
         try {
-            System.out.println("\n" + us.getObj(1) + "\n");
+            System.out.println("\n" + us.getObj(1).toString() + "\n");
         } catch (Exception e) {
             System.out.println("MY DB fail me! Check output console for Hibernate.");
             e.printStackTrace();
