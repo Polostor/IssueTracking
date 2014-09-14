@@ -32,7 +32,7 @@ public class TestConnections {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgre", "apassword");
+                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgres", "apassword");
 
         } catch (SQLException e) {
             System.out.println("TEST: Connection Failed! Check output console");
@@ -73,7 +73,7 @@ public class TestConnections {
             e.printStackTrace();
         }
         try {
-            System.out.println("\n" + us.getObj(1) + "\n");
+            System.out.println("\n" + us.getObj(1).toString() + "\n");
         } catch (Exception e) {
             System.out.println("MY DB fail me! Check output console for Hibernate.");
             e.printStackTrace();

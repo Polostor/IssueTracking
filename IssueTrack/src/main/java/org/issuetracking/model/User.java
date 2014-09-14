@@ -124,6 +124,9 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
+        if(this.iduser==null){
+            return "No user was found!";
+        }
         return "issuetracking.org.datalayer.User[ iduser=" + iduser + " nick=" + nick + " pass=" + pass + " ]";
     }
 
