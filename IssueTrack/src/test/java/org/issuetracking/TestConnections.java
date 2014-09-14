@@ -20,7 +20,7 @@ public class TestConnections {
     @Test
     public void testNewConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.hibernate.dialect.PostgreSQLDialect");
         } catch (ClassNotFoundException e) {
             System.out.println("TEST: Where is MySQL JDBC Driver?");
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class TestConnections {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/issuetrack", "root", "pass");
+                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgre", "apassword");
 
         } catch (SQLException e) {
             System.out.println("TEST: Connection Failed! Check output console");

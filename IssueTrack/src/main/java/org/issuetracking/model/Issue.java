@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "issue")
+@Table(name = "Issue")
 @NamedQueries({
     @NamedQuery(name = "Issue.findAll", query = "SELECT i FROM Issue i"),
     @NamedQuery(name = "Issue.findByIdissue", query = "SELECT i FROM Issue i WHERE i.idissue = :idissue"),
