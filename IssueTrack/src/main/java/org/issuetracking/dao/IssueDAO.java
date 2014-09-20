@@ -2,8 +2,10 @@ package org.issuetracking.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+
 import org.issuetracking.model.Issue;
 
 /**
@@ -21,9 +23,9 @@ public class IssueDAO extends GenericDAO<Issue> {
 
     @Override
     public Issue find(long id) {
-        Query query = em.createQuery("SELECT c FROM Issue c WHERE c.id = :id");
-        query.setParameter("id", id);
-        Issue iss = (Issue)query.getSingleResult();
+        final Query query = em.createQuery("SELECT b FROM Issue b WHERE b.id = :id")
+                .setParameter("id", id);
+        Issue iss = (Issue) query.getSingleResult();
         if (iss == null) {
             iss = new Issue();
         }
@@ -32,8 +34,8 @@ public class IssueDAO extends GenericDAO<Issue> {
 
     @Override
     public List<Issue> findAll() {
-        Query query = em.createQuery("SELECT c FROM Issue c ORDER BY c.id DESC");
-        List<Issue> entries = query.getResultList();
+        List<Issue> entries = em.createQuery("SELECT c FROM Issue c ORDER BY c.id ASC")
+                .getResultList();
         if (entries == null) {
             entries = new ArrayList<Issue>();
         }

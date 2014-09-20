@@ -12,39 +12,27 @@ import org.issuetracking.service.Generic.GenericServiceInterface;
 
 @ManagedBean
 @SessionScoped
-public class GenericService<E> implements GenericServiceInterface<E>, Serializable {
+public abstract class GenericService<E> implements GenericServiceInterface<E>, Serializable {
 
-    protected E obj;
-
-    @EJB
     GenericDAO gDAO;
 
-    protected void setUp() throws Exception {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("IssueTrackingPU");
-        gDAO.setEntityManager(entityManagerFactory.createEntityManager());
-    }
-
     @Override
-    public boolean createObj(E obj) throws Exception {
+    public void create(E obj) {
         gDAO.create(obj);
-        // TODO change as it is updted or not
-        return true;
     }
 
     @Override
-    public E getObj(int id) throws Exception {
+    public E getObj(long id) {
         return (E) gDAO.find(id);
     }
 
     @Override
-    public List<E> getAllObjs() throws Exception {
+    public List<E> getAllObjs() {
         return gDAO.findAll();
     }
 
     @Override
-     public boolean updateObj(E o) throws Exception {
-     gDAO.update(o);
-     // TODO change as it is updted or not
-     return true;
-     }
+    public void update(E o) {
+        gDAO.update(o);
+    }
 }

@@ -20,7 +20,12 @@
         <h:message for="id" />
         <h2>IssueTracking website - User detail</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">user list</a> <a href="new.xhtml">create new</a> <a href="edit.xhtml">edit</a><br/>
+
+        <h:link value="user list" outcome="list"/> - 
+        <h:link value="create new" outcome="new"/> - 
+        <h:link value="edit" outcome="edit" >
+            <f:param name="id" value="#{looserBean.id}" />
+        </h:link>
 
         <h:messages />
 

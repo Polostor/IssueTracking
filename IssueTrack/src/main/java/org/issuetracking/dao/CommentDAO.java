@@ -23,19 +23,19 @@ public class CommentDAO extends GenericDAO<Comment> {
 
     @Override
     public Comment find(long id) {
-        Query query = em.createQuery("SELECT c FROM Comment c WHERE c.id = :id");
-        query.setParameter("id", id);
-        Comment com = (Comment)query.getSingleResult();
-        if (com == null) {
-            com = new Comment();
+        final Query query = em.createQuery("SELECT b FROM Comment b WHERE b.id = :id")
+                .setParameter("id", id);
+        Comment comm = (Comment) query.getSingleResult();
+        if (comm == null) {
+            comm = new Comment();
         }
-        return com;
+        return comm;
     }
 
     @Override
     public List<Comment> findAll() {
-        Query query = em.createQuery("SELECT c FROM Comment c ORDER BY c.id DESC");
-        List<Comment> entries = query.getResultList();
+        List<Comment> entries = em.createQuery("SELECT c FROM Comment c ORDER BY c.id ASC")
+                .getResultList();
         if (entries == null) {
             entries = new ArrayList<Comment>();
         }

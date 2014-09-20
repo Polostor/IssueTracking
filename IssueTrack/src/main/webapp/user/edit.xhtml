@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
+    
     <ui:define name="meta">
         <f:metadata>
             <f:viewParam name="id" value="#{looserBean.id}" />
@@ -18,7 +19,12 @@
     <h:body>
         <h2>IssueTracking website - User Edit</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">user list</a> <a href="new.xhtml">create new</a> <a href="list.xhtml">detail</a><br/>
+
+        <h:link value="user list" outcome="list"/> - 
+        <h:link value="create new" outcome="new"/> - 
+        <h:link value="detail" outcome="detail" >
+            <f:param name="id" value="#{looserBean.id}" />
+        </h:link><br/>
 
         <h:messages />
 
@@ -30,7 +36,7 @@
                 <h:outputLabel for="pass" value="Password" />
                 <h:inputText id="pass" value="#{looserBean.looser.pass}" label="Password"  />
 
-                <h:commandButton action="#{looserService.editUser()}" value="Save" />
+                <h:commandButton action="#{looserBean.updateLooser()}" value="Save" />
             </h:panelGrid>
         </h:form>
 

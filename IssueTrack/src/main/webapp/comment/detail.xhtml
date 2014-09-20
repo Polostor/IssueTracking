@@ -3,7 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{commentBean.id}" />
+            <f:event type="preRenderView" listener="#{commentBean.commentById()}" />
+        </f:metadata>
+    </ui:define>
 
 <h:head>
 	<title>IssueTracking</title>
@@ -11,9 +19,25 @@
 <h:body>
         <h2>IssueTracking website - Comment detail</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">comment list</a> <a href="new.xhtml">create new</a> <a href="edit.xhtml">edit</a><br/>
-        
-	<p>#{indexBean.welcome}</p>
+
+        <h:link value="project list" outcome="list"/> - 
+        <h:link value="create new" outcome="new"/> - 
+        <h:link value="detail" outcome="detail" >
+            <f:param name="id" value="#{commentBean.id}" />
+        </h:link><br/>
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputLabel for="comment" value="Comment" />
+                <h:inputText id="comment" value="#{commentBean.comment.author}" label="Comment" />
+                
+                <h:outputLabel for="comment" value="Comment" />
+                <h:inputText id="comment" value="#{commentBean.comment.issue}" label="Comment" />
+                
+                <h:outputLabel for="comment" value="Comment" />
+                <h:inputText id="comment" value="#{commentBean.comment.comment}" label="Comment" />
+            </h:panelGrid>
+        </h:form>
         
         <a href="../index.xhtml">index</a>
 </h:body>

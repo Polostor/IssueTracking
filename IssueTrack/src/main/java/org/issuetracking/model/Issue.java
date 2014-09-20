@@ -3,8 +3,12 @@ package org.issuetracking.model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +22,7 @@ public class Issue implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @NotNull
@@ -35,17 +39,17 @@ public class Issue implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date issuedate;
     
-    /*@JoinColumn(name = "assignee", referencedColumnName = "idlooser")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "looserIdAssign")
     private Looser assignee;
     
-    @JoinColumn(name = "project", referencedColumnName = "idproject")
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "projectId")
     private Project project;
     
-    @JoinColumn(name = "reporter", referencedColumnName = "idlooser")
-    @ManyToOne(optional = false)
-    private Looser reporter;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "looserIdReport")
+    private Looser reporter;
     
 
     @PrePersist
@@ -93,7 +97,7 @@ public class Issue implements Serializable {
         this.issuedate = issuedate;
     }
 
-    /*public Looser getAssignee() {
+    public Looser getAssignee() {
         return assignee;
     }
 
@@ -115,7 +119,7 @@ public class Issue implements Serializable {
 
     public void setReporter(Looser reporter) {
         this.reporter = reporter;
-    }*/
+    }
 
     @Override
     public int hashCode() {

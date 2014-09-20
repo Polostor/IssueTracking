@@ -33,7 +33,7 @@ public class LooserDAO extends GenericDAO<Looser> {
     }
 
     public Looser findByNick(String s) {
-        Query query = em.createQuery("SELECT c FROM Looser c WHERE c.nick = :nick")
+        final Query query = em.createQuery("SELECT b FROM Looser b WHERE b.nick = :nick")
                 .setParameter("nick", s);
         Looser lose = (Looser) query.getSingleResult();
         if (lose == null) {

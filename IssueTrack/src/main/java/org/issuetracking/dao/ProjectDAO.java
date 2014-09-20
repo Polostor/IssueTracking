@@ -2,8 +2,10 @@ package org.issuetracking.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+
 import org.issuetracking.model.Project;
 
 /**
@@ -21,19 +23,19 @@ public class ProjectDAO extends GenericDAO<Project> {
 
     @Override
     public Project find(long id) {
-        Query query = em.createQuery("SELECT c FROM Project c WHERE c.id = :id");
-        query.setParameter("id", id);
-        Project p = (Project)query.getSingleResult();
-        if (p == null) {
-            p = new Project();
+        final Query query = em.createQuery("SELECT b FROM Project b WHERE b.id = :id")
+                .setParameter("id", id);
+        Project proj = (Project) query.getSingleResult();
+        if (proj == null) {
+            proj = new Project();
         }
-        return p;
+        return proj;
     }
 
     @Override
     public List<Project> findAll() {
-        Query query = em.createQuery("SELECT c FROM Project c ORDER BY c.id DESC");
-        List<Project> entries = query.getResultList();
+        List<Project> entries = em.createQuery("SELECT c FROM Project c ORDER BY c.id ASC")
+                .getResultList();
         if (entries == null) {
             entries = new ArrayList<Project>();
         }

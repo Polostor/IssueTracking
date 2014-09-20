@@ -2,10 +2,13 @@ package org.issuetracking.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +22,7 @@ public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @NotNull
@@ -29,14 +32,14 @@ public class Comment implements Serializable {
     @Past
     @Temporal(TemporalType.TIMESTAMP)
     private Date commentdate;
-    /*
-    @JoinColumn(name = "author", referencedColumnName = "idlooser")
-    @ManyToOne(optional = false)
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "looserId")
     private Looser author;
     
-    @JoinColumn(name = "issue", referencedColumnName = "idissue")
-    @ManyToOne(optional = false)
-    private Issue issue;    */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "issueId")
+    private Issue issue;
 
     @PrePersist
     private void onCreate() {
@@ -67,7 +70,7 @@ public class Comment implements Serializable {
         this.commentdate = commentdate;
     }
 
-    /*public Looser getAuthor() {
+    public Looser getAuthor() {
         return author;
     }
 
@@ -81,7 +84,7 @@ public class Comment implements Serializable {
 
     public void setIssue(Issue issue) {
         this.issue = issue;
-    }*/
+    }
 
     @Override
     public int hashCode() {

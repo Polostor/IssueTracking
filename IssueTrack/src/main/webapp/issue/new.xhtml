@@ -11,9 +11,31 @@
 <h:body>
         <h2>IssueTracking website - Create new Issue</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">issue list</a> <a href="list.xhtml">detail</a> <a href="edit.xhtml">edit</a><br/>
-        
-	<p>#{indexBean.welcome}</p>
+        <a href="list.xhtml">issue list</a>
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.assignee}" label="Description" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.reporter}" label="Description" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.project}" label="Description" />
+                
+                <h:outputLabel for="priority" value="Priority" />
+                <h:inputText id="priority" value="#{issueBean.issue.priority}" label="Priority" />
+                
+                <h:outputLabel for="status" value="Status" />
+                <h:inputText id="status" value="#{issueBean.issue.status}" label="Status" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.description}" label="Description" />
+
+                <h:commandButton action="#{issueBean.saveIssue()}" value="Save" />
+            </h:panelGrid>
+        </h:form>
         
         <a href="../index.xhtml">index</a>
 </h:body>
