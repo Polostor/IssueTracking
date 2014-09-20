@@ -2,9 +2,10 @@ package org.issuetracking.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ejb.Stateless;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
+
 import org.issuetracking.model.Looser;
 
 /**
@@ -22,25 +23,23 @@ public class LooserDAO extends GenericDAO<Looser> {
 
     @Override
     public Looser find(long id) {
-        Looser loos;
-        try {
-            loos = em.createQuery("SELECT c FROM Looser c WHERE c.id = :id", Looser.class)
-                    .setParameter("id", id)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            loos = new Looser();
+        final Query query = em.createQuery("SELECT b FROM Looser b WHERE b.id = :id")
+                .setParameter("id", id);
+        Looser lose = (Looser) query.getSingleResult();
+        if (lose == null) {
+            lose = new Looser();
         }
-        return loos;
+        return lose;
     }
 
     public Looser findByNick(String s) {
         Query query = em.createQuery("SELECT c FROM Looser c WHERE c.nick = :nick")
                 .setParameter("nick", s);
-        Looser loos = (Looser) query.getSingleResult();
-        if (loos == null) {
-            loos = new Looser();
+        Looser lose = (Looser) query.getSingleResult();
+        if (lose == null) {
+            lose = new Looser();
         }
-        return loos;
+        return lose;
     }
 
     @Override

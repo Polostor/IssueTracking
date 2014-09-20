@@ -4,15 +4,13 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
                      http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="IssueTrackingPU" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/issuetrack</jta-data-source>
         <class>org.issuetracking.model.Comment</class>
         <class>org.issuetracking.model.Issue</class>
         <class>org.issuetracking.model.Looser</class>
         <class>org.issuetracking.model.Project</class>
         <properties>       
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
         </properties>
     </persistence-unit>
 </persistence>

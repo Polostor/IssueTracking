@@ -12,13 +12,13 @@ import org.issuetracking.model.Looser;
 @Named(value = "looserBean")
 @RequestScoped
 public class LooserBean {
-    private Long id;
+    private long id;
     
-    public Long getId(){
+    public long getId(){
         return id;
     }
     
-    public void setId(Long id){
+    public void setId(long id){
         this.id = id;
     }
     
@@ -29,6 +29,11 @@ public class LooserBean {
 
     public List<Looser> getLoosers() {
         return gDAO.findAll();
+    }
+    
+    public Looser getLooserById() {
+        looser = gDAO.find(id);
+        return looser;
     }
 
     public Looser getLooser() {
@@ -41,7 +46,7 @@ public class LooserBean {
 
     public String saveLooser() {
         gDAO.create(looser);
-        return "success";
+        return "list.xhtml";
     }
     
     public void  init(){
