@@ -8,7 +8,7 @@ package org.issuetracking;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.issuetracking.service.UserService;
+import org.issuetracking.service.LooserService;
 import org.junit.Test;
 
 /**
@@ -21,6 +21,7 @@ public class TestConnections {
     public void testNewConnection() {
         try {
             Class.forName("org.postgresql.Driver");
+            System.out.println("TEST: We have JDBC Driver for PGSQL.");
         } catch (ClassNotFoundException e) {
             System.out.println("TEST: Where is PGSQL JDBC Driver?");
             e.printStackTrace();
@@ -32,8 +33,8 @@ public class TestConnections {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgres", "apassword");
-
+                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "peta", "pass");
+            System.out.println("TEST: We have have connected to /issuetrack database.");
         } catch (SQLException e) {
             System.out.println("TEST: Connection Failed! Check output console");
             e.printStackTrace();
@@ -49,11 +50,30 @@ public class TestConnections {
     }
 
     @Test
-    public void testUserService() {
-        UserService us;
-        us = new UserService();
+    public void testLooserService() {
+        LooserService us;
         try {
-            us.setUp();
+            us = new LooserService();
+        } catch (Exception e) {
+            us = new LooserService();
+            System.out.println("MY Services fail me! Check output console for Hibernate.");
+            e.printStackTrace();
+        }
+        System.out.println("TEST: Everything was done just well enought!");
+        System.out.println("---------------------------------------\n");
+    }
+
+    @Test
+    public void testQueryLooserService() {
+        LooserService us;
+        try {
+            us = new LooserService();
+            try {
+                System.out.println("\n" + us.getObj(1).toString() + "\n");
+            } catch (Exception e) {
+                System.out.println("MY DB fail me! Check output console for Hibernate.");
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             System.out.println("MY Services fail me! Check output console for Hibernate.");
             e.printStackTrace();
@@ -63,19 +83,18 @@ public class TestConnections {
     }
 
     @Test
-    public void testQueryUserService() {
-        UserService us;
-        us = new UserService();
+    public void testMultipleQueryLooserService() {
+        LooserService us;
         try {
-            us.setUp();
+            us = new LooserService();
+            try {
+                System.out.println("\n" + us.getAllObjs().toString() + "\n");
+            } catch (Exception e) {
+                System.out.println("MY DB fail me! Check output console for Hibernate.");
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             System.out.println("MY Services fail me! Check output console for Hibernate.");
-            e.printStackTrace();
-        }
-        try {
-            System.out.println("\n" + us.getObj(1).toString() + "\n");
-        } catch (Exception e) {
-            System.out.println("MY DB fail me! Check output console for Hibernate.");
             e.printStackTrace();
         }
         System.out.println("TEST: Everything was done just well enought!");

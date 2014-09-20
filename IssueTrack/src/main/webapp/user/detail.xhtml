@@ -7,9 +7,6 @@
 
     <h:head>
         <title>IssueTracking</title>
-        <f:metadata>
-            <f:viewParam name="id" value="#{userService.getObj(id)}" />
-        </f:metadata>
     </h:head>
     <h:body>
         <h:message for="id" />
@@ -22,10 +19,10 @@
         <h:form>        
             <h:panelGrid columns="2">                                  
                 <h:outputLabel for="nick" value="Nickname" />
-                <h:inputText id="nick" value="#{userService.user.nick}" label="Nickname" />
+                <h:inputText id="nick" value="#{looserBean.looser.nick}" label="Nickname" />
 
                 <h:outputLabel for="pass" value="Password" />
-                <h:inputText id="pass" value="#{userService.user.pass}" label="Password"  />
+                <h:inputText id="pass" value="#{looserBean.looser.pass}" label="Password"  />
             </h:panelGrid>
         </h:form>
 

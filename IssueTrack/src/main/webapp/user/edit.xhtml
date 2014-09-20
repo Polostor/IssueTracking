@@ -3,14 +3,17 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{looserBean.id}" />
+            <f:event type="preRenderView" listener="#{looserBean.init}" />
+        </f:metadata>
+    </ui:define>
 
     <h:head>
         <title>IssueTracking</title>
-        <f:metadata>
-            <f:viewParam name="user_id" value="#{userService.user}" />
-        </f:metadata>
-
     </h:head>
     <h:body>
         <h2>IssueTracking website - User Edit</h2>
@@ -22,12 +25,12 @@
         <h:form>        
             <h:panelGrid columns="2">                                  
                 <h:outputLabel for="nick" value="Nickname" />
-                <h:inputText id="nick" value="#{userService.user.nick}" label="Nickname" />
+                <h:inputText id="nick" value="#{looserBean.looser.nick}" label="Nickname" />
 
                 <h:outputLabel for="pass" value="Password" />
-                <h:inputText id="pass" value="#{userService.user.pass}" label="Password"  />
+                <h:inputText id="pass" value="#{looserBean.looser.pass}" label="Password"  />
 
-                <h:commandButton action="#{userService.editUser()}" value="Save" />
+                <h:commandButton action="#{looserService.editUser()}" value="Save" />
             </h:panelGrid>
         </h:form>
 

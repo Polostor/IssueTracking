@@ -8,44 +8,52 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Project implements Serializable {
+public class Looser implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue
-    private Integer id;
-    
-    @NotNull
-    @Size(min = 10, max = 100)
-    private String description;
-    
-    @NotNull
-    @Size(min = 4, max = 40)
-    private String name;
+    private Long id;
 
-    public Integer getId() {
+    @NotNull
+    @Size(min = 4, max = 16)
+    private String nick;
+
+    @NotNull
+    @Size(min = 4, max = 20)
+    private String pass;
+
+    public Looser() {
+    }
+
+    public Looser(String nick, String pass) {
+        this.nick = nick;
+        this.pass = pass;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Long idlooser) {
+        this.id = idlooser;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNick() {
+        return nick;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
-    public String getName() {
-        return name;
+    public String getPass() {
+        return pass;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     @Override
@@ -58,10 +66,10 @@ public class Project implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Project)) {
+        if (!(object instanceof Looser)) {
             return false;
         }
-        Project other = (Project) object;
+        Looser other = (Looser) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -70,7 +78,7 @@ public class Project implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.Project[ idproject=" + id + " ]";
+        return "issuetracking.org.datalayer.Looser[ idlooser=" + id + " nick=" + nick + " pass=" + pass + " ]";
     }
 
 }

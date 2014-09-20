@@ -2,63 +2,53 @@ package org.issuetracking.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "comment")
-@NamedQueries({
-    @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
-    @NamedQuery(name = "Comment.findByIdcomment", query = "SELECT c FROM Comment c WHERE c.idcomment = :idcomment"),
-    @NamedQuery(name = "Comment.findByComment", query = "SELECT c FROM Comment c WHERE c.comment = :comment"),
-    @NamedQuery(name = "Comment.findByCommentdate", query = "SELECT c FROM Comment c WHERE c.commentdate = :commentdate")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idcomment")
-    private Integer idcomment;
-    @Column(name = "comment")
+    @GeneratedValue
+    private Integer id;
+    
+    @NotNull
+    @Size(min = 10, max = 200)
     private String comment;
-    @Column(name = "commentdate")
+    
+    @Past
     @Temporal(TemporalType.TIMESTAMP)
     private Date commentdate;
-    @JoinColumn(name = "author", referencedColumnName = "iduser")
+    /*
+    @JoinColumn(name = "author", referencedColumnName = "idlooser")
     @ManyToOne(optional = false)
-    private User author;
+    private Looser author;
+    
     @JoinColumn(name = "issue", referencedColumnName = "idissue")
     @ManyToOne(optional = false)
-    private Issue issue;
+    private Issue issue;    */
 
-    public Comment() {
+    @PrePersist
+    private void onCreate() {
+        commentdate = new Date();
     }
 
-    public Comment(String comment, Date commentdate, User author, Issue issue) {
-        this.comment = comment;
-        this.commentdate = commentdate;
-        this.author = author;
-        this.issue = issue;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getIdcomment() {
-        return idcomment;
-    }
-
-    public void setIdcomment(Integer idcomment) {
-        this.idcomment = idcomment;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getComment() {
@@ -77,11 +67,11 @@ public class Comment implements Serializable {
         this.commentdate = commentdate;
     }
 
-    public User getAuthor() {
+    /*public Looser getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Looser author) {
         this.author = author;
     }
 
@@ -91,12 +81,12 @@ public class Comment implements Serializable {
 
     public void setIssue(Issue issue) {
         this.issue = issue;
-    }
+    }*/
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idcomment != null ? idcomment.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -107,7 +97,7 @@ public class Comment implements Serializable {
             return false;
         }
         Comment other = (Comment) object;
-        if ((this.idcomment == null && other.idcomment != null) || (this.idcomment != null && !this.idcomment.equals(other.idcomment))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -115,7 +105,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.Comment[ idcomment=" + idcomment + " comment=" + comment + " date=" + commentdate + " ]";
+        return "issuetracking.org.datalayer.Comment[ idcomment=" + id + " comment=" + comment + " date=" + commentdate + " ]";
     }
 
 }
