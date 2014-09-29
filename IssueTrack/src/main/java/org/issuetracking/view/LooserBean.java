@@ -34,7 +34,7 @@ public class LooserBean {
     }
 
     public Looser getLooserById() {
-        looser = gServ.getLooserById(id);
+        looser = gServ.getObjById(id);
         return looser;
     }
 
@@ -61,7 +61,7 @@ public class LooserBean {
         if (id == 0) {
             return "list.xhtml";
         }
-        looser = gServ.getLooserById(id);
+        looser = gServ.getObjById(id);
         return "";
     }
 

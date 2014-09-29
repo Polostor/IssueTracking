@@ -16,16 +16,8 @@ import org.issuetracking.model.Project;
 public class ProjectDAO extends GenericDAO<Project> {
 
     @Override
-    public Project create(Project obj) {
-        em.persist(obj);
-        return obj;
-    }
-
-    @Override
     public Project find(long id) {
-        final Query query = em.createQuery("SELECT b FROM Project b WHERE b.id = :id")
-                .setParameter("id", id);
-        Project proj = (Project) query.getSingleResult();
+        Project proj = em.find(Project.class, id);
         if (proj == null) {
             proj = new Project();
         }
@@ -40,11 +32,5 @@ public class ProjectDAO extends GenericDAO<Project> {
             entries = new ArrayList<Project>();
         }
         return entries;
-    }
-
-    @Override
-    public Project update(Project obj) {
-        em.merge(obj);
-        return obj;
     }
 }

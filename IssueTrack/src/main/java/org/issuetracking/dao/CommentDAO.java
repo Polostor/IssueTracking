@@ -16,16 +16,8 @@ import org.issuetracking.model.Comment;
 public class CommentDAO extends GenericDAO<Comment> {
 
     @Override
-    public Comment create(Comment obj) {
-        em.persist(obj);
-        return obj;
-    }
-
-    @Override
     public Comment find(long id) {
-        final Query query = em.createQuery("SELECT b FROM Comment b WHERE b.id = :id")
-                .setParameter("id", id);
-        Comment comm = (Comment) query.getSingleResult();
+        Comment comm = em.find(Comment.class, id);
         if (comm == null) {
             comm = new Comment();
         }
@@ -41,11 +33,4 @@ public class CommentDAO extends GenericDAO<Comment> {
         }
         return entries;
     }
-
-    @Override
-    public Comment update(Comment obj) {
-        em.merge(obj);
-        return obj;
-    }
-
 }

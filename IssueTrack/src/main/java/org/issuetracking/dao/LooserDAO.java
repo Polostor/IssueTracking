@@ -16,16 +16,8 @@ import org.issuetracking.model.Looser;
 public class LooserDAO extends GenericDAO<Looser> {
 
     @Override
-    public Looser create(Looser obj) {
-        em.persist(obj);
-        return obj;
-    }
-
-    @Override
     public Looser find(long id) {
-        final Query query = em.createQuery("SELECT b FROM Looser b WHERE b.id = :id")
-                .setParameter("id", id);
-        Looser lose = (Looser) query.getSingleResult();
+        Looser lose = em.find(Looser.class, id);
         if (lose == null) {
             lose = new Looser();
         }
@@ -33,9 +25,7 @@ public class LooserDAO extends GenericDAO<Looser> {
     }
 
     public Looser findByNick(String s) {
-        final Query query = em.createQuery("SELECT b FROM Looser b WHERE b.nick = :nick")
-                .setParameter("nick", s);
-        Looser lose = (Looser) query.getSingleResult();
+        Looser lose = em.find(Looser.class, s);
         if (lose == null) {
             lose = new Looser();
         }
@@ -51,11 +41,4 @@ public class LooserDAO extends GenericDAO<Looser> {
         }
         return entries;
     }
-
-    @Override
-    public Looser update(Looser obj) {
-        em.merge(obj);
-        return obj;
-    }
-
 }

@@ -24,7 +24,7 @@ public class LooserService extends GenericService<Looser> {
         gDAO.update(obj);
     }
     
-    public Looser getLooserById(long id) {
+    public Looser getObjById(long id) {
         return gDAO.find(id);
     }
 

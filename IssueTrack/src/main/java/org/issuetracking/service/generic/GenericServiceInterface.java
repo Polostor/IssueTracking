@@ -1,4 +1,4 @@
-package org.issuetracking.service.Generic;
+package org.issuetracking.service.generic;
 import java.util.List;
 
 public interface GenericServiceInterface<E> {

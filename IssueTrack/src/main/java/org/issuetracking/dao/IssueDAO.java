@@ -16,16 +16,8 @@ import org.issuetracking.model.Issue;
 public class IssueDAO extends GenericDAO<Issue> {
 
     @Override
-    public Issue create(Issue obj) {
-        em.persist(obj);
-        return obj;
-    }
-
-    @Override
     public Issue find(long id) {
-        final Query query = em.createQuery("SELECT b FROM Issue b WHERE b.id = :id")
-                .setParameter("id", id);
-        Issue iss = (Issue) query.getSingleResult();
+        Issue iss = em.find(Issue.class, id);
         if (iss == null) {
             iss = new Issue();
         }
@@ -40,11 +32,5 @@ public class IssueDAO extends GenericDAO<Issue> {
             entries = new ArrayList<Issue>();
         }
         return entries;
-    }
-
-    @Override
-    public Issue update(Issue obj) {
-        em.merge(obj);
-        return obj;
     }
 }
