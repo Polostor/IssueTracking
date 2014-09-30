@@ -33,7 +33,7 @@ public class TestConnections {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "peta", "pass");
+                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgres", "apassword");
             System.out.println("TEST: We have have connected to /issuetrack database.");
         } catch (SQLException e) {
             System.out.println("TEST: Connection Failed! Check output console");
