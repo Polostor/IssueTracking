@@ -1,8 +1,12 @@
 package org.issuetracking.dao;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+import java.util.List;
+>>>>>>> origin/master
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 
