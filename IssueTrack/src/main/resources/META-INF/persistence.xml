@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<<<<<<< HEAD
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="IssueTrackingPU" transaction-type="JTA">
+        <jta-data-source>jdbc/issuetrack</jta-data-source>
+        <class>org.issuetracking.model.Comment</class>
+        <class>org.issuetracking.model.Issue</class>
+        <class>org.issuetracking.model.Looser</class>
+        <class>org.issuetracking.model.Project</class>
+        <properties>       
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+=======
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence                                   
                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="IssueTrackingPU">
@@ -16,6 +28,7 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
+>>>>>>> origin/master
         </properties>
     </persistence-unit>
 </persistence>

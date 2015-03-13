@@ -2,85 +2,74 @@ package org.issuetracking.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "issue")
-@NamedQueries({
-    @NamedQuery(name = "Issue.findAll", query = "SELECT i FROM Issue i"),
-    @NamedQuery(name = "Issue.findByIdissue", query = "SELECT i FROM Issue i WHERE i.idissue = :idissue"),
-    @NamedQuery(name = "Issue.findByDesc", query = "SELECT i FROM Issue i WHERE i.description = :desc"),
-    @NamedQuery(name = "Issue.findByStatus", query = "SELECT i FROM Issue i WHERE i.status = :status"),
-    @NamedQuery(name = "Issue.findByPriority", query = "SELECT i FROM Issue i WHERE i.priority = :priority"),
-    @NamedQuery(name = "Issue.findByIssuedate", query = "SELECT i FROM Issue i WHERE i.issuedate = :issuedate")})
 public class Issue implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idissue")
-    private Integer idissue;
-    @Column(name = "description")
+    private Long id;
+    
+    @NotNull
+    @Size(min = 4, max = 200)
     private String description;
-    @Basic(optional = false)
-    @Column(name = "status")
+    
+    @NotNull
     private int status;
-    @Basic(optional = false)
-    @Column(name = "priority")
+    
+    @NotNull
     private int priority;
-    @Column(name = "issuedate")
+    
+    @Past
     @Temporal(TemporalType.TIMESTAMP)
     private Date issuedate;
-    @JoinColumn(name = "assignee", referencedColumnName = "iduser")
-    @ManyToOne(optional = false)
-    private User assignee;
-    @JoinColumn(name = "project", referencedColumnName = "idproject")
-    @ManyToOne(optional = false)
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "looserIdAssign")
+    private Looser assignee;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "projectId")
     private Project project;
-    @JoinColumn(name = "reporter", referencedColumnName = "iduser")
-    @ManyToOne(optional = false)
-    private User reporter;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "issue")
-    private List<Comment> commentList;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "looserIdReport")
+    private Looser reporter;
+    
 
-    public Issue() {
+    @PrePersist
+    private void onCreate() {
+        issuedate = new Date();
     }
 
-    public Issue(int status, int priority) {
-        this.status = status;
-        this.priority = priority;
+    public Long getId() {
+        return id;
     }
 
-    public Integer getIdissue() {
-        return idissue;
+    public void setId(Long idissue) {
+        this.id = idissue;
     }
 
-    public void setIdissue(Integer idissue) {
-        this.idissue = idissue;
-    }
-
-    public String getDesc() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDesc(String desc) {
+    public void setDescription(String desc) {
         this.description = desc;
     }
 
@@ -108,11 +97,11 @@ public class Issue implements Serializable {
         this.issuedate = issuedate;
     }
 
-    public User getAssignee() {
+    public Looser getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(User assignee) {
+    public void setAssignee(Looser assignee) {
         this.assignee = assignee;
     }
 
@@ -124,27 +113,18 @@ public class Issue implements Serializable {
         this.project = project;
     }
 
-    public User getReporter() {
+    public Looser getReporter() {
         return reporter;
     }
 
-    public void setReporter(User reporter) {
+    public void setReporter(Looser reporter) {
         this.reporter = reporter;
-    }
-
-    @XmlTransient
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idissue != null ? idissue.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -155,7 +135,7 @@ public class Issue implements Serializable {
             return false;
         }
         Issue other = (Issue) object;
-        if ((this.idissue == null && other.idissue != null) || (this.idissue != null && !this.idissue.equals(other.idissue))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -163,7 +143,7 @@ public class Issue implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.Issue[ idissue=" + idissue + " ]";
+        return "issuetracking.org.datalayer.Issue[ idissue=" + id + " ]";
     }
 
 }

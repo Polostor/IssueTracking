@@ -1,8 +1,14 @@
 package org.issuetracking.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+
 import org.issuetracking.model.Project;
 
 /**
@@ -13,25 +19,21 @@ import org.issuetracking.model.Project;
 public class ProjectDAO extends GenericDAO<Project> {
 
     @Override
-    public void create(Project obj) {
-        entityManager.persist(obj);
-    }
-
-    @Override
-    public Project find(int id) {
-        Query projectQuery = entityManager.createNamedQuery("Project.findByIdproject", Project.class);
-        projectQuery.setParameter("idproject", id);
-        return (Project) projectQuery.getSingleResult();
+    public Project find(long id) {
+        Project proj = em.find(Project.class, id);
+        if (proj == null) {
+            proj = new Project();
+        }
+        return proj;
     }
 
     @Override
     public List<Project> findAll() {
-        Query query = entityManager.createQuery("Project.findAll", Project.class);
-        return query.getResultList();
-    }
-
-    @Override
-    public void update(Project obj) {
-        entityManager.merge(obj);
+        List<Project> entries = em.createQuery("SELECT c FROM Project c ORDER BY c.id ASC")
+                .getResultList();
+        if (entries == null) {
+            entries = new ArrayList<Project>();
+        }
+        return entries;
     }
 }

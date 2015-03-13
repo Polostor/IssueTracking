@@ -11,9 +11,22 @@
 <h:body>
         <h2>IssueTracking website - Create new Comment</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">comment list</a> <a href="list.xhtml">detail</a> <a href="edit.xhtml">edit</a><br/>
-        
-	<p>#{indexBean.welcome}</p>
+        <a href="list.xhtml">comment list</a> 
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputLabel for="comment" value="Comment" />
+                <h:inputText id="comment" value="#{commentBean.comment.author}" label="Comment" />
+                
+                <h:outputLabel for="comment" value="Comment" />
+                <h:inputText id="comment" value="#{commentBean.comment.issue}" label="Comment" />
+                
+                <h:outputLabel for="comment" value="Comment" />
+                <h:inputText id="comment" value="#{commentBean.comment.comment}" label="Comment" />
+
+                <h:commandButton action="#{commentBean.saveComment()}" value="Save" />
+            </h:panelGrid>
+        </h:form>
         
         <a href="../index.xhtml">index</a>
 </h:body>

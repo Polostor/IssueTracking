@@ -3,7 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{issueBean.id}" />
+            <f:event type="preRenderView" listener="#{issueBean.issueById()}" />
+        </f:metadata>
+    </ui:define>
 
 <h:head>
 	<title>IssueTracking</title>
@@ -11,9 +19,34 @@
 <h:body>
         <h2>IssueTracking website - Issue detail</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">issue list</a> <a href="new.xhtml">create new</a> <a href="edit.xhtml">edit</a><br/>
-        
-	<p>#{indexBean.welcome}</p>
+
+        <h:link value="issue list" outcome="list"/> - 
+        <h:link value="create new" outcome="new"/> - 
+        <h:link value="detail" outcome="detail" >
+            <f:param name="id" value="#{issueBean.id}" />
+        </h:link><br/>
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.assignee}" label="Description" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.reporter}" label="Description" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.project}" label="Description" />
+                
+                <h:outputLabel for="priority" value="Priority" />
+                <h:inputText id="priority" value="#{issueBean.issue.priority}" label="Priority" />
+                
+                <h:outputLabel for="status" value="Status" />
+                <h:inputText id="status" value="#{issueBean.issue.status}" label="Status" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.description}" label="Description" />
+            </h:panelGrid>
+        </h:form>
         
         <a href="../index.xhtml">index</a>
 </h:body>

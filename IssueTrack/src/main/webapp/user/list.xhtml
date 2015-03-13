@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
 
@@ -12,26 +13,40 @@
         <h2>IssueTracking website - User list</h2>
         <h3>JSF made IssueTracking website</h3>
 
-        <a href="detail.xhtml">detail</a> <a href="new.xhtml">create new</a> <a href="edit.xhtml">edit</a><br/>
+        <a href="new.xhtml">create new</a>
 
-        <p>#{userService.user}</p>
-
-        <h:dataTable value="#{userService.allOs}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
+        <h:dataTable value="#{looserBean.loosers}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="User_Id"/>
                 </f:facet>
-                <h:outputText value=" #{item.iduser}">
-                    <f:converter converterId="userConverter" />
-                </h:outputText>
+                <h:outputText value=" #{item.id}"/>
             </h:column>
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="User_Nickname"/>
                 </f:facet>
-                <h:outputText value=" #{item.nick}">
-                    <f:converter converterId="userConverter" />
-                </h:outputText>
+                <h:outputText value=" #{item.nick}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="User_Nickname"/>
+                </f:facet>
+                <h:outputText value=" #{item.pass}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                </f:facet>
+                <h:link value="detail " outcome="detail" >
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                </f:facet>
+                <h:link value="edit " outcome="edit" >
+                    <f:param name="id" value="#{item.id}" />
+                </h:link>
             </h:column>
         </h:dataTable>
 

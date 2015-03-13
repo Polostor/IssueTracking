@@ -8,6 +8,9 @@ package org.issuetracking;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+<<<<<<< HEAD
+import org.issuetracking.service.LooserService;
+=======
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -15,6 +18,7 @@ import javax.persistence.Query;
 import org.issuetracking.dao.UserDAO;
 import org.issuetracking.model.User;
 import org.issuetracking.service.base.UserService;
+>>>>>>> origin/master
 import org.junit.Test;
 
 /**
@@ -27,9 +31,10 @@ public class TestConnections {
     public void testNewConnection() {
         System.out.println("New Connection Test");
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
+            System.out.println("TEST: We have JDBC Driver for PGSQL.");
         } catch (ClassNotFoundException e) {
-            System.out.println("TEST: Where is MySQL JDBC Driver?");
+            System.out.println("TEST: Where is PGSQL JDBC Driver?");
             e.printStackTrace();
             return;
         }
@@ -39,8 +44,8 @@ public class TestConnections {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/issuetrack", "root", "pass");
-
+                    .getConnection("jdbc:postgresql://localhost:5432/issuetrack", "postgres", "apassword");
+            System.out.println("TEST: We have have connected to /issuetrack database.");
         } catch (SQLException e) {
             System.out.println("TEST: Connection Failed! Check output console");
             e.printStackTrace();
@@ -56,15 +61,39 @@ public class TestConnections {
     }
 
     @Test
+<<<<<<< HEAD
+    public void testLooserService() {
+        LooserService us;
+        try {
+            us = new LooserService();
+        } catch (Exception e) {
+            us = new LooserService();
+            System.out.println("MY Services fail me! Check output console for Hibernate.");
+            e.printStackTrace();
+        }
+=======
     public void testUserService() {
         System.out.println("User Service Test");
         UserService us = new UserService();
         // TODO - Proc the DB
+>>>>>>> origin/master
         System.out.println("TEST: Everything was done just well enought!");
         System.out.println("---------------------------------------\n");
     }
 
     @Test
+<<<<<<< HEAD
+    public void testQueryLooserService() {
+        LooserService us;
+        try {
+            us = new LooserService();
+            try {
+                System.out.println("\n" + us.getObj(1).toString() + "\n");
+            } catch (Exception e) {
+                System.out.println("MY DB fail me! Check output console for Hibernate.");
+                e.printStackTrace();
+            }
+=======
     public void testQueryUserService() {
         System.out.println("(User Service) getAll Test");
         UserService us;
@@ -88,6 +117,7 @@ public class TestConnections {
                 System.out.println(u.toString());
             }
             System.out.println("+++++++++++++++++++++++++++++++++++++++");
+>>>>>>> origin/master
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("MY DB failed me! Check Hibernate.");
@@ -99,6 +129,21 @@ public class TestConnections {
     }
 
     @Test
+<<<<<<< HEAD
+    public void testMultipleQueryLooserService() {
+        LooserService us;
+        try {
+            us = new LooserService();
+            try {
+                System.out.println("\n" + us.getAllObjs().toString() + "\n");
+            } catch (Exception e) {
+                System.out.println("MY DB fail me! Check output console for Hibernate.");
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            System.out.println("MY Services fail me! Check output console for Hibernate.");
+            e.printStackTrace();
+=======
     public void testAllUsersService() {
         System.out.println("(Persistence) getAll Users Test");
         EntityManager entityManager = Persistence.createEntityManagerFactory(null).createEntityManager();
@@ -108,6 +153,7 @@ public class TestConnections {
         List<User> l = query.getResultList();
         for (User u : l) {
             System.out.println(u.toString());
+>>>>>>> origin/master
         }
         System.out.println("+++++++++++++++++++++++++++++++++++++++");
 

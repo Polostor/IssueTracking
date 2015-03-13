@@ -1,8 +1,15 @@
 package org.issuetracking.dao;
 
+<<<<<<< HEAD
+import java.util.ArrayList;
 import java.util.List;
+
+=======
+import java.util.List;
+>>>>>>> origin/master
 import javax.ejb.Stateless;
 import javax.persistence.Query;
+
 import org.issuetracking.model.Comment;
 
 /**
@@ -13,26 +20,21 @@ import org.issuetracking.model.Comment;
 public class CommentDAO extends GenericDAO<Comment> {
 
     @Override
-    public void create(Comment obj) {
-        entityManager.persist(obj);
-    }
-
-    @Override
-    public Comment find(int id) {
-        Query commentQuery = entityManager.createNamedQuery("Comment.findByIdcomment", Comment.class);
-        commentQuery.setParameter("idcomment", id);
-        return (Comment) commentQuery.getSingleResult();
+    public Comment find(long id) {
+        Comment comm = em.find(Comment.class, id);
+        if (comm == null) {
+            comm = new Comment();
+        }
+        return comm;
     }
 
     @Override
     public List<Comment> findAll() {
-        Query query = entityManager.createQuery("Comment.findAll", Comment.class);
-        return query.getResultList();
+        List<Comment> entries = em.createQuery("SELECT c FROM Comment c ORDER BY c.id ASC")
+                .getResultList();
+        if (entries == null) {
+            entries = new ArrayList<Comment>();
+        }
+        return entries;
     }
-
-    @Override
-    public void update(Comment obj) {
-        entityManager.merge(obj);
-    }
-
 }
