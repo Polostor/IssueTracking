@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 
 import org.issuetracking.model.Project;
 
+
 @Stateless
 public class ProjectDAO extends GenericDAO<Project> {
 

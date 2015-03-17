@@ -8,7 +8,13 @@ package org.issuetracking;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.issuetracking.service.UserService;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import org.issuetracking.dao.UserDAO;
+import org.issuetracking.model.User;
+import org.issuetracking.service.base.UserService;
 import org.junit.Test;
 
 /**
@@ -19,6 +25,7 @@ public class TestConnections {
 
     @Test
     public void testNewConnection() {
+        System.out.println("New Connection Test");
         try {
             Class.forName("org.postgresql.Driver");
             System.out.println("TEST: We have JDBC Driver for PGSQL.");
