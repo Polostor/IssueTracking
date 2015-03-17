@@ -5,27 +5,27 @@ import java.util.List;
 import org.issuetracking.dao.GenericDAO;
 import org.issuetracking.service.generic.GenericServiceInterface;
 
-public abstract class GenericService<E> implements GenericServiceInterface<E>, Serializable {
-
-    GenericDAO gDAO;
+public abstract class GenericService<E, TypeOfDAO extends GenericDAO> implements GenericServiceInterface<E, TypeOfDAO>, Serializable {
+    
+    protected abstract TypeOfDAO getDAO();
 
     @Override
     public void create(E obj) {
-        gDAO.create(obj);
+        getDAO().create(obj);
     }
 
     @Override
     public E getObj(long id) {
-        return (E) gDAO.find(id);
+        return (E) getDAO().find(id);
     }
 
     @Override
     public List<E> getAllObjs() {
-        return gDAO.findAll();
+        return getDAO().findAll();
     }
 
     @Override
     public void update(E o) {
-        gDAO.update(o);
+        getDAO().update(o);
     }
 }

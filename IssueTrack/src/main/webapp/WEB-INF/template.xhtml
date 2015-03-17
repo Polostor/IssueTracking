@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>IssueTracking - <ui:insert name="title">Title to add</ui:insert></title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div id="head-bg">
+            <header>
+                <div id="logo">
+                    <a href="index.xhtml">issuetracking</a>
+                </div>    
+                <nav>
+                    <ul>
+                        <a href=""><li>Login</li></a>
+                        <a href="users.xhtml"><li>People</li></a>
+                        <a href="projects.xhtml"><li>Projects</li></a>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+        <div id="middle">           
+            <h1><ui:insert name="header_1">IssueTracking website</ui:insert></h1>
+            <div id="menu"><ui:insert name="sidebar">
+                    <h2>Login</h2>
+                    <ul>
+                        <li>Name:</li>
+                        <li>Password:</li>
+                        <li>Send</li>
+                    </ul>
+                </ui:insert>
+            </div> 
+            <h2><ui:insert name="header_2">JSF made IssueTracking website</ui:insert></h2>
+            <h3><ui:insert name="header_3">Everything in the right place</ui:insert></h3>  
+            <p><ui:insert name="content">New content here</ui:insert></p>
+        </div>    
+        <div id="bottom">
+            <p>Lists: <a href="comments.xhtml">Comments</a> &#124; 
+                <a href="issues.xhtml">Issues</a> &#124; 
+                <a href="projects.xhtml">Projects</a> &#124; 
+                <a href="users.xhtml">Users</a>
+            </p>
+        </div>
+    </body>
+</html>

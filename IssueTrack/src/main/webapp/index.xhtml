@@ -1,21 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-	<title>IssueTracking</title>
-</h:head>
-<h:body>
-        <h2>IssueTracking website - Home</h2>
-        <h3>JSF made IssueTracking website</h3>
-	<h3>#{indexBean.welcome}</h3>
-        
-        <a href="comment/list.xhtml">comment list</a>
-        <a href="issue/list.xhtml">issue list</a>
-        <a href="project/list.xhtml">project list</a>
-        <a href="user/list.xhtml">user list</a>
-</h:body>
-</html>
+    <ui:define name="title">Official Bc. work</ui:define>
+    
+    <ui:define name="header_1">IssueTracking website - Home</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">JSF made IssueTracking website</ui:define>
+
+    <ui:define name="sidebar"><h2>Login</h2>
+        <ul>
+            <li>Name:</li>
+            <li>Password:</li>
+            <li>Send</li>
+        </ul></ui:define>
+
+
+    <ui:define name="content">
+    <p>Lists: <a href="comments.xhtml">Comments</a> &#124;
+        <a href="issues.xhtml">Issues</a> &#124; 
+        <a href="projects.xhtml">Projects</a> &#124; 
+        <a href="users.xhtml">Users</a>
+    </p>
+
+    <p>Aliquam erat volutpat. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Cum sociis natoque penatibus et magnis dis 
+        parturient montes, nascetur ridiculus mus. In rutrum. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. 
+        Donec iaculis gravida nulla. Etiam posuere lacus quis dolor. Duis viverra diam non justo. Quis autem vel eum iure reprehenderit 
+        qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? 
+        Aliquam erat volutpat. In rutrum.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis viverra diam non justo. Phasellus rhoncus. Fusce tellus odio, 
+        dapibus id fermentum quis, suscipit id erat. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Morbi leo mi, 
+        nonummy eget tristique non, rhoncus non leo. Fusce tellus. Nulla pulvinar eleifend sem. Mauris dolor felis, sagittis at, 
+        luctus sed, aliquam non, tellus. Vestibulum fermentum tortor id mi. Sed ac dolor sit amet purus malesuada congue. Etiam bibendum 
+        elit eget erat. Duis condimentum augue id magna semper rutrum. Curabitur vitae diam non enim vestibulum interdum. Cum sociis 
+        natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis viverra diam non justo. Sed ac dolor sit amet 
+        purus malesuada congue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas libero.</p>
+    </ui:define>
+</ui:composition>

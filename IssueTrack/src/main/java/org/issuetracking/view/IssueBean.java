@@ -1,6 +1,5 @@
 package org.issuetracking.view;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -34,7 +33,7 @@ public class IssueBean {
     }
 
     public Issue getIssueById() {
-        issue = gServ.getObjById(id);
+        issue = gServ.getObj(id);
         return issue;
     }
 
@@ -61,37 +60,8 @@ public class IssueBean {
         if (id == 0) {
             return "list.xhtml";
         }
-        issue = gServ.getObjById(id);
+        issue = gServ.getObj(id);
         return "";
-=======
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-import java.io.Serializable;
-import javax.ejb.EJB;
-import org.issuetracking.model.Issue;
-import org.issuetracking.service.base.IssueService;
-
-@ManagedBean
-@SessionScoped
-public class IssueBean implements Serializable {
-
-    private Issue issue;
-    
-    @EJB
-    public IssueService issues;
-
-    private static final long serialVersionUID = 1L;
-
-    private final String welcome = "Welcome at the IssueTracking webpage";
-
-    public String getWelcome() {
-        return welcome;
-    }
-    
-    public void create() throws Exception{     
-        issues.create(issue);
->>>>>>> origin/master
     }
 
 }

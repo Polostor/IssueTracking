@@ -35,7 +35,7 @@ public class Comment implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "looserId")
-    private Looser author;
+    private User author;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issueId")
@@ -70,11 +70,11 @@ public class Comment implements Serializable {
         this.commentdate = commentdate;
     }
 
-    public Looser getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Looser author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

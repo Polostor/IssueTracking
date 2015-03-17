@@ -9,7 +9,7 @@
     <ui:define name="meta">
         <f:metadata>
             <f:viewParam name="id" value="#{projectBean.id}" />
-            <f:event type="preRenderView" listener="#{projectBean.projectById()}" />
+            <f:event type="preRenderView" listener="#{projectBean.getProjectById()}" />
         </f:metadata>
     </ui:define>
 

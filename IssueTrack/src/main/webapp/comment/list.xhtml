@@ -1,66 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">    
+    <ui:define name="header_3">Comment list</ui:define>  
 
-    <h:head>
-        <title>Project list - IssueTracking</title>
-    </h:head>
-    <h:body>
-        <h2>IssueTracking website - Comment list</h2>
-        <h3>JSF made IssueTracking website</h3>
-        
-        <a href="new.xhtml">create new</a>
+    <h:link value="create new " outcome="comments" >
+        <f:param name="do" value="create" />
+    </h:link>
 
-        <h:dataTable value="#{commentBean.comments}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Comment_Id"/>
-                </f:facet>
-                <h:outputText value=" #{item.id}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Comment_Author"/>
-                </f:facet>
-                <h:outputText value=" #{item.author}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Comment_Issue"/>
-                </f:facet>
-                <h:outputText value=" #{item.issue}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Comment_Date"/>
-                </f:facet>
-                <h:outputText value=" #{item.commentdate}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Comment_Comment"/>
-                </f:facet>
-                <h:outputText value=" #{item.comment}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                </f:facet>
-                <h:link value="detail " outcome="detail" >
-                    <f:param name="id" value="#{item.id}" />
-                </h:link>
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                </f:facet>
-                <h:link value="edit " outcome="edit" >
-                    <f:param name="id" value="#{item.id}" />
-                </h:link>
-            </h:column>
-        </h:dataTable>
-
-        <a href="../index.xhtml">index</a>
-    </h:body>
-</html>
+    <h:dataTable value="#{commentBean.comments}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Id"/>
+            </f:facet>
+            <h:outputText value=" #{item.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Author"/>
+            </f:facet>
+            <h:outputText value=" #{item.author}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Issue"/>
+            </f:facet>
+            <h:outputText value=" #{item.issue}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Date"/>
+            </f:facet>
+            <h:outputText value=" #{item.commentdate}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Comment"/>
+            </f:facet>
+            <h:outputText value=" #{item.comment}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+            </f:facet>
+            <h:link value="detail " outcome="comments" >
+                <f:param name="id" value="#{item.id}" />
+            </h:link>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+            </f:facet>
+            <h:link value="edit " outcome="comments" >
+                <f:param name="id" value="#{item.id}" />
+                <f:param name="do" value="edit" />
+            </h:link>
+        </h:column>
+    </h:dataTable>
+</ui:composition>

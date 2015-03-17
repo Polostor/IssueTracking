@@ -9,7 +9,7 @@
     <ui:define name="meta">
         <f:metadata>
             <f:viewParam name="id" value="#{commentBean.id}" />
-            <f:event type="preRenderView" listener="#{commentBean.commentById()}" />
+            <f:event type="preRenderView" listener="#{commentBean.getCommentById()}" />
         </f:metadata>
     </ui:define>
 
@@ -28,11 +28,11 @@
 
         <h:form>        
             <h:panelGrid columns="2">
-                <h:outputLabel for="comment" value="Comment" />
-                <h:inputText id="comment" value="#{commentBean.comment.author}" label="Comment" />
+                <h:outputLabel for="author" value="Author" />
+                <h:inputText id="author" value="#{commentBean.comment.author}" label="Author" />
                 
-                <h:outputLabel for="comment" value="Comment" />
-                <h:inputText id="comment" value="#{commentBean.comment.issue}" label="Comment" />
+                <h:outputLabel for="issue" value="Issue" />
+                <h:inputText id="issue" value="#{commentBean.comment.issue}" label="Issue" />
                 
                 <h:outputLabel for="comment" value="Comment" />
                 <h:inputText id="comment" value="#{commentBean.comment.comment}" label="Comment" />

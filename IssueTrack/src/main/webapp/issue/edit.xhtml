@@ -9,7 +9,7 @@
     <ui:define name="meta">
         <f:metadata>
             <f:viewParam name="id" value="#{issueBean.id}" />
-            <f:event type="preRenderView" listener="#{issueBean.issueById()}" />
+            <f:event type="preRenderView" listener="#{issueBean.getIssueById()}" />
         </f:metadata>
     </ui:define>
 
@@ -28,14 +28,14 @@
 
         <h:form>        
             <h:panelGrid columns="2">
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.assignee}" label="Description" />
+                <h:outputLabel for="project" value="Project" />
+                <h:inputText id="project" value="#{issueBean.issue.project}" label="Project" />
                 
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.reporter}" label="Description" />
+                <h:outputLabel for="assignee" value="Assignee" />
+                <h:inputText id="assignee" value="#{issueBean.issue.assignee}" label="Assignee" />
                 
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.project}" label="Description" />
+                <h:outputLabel for="reporter" value="Reporter" />
+                <h:inputText id="reporter" value="#{issueBean.issue.reporter}" label="Reporter" />
                 
                 <h:outputLabel for="priority" value="Priority" />
                 <h:inputText id="priority" value="#{issueBean.issue.priority}" label="Priority" />

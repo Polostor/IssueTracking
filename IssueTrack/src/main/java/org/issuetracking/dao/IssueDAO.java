@@ -2,19 +2,11 @@ package org.issuetracking.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 
 import org.issuetracking.model.Issue;
 
-/**
- *
- * @author peta
- */
 @Stateless
 public class IssueDAO extends GenericDAO<Issue> {
 
