@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 
 import org.issuetracking.model.Comment;
 
-/**
- *
- * @author peta
- */
 @Stateless
 public class CommentDAO extends GenericDAO<Comment> {
 

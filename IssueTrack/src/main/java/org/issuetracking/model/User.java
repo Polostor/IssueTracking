@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-public class Looser implements Serializable {
+@Entity(name = "Looser")
+@Table(name = "Looser")
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,10 +27,10 @@ public class Looser implements Serializable {
     @Size(min = 4, max = 20)
     private String pass;
 
-    public Looser() {
+    public User() {
     }
 
-    public Looser(String nick, String pass) {
+    public User(String nick, String pass) {
         this.nick = nick;
         this.pass = pass;
     }
@@ -37,8 +39,8 @@ public class Looser implements Serializable {
         return id;
     }
 
-    public void setId(long idlooser) {
-        this.id = idlooser;
+    public void setId(long iduser) {
+        this.id = iduser;
     }
 
     public String getNick() {
@@ -67,10 +69,10 @@ public class Looser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Looser)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Looser other = (Looser) object;
+        User other = (User) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -79,7 +81,7 @@ public class Looser implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.Looser[ idlooser=" + id + " nick=" + nick + " pass=" + pass + " ]";
+        return "issuetracking.org.datalayer.User[ iduser=" + id + " nick=" + nick + " pass=" + pass + " ]";
     }
 
 }

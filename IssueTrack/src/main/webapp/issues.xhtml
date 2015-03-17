@@ -1,0 +1,27 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="title">Issues</ui:define>
+
+    <ui:define name="header_1">IssueTracking website - Issues</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">Issues</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Issue details</h2>
+        <ul>
+            <li>Project: Project 1</li>
+            <li>Owner: IT_Peta</li>
+            <li>Created: 25.1.2014</li>
+            <li>No. of comments 3</li>
+            <li>Percent complete: 80</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <ui:include src="issue/list.xhtml" />
+    </ui:define>
+</ui:composition>

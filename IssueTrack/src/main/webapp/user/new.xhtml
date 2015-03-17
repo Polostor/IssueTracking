@@ -16,12 +16,12 @@
         <h:form>        
             <h:panelGrid columns="2">                                  
                 <h:outputLabel for="nick" value="Nickname" />
-                <h:inputText id="nick" value="#{looserBean.looser.nick}" label="Nickname" />
+                <h:inputText id="nick" value="#{userBean.user.nick}" label="Nickname" />
 
                 <h:outputLabel for="pass" value="Password" />
-                <h:inputText id="pass" value="#{looserBean.looser.pass}" label="Password"  />
+                <h:inputText id="pass" value="#{userBean.user.pass}" label="Password"  />
 
-                <h:commandButton action="#{looserBean.saveLooser()}" value="Save" />
+                <h:commandButton action="#{userBean.saveUser()}" value="Save" />
             </h:panelGrid>
         </h:form>
 

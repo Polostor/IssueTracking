@@ -33,7 +33,7 @@ public class ProjectBean {
     }
 
     public Project getProjectById() {
-        project = gServ.getObjById(id);
+        project = gServ.getObj(id);
         return project;
     }
 
@@ -60,7 +60,7 @@ public class ProjectBean {
         if (id == 0) {
             return "list.xhtml";
         }
-        project = gServ.getObjById(id);
+        project = gServ.getObj(id);
         return "";
     }
 

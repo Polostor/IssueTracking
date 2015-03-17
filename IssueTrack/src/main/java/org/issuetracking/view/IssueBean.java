@@ -33,7 +33,7 @@ public class IssueBean {
     }
 
     public Issue getIssueById() {
-        issue = gServ.getObjById(id);
+        issue = gServ.getObj(id);
         return issue;
     }
 
@@ -60,7 +60,7 @@ public class IssueBean {
         if (id == 0) {
             return "list.xhtml";
         }
-        issue = gServ.getObjById(id);
+        issue = gServ.getObj(id);
         return "";
     }
 

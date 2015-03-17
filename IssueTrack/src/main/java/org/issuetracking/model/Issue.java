@@ -41,7 +41,7 @@ public class Issue implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "looserIdAssign")
-    private Looser assignee;
+    private User assignee;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projectId")
@@ -49,7 +49,7 @@ public class Issue implements Serializable {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "looserIdReport")
-    private Looser reporter;
+    private User reporter;
     
 
     @PrePersist
@@ -97,11 +97,11 @@ public class Issue implements Serializable {
         this.issuedate = issuedate;
     }
 
-    public Looser getAssignee() {
+    public User getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(Looser assignee) {
+    public void setAssignee(User assignee) {
         this.assignee = assignee;
     }
 
@@ -113,11 +113,11 @@ public class Issue implements Serializable {
         this.project = project;
     }
 
-    public Looser getReporter() {
+    public User getReporter() {
         return reporter;
     }
 
-    public void setReporter(Looser reporter) {
+    public void setReporter(User reporter) {
         this.reporter = reporter;
     }
 

@@ -33,7 +33,7 @@ public class CommentBean {
     }
 
     public Comment getCommentById() {
-        comment = gServ.getObjById(id);
+        comment = gServ.getObj(id);
         return comment;
     }
 
@@ -60,7 +60,7 @@ public class CommentBean {
         if (id == 0) {
             return "list.xhtml";
         }
-        comment = gServ.getObjById(id);
+        comment = gServ.getObj(id);
         return "";
     }
 

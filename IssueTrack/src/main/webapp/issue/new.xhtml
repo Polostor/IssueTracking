@@ -15,14 +15,24 @@
 
         <h:form>        
             <h:panelGrid columns="2">
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.assignee}" label="Description" />
+                <h:outputLabel for="project" value="Project" />
+                <h:selectOneMenu id="project" value="#{issueBean.issue.project}" label="Project">
+                    <f:selectItem itemValue="1" itemLabel="Projekt 1"/>
+                    <f:selectItem itemValue="2" itemLabel="Projekt 2"/>
+                    <f:selectItem itemValue="3" itemLabel="Projekt 3"/>
+                </h:selectOneMenu>
                 
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.reporter}" label="Description" />
+                <h:outputLabel for="assignee" value="Assignee" />
+                <h:selectOneMenu id="assignee" value="#{issueBean.issue.assignee}" label="Assignee">
+                    <f:selectItem itemValue="1" itemLabel="You are!"/>
+                </h:selectOneMenu>
                 
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.project}" label="Description" />
+                <h:outputLabel for="reporter" value="Reporter" />
+                <h:selectOneMenu id="reporter" value="#{issueBean.issue.reporter}" label="Reporter">
+                    <f:selectItem itemValue="1" itemLabel="Clobrda 1"/>
+                    <f:selectItem itemValue="2" itemLabel="Clobrda 2"/>
+                    <f:selectItem itemValue="3" itemLabel="Clobrda 3"/>
+                </h:selectOneMenu>
                 
                 <h:outputLabel for="priority" value="Priority" />
                 <h:inputText id="priority" value="#{issueBean.issue.priority}" label="Priority" />
@@ -31,7 +41,7 @@
                 <h:inputText id="status" value="#{issueBean.issue.status}" label="Status" />
                 
                 <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{issueBean.issue.description}" label="Description" />
+                <h:inputTextarea id="description" value="#{issueBean.issue.description}" label="Description" />
 
                 <h:commandButton action="#{issueBean.saveIssue()}" value="Save" />
             </h:panelGrid>

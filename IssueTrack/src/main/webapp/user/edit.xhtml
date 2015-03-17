@@ -8,8 +8,8 @@
     
     <ui:define name="meta">
         <f:metadata>
-            <f:viewParam name="id" value="#{looserBean.id}" />
-            <f:event type="preRenderView" listener="#{looserBean.init}" />
+            <f:viewParam name="id" value="#{userBean.id}" />
+            <f:event type="preRenderView" listener="#{userBean.init}" />
         </f:metadata>
     </ui:define>
 
@@ -23,7 +23,7 @@
         <h:link value="user list" outcome="list"/> - 
         <h:link value="create new" outcome="new"/> - 
         <h:link value="detail" outcome="detail" >
-            <f:param name="id" value="#{looserBean.id}" />
+            <f:param name="id" value="#{userBean.id}" />
         </h:link><br/>
 
         <h:messages />
@@ -31,12 +31,12 @@
         <h:form>        
             <h:panelGrid columns="2">                                  
                 <h:outputLabel for="nick" value="Nickname" />
-                <h:inputText id="nick" value="#{looserBean.looser.nick}" label="Nickname" />
+                <h:inputText id="nick" value="#{userBean.user.nick}" label="Nickname" />
 
                 <h:outputLabel for="pass" value="Password" />
-                <h:inputText id="pass" value="#{looserBean.looser.pass}" label="Password"  />
+                <h:inputText id="pass" value="#{userBean.user.pass}" label="Password"  />
 
-                <h:commandButton action="#{looserBean.updateLooser()}" value="Save" />
+                <h:commandButton action="#{userBean.updateUser()}" value="Save" />
             </h:panelGrid>
         </h:form>
 
