@@ -37,6 +37,7 @@
                 <h:outputLabel for="comment" value="Comment" />
                 <h:inputText id="comment" value="#{commentBean.comment.comment}" label="Comment" />
 
+                <h:inputHidden id="id" value="#{commentBean.comment.id}" /> 
                 <h:commandButton action="#{commentBean.updateComment()}" value="Save" />
             </h:panelGrid>
         </h:form>

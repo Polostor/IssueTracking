@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -13,10 +13,10 @@
         </f:metadata>
     </ui:define>
 
-<h:head>
-	<title>IssueTracking</title>
-</h:head>
-<h:body>
+    <h:head>
+        <title>IssueTracking</title>
+    </h:head>
+    <h:body>
         <h2>IssueTracking website - Project Edit</h2>
         <h3>JSF made IssueTracking website</h3>
 
@@ -26,18 +26,19 @@
             <f:param name="id" value="#{projectBean.id}" />
         </h:link><br/>
 
-        <h:form>        
-            <h:panelGrid columns="2">                                  
+        <h:form>          
+            <h:panelGrid columns="2">                               
                 <h:outputLabel for="name" value="Name" />
                 <h:inputText id="name" value="#{projectBean.project.name}" label="Name" />
 
                 <h:outputLabel for="description" value="Description" />
                 <h:inputText id="description" value="#{projectBean.project.description}" label="Description"  />
 
+                <h:inputHidden id="id" value="#{projectBean.project.id}" /> 
                 <h:commandButton action="#{projectBean.updateProject()}" value="Save" />
             </h:panelGrid>
         </h:form>
-        
+
         <a href="../index.xhtml">index</a>
-</h:body>
+    </h:body>
 </html>

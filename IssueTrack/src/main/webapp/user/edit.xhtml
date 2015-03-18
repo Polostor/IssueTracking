@@ -36,6 +36,7 @@
                 <h:outputLabel for="pass" value="Password" />
                 <h:inputText id="pass" value="#{userBean.user.pass}" label="Password"  />
 
+                <h:inputHidden id="id" value="#{userBean.user.id}" /> 
                 <h:commandButton action="#{userBean.updateUser()}" value="Save" />
             </h:panelGrid>
         </h:form>
