@@ -11,15 +11,20 @@
     <h:body>
         <h2>IssueTracking website - Create new User</h2>
         <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">user list</a><br/>
+        <h:link value="user list" outcome="list"/><br/>
+
+        <h:messages />
 
         <h:form>        
             <h:panelGrid columns="2">                                  
                 <h:outputLabel for="nick" value="Nickname" />
                 <h:inputText id="nick" value="#{userBean.user.nick}" label="Nickname" />
 
+                <h:outputLabel for="email" value="Email" />
+                <h:inputText id="email" value="#{userBean.user.email}" label="Email"  />
+
                 <h:outputLabel for="pass" value="Password" />
-                <h:inputText id="pass" value="#{userBean.user.pass}" label="Password"  />
+                <h:inputSecret id="pass" value="#{userBean.user.pass}" label="Password"  />
 
                 <h:commandButton action="#{userBean.saveUser()}" value="Save" />
             </h:panelGrid>
