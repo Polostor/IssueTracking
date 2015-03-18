@@ -1,6 +1,7 @@
 package org.issuetracking.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,11 +22,16 @@ public class User implements Serializable {
 
     @NotNull
     @Size(min = 4, max = 16)
+    @Column(unique=true)
     private String nick;
 
     @NotNull
     @Size(min = 4, max = 20)
     private String pass;
+    
+    @NotNull
+    @Size(min = 8, max = 30)
+    private String email;
 
     public User() {
     }
@@ -35,11 +41,11 @@ public class User implements Serializable {
         this.pass = pass;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long iduser) {
+    public void setId(Long iduser) {
         this.id = iduser;
     }
 
@@ -57,6 +63,14 @@ public class User implements Serializable {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
