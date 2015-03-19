@@ -3,6 +3,8 @@ package org.issuetracking.view;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -56,11 +58,21 @@ public class CommentBean {
     }
 
     public String init() {
-        System.out.println("id - " + id);
-        if (id == 0) {
+        if (id < 1) {
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
             return "list.xhtml";
         }
         comment = gServ.getObj(id);
+        if(comment.getComment() == null && comment.getAuthor() == null){
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return "new.xhtml";
+        }
         return "";
     }
 
