@@ -11,11 +11,17 @@
     <ui:define name="header_3">JSF made IssueTracking website</ui:define>
 
     <ui:define name="sidebar"><h2>Login</h2>
-        <ul>
-            <li>Name:</li>
-            <li>Password:</li>
-            <li>Send</li>
-        </ul></ui:define>
+        <h:form>     
+            <h:panelGrid columns="2">    
+                <h:outputLabel for="nick" value="Username" />
+                <h:inputText id="nick" label="Nickname"  />
+
+                <h:outputLabel for="pass" value="Password" />
+                <h:inputSecret id="pass" label="Password" />
+
+                <h:commandButton action="#{userBean.logIn()}" value="Login" />
+            </h:panelGrid>
+        </h:form></ui:define>
 
 
     <ui:define name="content">
