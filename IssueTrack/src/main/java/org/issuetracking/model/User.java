@@ -1,11 +1,13 @@
 package org.issuetracking.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,17 +24,25 @@ public class User implements Serializable {
 
     @NotNull
     @Size(min = 4, max = 16)
-    @Column(unique=true)
+    @Column(unique = true)
     private String nick;
 
     @NotNull
     @Size(min = 4, max = 20)
     private String pass;
-    
+
     @NotNull
     @Size(min = 8, max = 30)
     private String email;
 
+    @NotNull
+    private Role role;
+
+
+    @PrePersist
+    private void onCreate() {
+        role = Role.User;
+    }
     public User() {
     }
 
@@ -68,9 +78,17 @@ public class User implements Serializable {
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

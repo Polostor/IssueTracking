@@ -30,10 +30,10 @@ public class Issue implements Serializable {
     private String description;
     
     @NotNull
-    private int status;
+    private Issue status;
     
     @NotNull
-    private int priority;
+    private Priority priority;
     
     @Past
     @Temporal(TemporalType.TIMESTAMP)
@@ -50,7 +50,6 @@ public class Issue implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "looserIdReport")
     private User reporter;
-    
 
     @PrePersist
     private void onCreate() {
@@ -73,19 +72,19 @@ public class Issue implements Serializable {
         this.description = desc;
     }
 
-    public int getStatus() {
+    public Issue getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Issue status) {
         this.status = status;
     }
 
-    public int getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
