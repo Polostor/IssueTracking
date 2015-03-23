@@ -63,12 +63,12 @@ public class IssueBean {
 
     public String saveIssue() {
         gServ.create(issue);
-        return "list.xhtml";
+        return "/issues.xhtml?faces-redirect=true";
     }
 
     public String updateIssue() {
         gServ.update(issue);
-        return "list.xhtml";
+        return "/issues.xhtml?faces-redirect=true";
     }
 
     public String init() {

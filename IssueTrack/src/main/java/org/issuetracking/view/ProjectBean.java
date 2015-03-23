@@ -35,11 +35,6 @@ public class ProjectBean {
     }
 
     public Project getProjectById() {
-        project = gServ.getObj(id);
-        return project;
-    }
-
-    public Project getProject() {
         if (id < 1) {
             ConfigurableNavigationHandler nav
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
@@ -48,13 +43,18 @@ public class ProjectBean {
             return null;
         }
         project = gServ.getObj(id);
-        if(project.getName() == null){
+        if (project.getName() == null) {
             ConfigurableNavigationHandler nav
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 
             nav.performNavigation("new");
             return null;
         }
+        return project;
+    }
+
+    public Project getProject() {
+        project = gServ.getObj(id);
         return project;
     }
 
@@ -64,12 +64,12 @@ public class ProjectBean {
 
     public String saveProject() {
         gServ.create(project);
-        return "list.xhtml";
+        return "/projects.xhtml?faces-redirect=true";
     }
 
     public String updateProject() {
         gServ.update(project);
-        return "list.xhtml";
+        return "/projects.xhtml?faces-redirect=true";
     }
 
     public String init() {
@@ -78,10 +78,10 @@ public class ProjectBean {
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 
             nav.performNavigation("new");
-            return "list.xhtml";
+            return "new.xhtml";
         }
         project = gServ.getObj(id);
-        if(project.getName() == null){
+        if (project.getName() == null) {
             ConfigurableNavigationHandler nav
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 

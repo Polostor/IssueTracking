@@ -35,11 +35,6 @@ public class CommentBean {
     }
 
     public Comment getCommentById() {
-        comment = gServ.getObj(id);
-        return comment;
-    }
-
-    public Comment getComment() {
         if (id < 1) {
             ConfigurableNavigationHandler nav
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
@@ -58,18 +53,23 @@ public class CommentBean {
         return comment;
     }
 
+    public Comment getComment() {
+        comment = gServ.getObj(id);
+        return comment;
+    }
+
     public void setComment(Comment Obj) {
         this.comment = Obj;
     }
 
     public String saveComment() {
         gServ.create(comment);
-        return "list.xhtml";
+        return "/comments.xhtml?faces-redirect=true";
     }
 
     public String updateComment() {
         gServ.update(comment);
-        return "list.xhtml";
+        return "/comments.xhtml?faces-redirect=true";
     }
 
     public String init() {
@@ -78,7 +78,7 @@ public class CommentBean {
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 
             nav.performNavigation("new");
-            return "list.xhtml";
+            return "new.xhtml";
         }
         comment = gServ.getObj(id);
         if(comment.getComment() == null && comment.getAuthor() == null){

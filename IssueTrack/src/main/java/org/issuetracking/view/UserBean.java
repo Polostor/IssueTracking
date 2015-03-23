@@ -63,12 +63,12 @@ public class UserBean {
 
     public String saveUser() {
         gServ.create(user);
-        return "list.xhtml?faces-redirect=true";
+        return "/users.xhtml?faces-redirect=true";
     }
 
     public String updateUser() {
         gServ.update(user);
-        return "list.xhtml?faces-redirect=true";
+        return "/users.xhtml?faces-redirect=true";
     }
 
     public String init() {
