@@ -95,7 +95,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "issuetracking.org.datalayer.User[ iduser=" + id + " nick=" + nick + " pass=" + pass + " ]";
+        return "issuetracking.org.datalayer.User[ iduser=" + id + " nick=" + nick + " ]";
     }
 
 }
