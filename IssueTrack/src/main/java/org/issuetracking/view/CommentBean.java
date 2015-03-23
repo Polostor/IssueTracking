@@ -40,6 +40,21 @@ public class CommentBean {
     }
 
     public Comment getComment() {
+        if (id < 1) {
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
+        comment = gServ.getObj(id);
+        if(comment.getComment() == null && comment.getAuthor() == null){
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
         return comment;
     }
 

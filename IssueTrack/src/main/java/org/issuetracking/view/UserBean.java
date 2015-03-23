@@ -35,7 +35,21 @@ public class UserBean {
     }
 
     public User getUserById() {
+        if (id < 1) {
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
         user = gServ.getObj(id);
+        if(user.getEmail() == null && user.getNick() == null){
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
         return user;
     }
 

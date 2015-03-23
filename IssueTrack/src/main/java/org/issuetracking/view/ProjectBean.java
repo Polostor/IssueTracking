@@ -40,6 +40,21 @@ public class ProjectBean {
     }
 
     public Project getProject() {
+        if (id < 1) {
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
+        project = gServ.getObj(id);
+        if(project.getName() == null){
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
         return project;
     }
 

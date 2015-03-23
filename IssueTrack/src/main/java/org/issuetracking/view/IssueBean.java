@@ -35,7 +35,21 @@ public class IssueBean {
     }
 
     public Issue getIssueById() {
+        if (id < 1) {
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
         issue = gServ.getObj(id);
+        if(issue.getDescription() == null && issue.getIssuedate() == null){
+            ConfigurableNavigationHandler nav
+                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+            nav.performNavigation("new");
+            return null;
+        }
         return issue;
     }
 
@@ -62,15 +76,15 @@ public class IssueBean {
             ConfigurableNavigationHandler nav
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 
-            nav.performNavigation("new");
-            return "list.xhtml";
+            nav.performNavigation("issue/new");
+            return "new.xhtml";
         }
         issue = gServ.getObj(id);
         if(issue.getDescription() == null && issue.getIssuedate() == null){
             ConfigurableNavigationHandler nav
                     = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 
-            nav.performNavigation("new");
+            nav.performNavigation("issue/new");
             return "new.xhtml";
         }
         return "";
