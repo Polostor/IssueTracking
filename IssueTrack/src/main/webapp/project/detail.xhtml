@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:define name="meta">
         <f:metadata>
@@ -12,30 +10,39 @@
             <f:event type="preRenderView" listener="#{projectBean.getProjectById()}" />
         </f:metadata>
     </ui:define>
+    
+    <ui:define name="title">Project details</ui:define>
 
-<h:head>
-	<title>IssueTracking</title>
-</h:head>
-<h:body>
-        <h2>IssueTracking website - Project detail</h2>
-        <h3>JSF made IssueTracking website</h3>
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{projectBean.project.id} - Project details</ui:define>
 
-        <h:link value="user list" outcome="list"/> - 
-        <h:link value="create new" outcome="new"/> - 
-        <h:link value="edit" outcome="edit" >
-            <f:param name="id" value="#{projectBean.id}" />
-        </h:link><br/>
+    <ui:define name="sidebar">
+        <h2>Project details</h2>
+        <ul>
+            <li>ID: #{projectBean.project.id}</li>
+            <li>Name: #{projectBean.project.name}</li>
+        </ul>
+    </ui:define>
 
+    <ui:define name="content">
+        <p>Lists: <h:link value="project list" outcome="/projects"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="edit" outcome="edit" >
+                <f:param name="id" value="#{projectBean.project.id}" />
+            </h:link>
+        </p>     
+        
         <h:form>        
-            <h:panelGrid columns="2">                                  
-                <h:outputLabel for="name" value="Name" />
-                <h:inputText id="name" value="#{projectBean.project.name}" label="Name" />
-
-                <h:outputLabel for="description" value="Description" />
-                <h:inputText id="description" value="#{projectBean.project.description}" label="Description"  />
+            <h:panelGrid columns="2">      
+                <h:outputText value="Name" />
+                <h:outputText value="#{projectBean.project.name}" />
+                
+                <h:outputText value="Description" />
+                <h:outputText value="#{projectBean.project.description}" />
             </h:panelGrid>
         </h:form>
-        
-        <a href="../index.xhtml">index</a>
-</h:body>
-</html>
+
+        <p>Get back to <h:link value="project list" outcome="/projects"/></p>
+    </ui:define>
+</ui:composition>

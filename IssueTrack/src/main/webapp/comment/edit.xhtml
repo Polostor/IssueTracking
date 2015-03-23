@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:define name="meta">
         <f:metadata>
@@ -13,37 +11,49 @@
         </f:metadata>
     </ui:define>
 
-<h:head>
-	<title>IssueTracking</title>
-</h:head>
-<h:body>
-        <h2>IssueTracking website - Comment Edit</h2>
-        <h3>JSF made IssueTracking website</h3>
+    <ui:define name="title">Edit comment</ui:define>
 
-        <h:link value="project list" outcome="list"/> - 
-        <h:link value="create new" outcome="new"/> - 
-        <h:link value="detail" outcome="detail" >
-            <f:param name="id" value="#{commentBean.id}" />
-        </h:link><br/>
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{commentBean.id} - Edit comment</ui:define>
 
-        <h:messages />
+    <ui:define name="sidebar">
+        <h2>Comment details</h2>
+        <ul>
+            <li>ID: none</li>
+            <li>Author none</li>
+            <li>Issue none</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="comment list" outcome="/comments"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="detail" outcome="detail" >
+                <f:param name="id" value="#{commentBean.id}" />
+            </h:link>
+        </p>
 
         <h:form>        
             <h:panelGrid columns="2">
                 <h:outputLabel for="author" value="Author" />
-                <h:inputText id="author" value="#{commentBean.comment.author}" label="Author" />
+                <h:selectOneMenu id="author" value="#{commentBean.comment.author}" label="Author">
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
+                </h:selectOneMenu>
                 
                 <h:outputLabel for="issue" value="Issue" />
-                <h:inputText id="issue" value="#{commentBean.comment.issue}" label="Issue" />
+                <h:selectOneMenu id="issue" value="#{commentBean.comment.issue}" label="Issue" >
+                    <f:selectItems value="#{issueBean.issues}" var="i" itemLabel="#{i.id}" itemValue="#{i}" />
+                </h:selectOneMenu>
                 
                 <h:outputLabel for="comment" value="Comment" />
-                <h:inputText id="comment" value="#{commentBean.comment.comment}" label="Comment" />
+                <h:inputTextarea id="comment" value="#{commentBean.comment.comment}" label="Comment" />
 
                 <h:inputHidden id="id" value="#{commentBean.comment.id}" /> 
                 <h:commandButton action="#{commentBean.updateComment()}" value="Save" />
             </h:panelGrid>
         </h:form>
-        
-        <a href="../index.xhtml">index</a>
-</h:body>
-</html>
+
+        <p>Get back to <h:link value="comment list" outcome="/comments"/></p>
+    </ui:define>
+</ui:composition>

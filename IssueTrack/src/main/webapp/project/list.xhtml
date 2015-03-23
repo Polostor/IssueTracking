@@ -5,9 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">    
     <ui:define name="header_3">Projects list</ui:define>  
 
-    <h:link value="create new " outcome="projects" >
-        <f:param name="do" value="create" />
-    </h:link>
+    <h:link value="create new " outcome="project/new" />
 
     <h:dataTable value="#{projectBean.projects}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
         <h:column>
@@ -31,16 +29,15 @@
         <h:column>
             <f:facet name="header">
             </f:facet>
-            <h:link value="detail " outcome="projects" >
+            <h:link value="detail " outcome="project/detail" >
                 <f:param name="id" value="#{item.id}" />
             </h:link>
         </h:column>
         <h:column>
             <f:facet name="header">
             </f:facet>
-            <h:link value="edit " outcome="projects" >
+            <h:link value="edit " outcome="project/edit" >
                 <f:param name="id" value="#{item.id}" />
-                <f:param name="do" value="edit" />
             </h:link>
         </h:column>
     </h:dataTable>

@@ -5,9 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">    
     <ui:define name="header_3">Comment list</ui:define>  
 
-    <h:link value="create new " outcome="issues" >
-        <f:param name="do" value="create" />
-    </h:link>
+    <h:link value="create new " outcome="issue/new" />
 
     <h:dataTable value="#{issueBean.issues}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
         <h:column>
@@ -20,23 +18,23 @@
             <f:facet name="header">
                 <h:outputText value="Assignee"/>
             </f:facet>
-            <h:outputText value=" #{item.assignee}"/>
+            <h:outputText value=" #{item.assignee.id}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
                 <h:outputText value="Reporter"/>
             </f:facet>
-            <h:outputText value=" #{item.reporter}"/>
+            <h:outputText value=" #{item.reporter.id}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
-                <h:outputText value="Priority"/>
+                <h:outputText value="P"/>
             </f:facet>
             <h:outputText value=" #{item.priority}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
-                <h:outputText value="Status"/>
+                <h:outputText value="S"/>
             </f:facet>
             <h:outputText value=" #{item.status}"/>
         </h:column>
@@ -50,21 +48,22 @@
             <f:facet name="header">
                 <h:outputText value="Date"/>
             </f:facet>
-            <h:outputText value=" #{item.issuedate}"/>
+            <h:outputText value="#{item.issuedate}" >
+                <f:convertDateTime pattern="dd-MM-yyyy" />
+            </h:outputText>
         </h:column>
         <h:column>
             <f:facet name="header">
             </f:facet>
-            <h:link value="detail " outcome="issues" >
+            <h:link value="detail " outcome="issue/detail" >
                 <f:param name="id" value="#{item.id}" />
             </h:link>
         </h:column>
         <h:column>
             <f:facet name="header">
             </f:facet>
-            <h:link value="edit " outcome="issues" >
+            <h:link value="edit " outcome="issue/edit" >
                 <f:param name="id" value="#{item.id}" />
-                <f:param name="do" value="edit" />
             </h:link>
         </h:column>
     </h:dataTable>

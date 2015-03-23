@@ -5,9 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">    
     <ui:define name="header_3">Comment list</ui:define>  
 
-    <h:link value="create new " outcome="comments" >
-        <f:param name="do" value="create" />
-    </h:link>
+    <h:link value="create new " outcome="comment/new"/>
 
     <h:dataTable value="#{commentBean.comments}" var="item" border="0" cellpadding="1" cellspacing="0" style="border:solid 2px">
         <h:column>
@@ -20,19 +18,25 @@
             <f:facet name="header">
                 <h:outputText value="Author"/>
             </f:facet>
-            <h:outputText value=" #{item.author}"/>
+            <h:link outcome="/user/detail" value="#{item.author.nick}">
+                <f:param name="id" value="#{item.author.id}" />
+            </h:link>
         </h:column>
         <h:column>
             <f:facet name="header">
                 <h:outputText value="Issue"/>
             </f:facet>
-            <h:outputText value=" #{item.issue}"/>
+            <h:link outcome="/issue/detail" value="#{item.issue.id}"> 
+                <f:param name="id" value="#{item.issue.id}" />
+            </h:link>
         </h:column>
         <h:column>
             <f:facet name="header">
                 <h:outputText value="Date"/>
             </f:facet>
-            <h:outputText value=" #{item.commentdate}"/>
+            <h:outputText value="#{item.commentdate}" >
+                <f:convertDateTime pattern="dd-MM-yyyy" />
+            </h:outputText>
         </h:column>
         <h:column>
             <f:facet name="header">
@@ -43,16 +47,15 @@
         <h:column>
             <f:facet name="header">
             </f:facet>
-            <h:link value="detail " outcome="comments" >
+            <h:link value="detail " outcome="comment/detail" >
                 <f:param name="id" value="#{item.id}" />
             </h:link>
         </h:column>
         <h:column>
             <f:facet name="header">
             </f:facet>
-            <h:link value="edit " outcome="comments" >
+            <h:link value="edit " outcome="comment/edit" >
                 <f:param name="id" value="#{item.id}" />
-                <f:param name="do" value="edit" />
             </h:link>
         </h:column>
     </h:dataTable>

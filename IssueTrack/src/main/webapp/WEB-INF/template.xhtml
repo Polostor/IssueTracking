@@ -5,26 +5,27 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <head>
+    <h:head>
         <title>IssueTracking - <ui:insert name="title">Title to add</ui:insert></title>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
         <div id="head-bg">
             <header>
                 <div id="logo">
-                    <a href="index.xhtml">issuetracking</a>
+                    <h:link value="issuetracking" outcome="/index"/>
                 </div>    
                 <nav>
                     <ul>
-                        <a href=""><li>Login</li></a>
-                        <a href="users.xhtml"><li>People</li></a>
-                        <a href="projects.xhtml"><li>Projects</li></a>
+                        <a href=""><li>Login</li></a> 
+                        <h:link outcome="/users"> <li>People</li></h:link>
+                        <h:link outcome="/projects"> <li>Projects</li></h:link>
                     </ul>
                 </nav>
             </header>
         </div>
-        <div id="middle">           
+        <div id="middle"> 
+            <h:messages />          
             <h1><ui:insert name="header_1">IssueTracking website</ui:insert></h1>
             <div id="menu"><ui:insert name="sidebar">
                     <h2>Login</h2>
@@ -40,11 +41,11 @@
             <p><ui:insert name="content">New content here</ui:insert></p>
         </div>    
         <div id="bottom">
-            <p>Lists: <a href="comments.xhtml">Comments</a> &#124; 
-                <a href="issues.xhtml">Issues</a> &#124; 
-                <a href="projects.xhtml">Projects</a> &#124; 
-                <a href="users.xhtml">Users</a>
+            <p>Lists: <h:link value="Comments" outcome="/comments"/> &#124; 
+                <h:link value="Issues" outcome="/issues"/> &#124; 
+                <h:link value="Projects" outcome="/projects"/> &#124; 
+                <h:link value="Users" outcome="/users"/>
             </p>
         </div>
-    </body>
+    </h:body>
 </html>

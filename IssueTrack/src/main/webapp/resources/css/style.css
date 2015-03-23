@@ -156,5 +156,6 @@ input[type="submit"] {
 }
 
 #middle td, #middle th{
-    padding: 0 8px;
+    padding: 0px 8px;
+    min-height: 25px;
 }

@@ -1,20 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <h:head>
-        <title>IssueTracking</title>
-    </h:head>
-    <h:body>
-        <h2>IssueTracking website - Create new User</h2>
-        <h3>JSF made IssueTracking website</h3>
-        <h:link value="user list" outcome="list"/><br/>
+    <ui:define name="title">Create new user</ui:define>
 
-        <h:messages />
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">Create new user</ui:define>
 
+    <ui:define name="sidebar">
+        <h2>User details</h2>
+        <ul>
+            <li>ID: none</li>
+            <li>Name: none</li>
+            <li>E-mail: none</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="user list" outcome="/users"/> &#124; 
+            <h:link value="create new" outcome="new"/>
+        </p>     
+        
         <h:form>        
             <h:panelGrid columns="2">                                  
                 <h:outputLabel for="nick" value="Nickname" />
@@ -30,6 +39,6 @@
             </h:panelGrid>
         </h:form>
 
-        <a href="../index.xhtml">index</a>
-    </h:body>
-</html>
+        <p>Get back to <h:link value="user list" outcome="/users"/></p>
+    </ui:define>
+</ui:composition>

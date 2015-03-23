@@ -1,39 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-	<title>IssueTracking</title>
-</h:head>
-<h:body>
-        <h2>IssueTracking website - Create new Issue</h2>
-        <h3>JSF made IssueTracking website</h3>
-        <a href="list.xhtml">issue list</a><br/>
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{issueBean.id}" />
+            <f:event type="preRenderView" listener="#{issueBean.getIssueById()}" />
+        </f:metadata>
+    </ui:define>
 
-        <h:messages />
+
+    <ui:define name="title">Create new issue</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">Create new issue</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Issue details</h2>
+        <ul>
+            <li>ID: none</li>
+            <li>Date: none</li>
+            <li>Priority: none</li>
+            <li>Status: none</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="issue list" outcome="/issues"/> &#124; 
+            <h:link value="create new" outcome="new"/>
+        </p>
 
         <h:form>        
             <h:panelGrid columns="2">
                 <h:outputLabel for="project" value="Project" />
                 <h:selectOneMenu id="project" value="#{issueBean.issue.project}" label="Project">
-                    <f:selectItem itemValue="1" itemLabel="Projekt 1"/>
-                    <f:selectItem itemValue="2" itemLabel="Projekt 2"/>
-                    <f:selectItem itemValue="3" itemLabel="Projekt 3"/>
+                    <f:selectItems value="#{projectBean.projects}" var="v" itemLabel="#{v.name}" itemValue="#{v}" />
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="assignee" value="Assignee" />
                 <h:selectOneMenu id="assignee" value="#{issueBean.issue.assignee}" label="Assignee">
-                    <f:selectItem itemValue="1" itemLabel="You are!"/>
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="reporter" value="Reporter" />
                 <h:selectOneMenu id="reporter" value="#{issueBean.issue.reporter}" label="Reporter">
-                    <f:selectItem itemValue="1" itemLabel="Clobrda 1"/>
-                    <f:selectItem itemValue="2" itemLabel="Clobrda 2"/>
-                    <f:selectItem itemValue="3" itemLabel="Clobrda 3"/>
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="priority" value="Priority" />
@@ -48,7 +62,7 @@
                 <h:commandButton action="#{issueBean.saveIssue()}" value="Save" />
             </h:panelGrid>
         </h:form>
-        
-        <a href="../index.xhtml">index</a>
-</h:body>
-</html>
+
+        <p>Get back to <h:link value="issue list" outcome="/issues"/></p>
+    </ui:define>
+</ui:composition>
