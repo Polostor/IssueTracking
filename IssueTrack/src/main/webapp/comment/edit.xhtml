@@ -36,14 +36,14 @@
 
         <h:form>        
             <h:panelGrid columns="2">
-                <h:outputLabel for="author" value="Author" />
-                <h:selectOneMenu id="author" value="#{commentBean.comment.author}" label="Author">
-                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
-                </h:selectOneMenu>
-                
                 <h:outputLabel for="issue" value="Issue" />
                 <h:selectOneMenu id="issue" value="#{commentBean.comment.issue}" label="Issue" >
                     <f:selectItems value="#{issueBean.issues}" var="i" itemLabel="#{i.id}" itemValue="#{i}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="author" value="Author" />
+                <h:selectOneMenu id="author" value="#{commentBean.comment.author}" label="Author">
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
                 </h:selectOneMenu>
                 
                 <h:outputLabel for="comment" value="Comment" />

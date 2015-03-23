@@ -4,14 +4,6 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:define name="meta">
-        <f:metadata>
-            <f:viewParam name="id" value="#{issueBean.id}" />
-            <f:event type="preRenderView" listener="#{issueBean.getIssueById()}" />
-        </f:metadata>
-    </ui:define>
-
-
     <ui:define name="title">Create new issue</ui:define>
 
     <ui:define name="header_1">IssueTracking website</ui:define>
