@@ -2,7 +2,8 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="title">Official Bc. work</ui:define>
 
@@ -10,23 +11,33 @@
     <ui:define name="header_2">JSF made IssueTracking website</ui:define>
     <ui:define name="header_3">JSF made IssueTracking website</ui:define>
 
-    <ui:define name="sidebar"><h2>Login</h2>
-        <h:form>     
-            <h:panelGrid columns="2">    
-                
-                <h:outputLabel for="username" value="Username" />
-                <h:inputText id="username" value="#{auth.username}" required="true" />
-                
-                <h:outputLabel for="password" value="Password" />
-                <h:inputSecret id="password" value="#{auth.password}" required="true" />
-                
-                <h:message for="username" />
-                <h:message for="password" />
-                
-                <h:commandButton value="Login" action="#{auth.login}" />
-                <h:messages globalOnly="true" />
-            </h:panelGrid>
-        </h:form></ui:define>
+    <ui:define name="sidebar">
+        <c:if test="${empty user}"><h2>Login</h2>
+            <h:form>     
+                <h:panelGrid columns="2">    
+                    <h:outputLabel for="username" value="Username" />
+                    <h:inputText id="username" value="#{userBean.username}" required="true" />
+
+                    <h:outputLabel for="password" value="Password" />
+                    <h:inputSecret id="password" value="#{userBean.password}" required="true" />
+
+                    <h:message for="username" />
+                    <h:message for="password" />
+
+                    <h:commandButton value="Login" action="#{userBean.login()}" />
+                    <h:messages globalOnly="false" />
+                </h:panelGrid>
+            </h:form></c:if>
+        <c:if test="${not empty user}"><h2>Logged in</h2>
+            <ul>
+                <li>ID: <h:outputText value="#{user.id}" /> </li>
+                <li>Name: <h:outputText value="#{user.nick}" /> </li>
+                <li>Role: <h:outputText value="#{user.role}" /> </li>
+            </ul>
+            <h:form> 
+                <h:commandButton value="Log Out" action="#{userBean.logout()}" />
+            </h:form>
+        </c:if></ui:define>
 
 
     <ui:define name="content">

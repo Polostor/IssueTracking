@@ -39,7 +39,12 @@
                 <h:outputText value="#{projectBean.project.name}" />
                 
                 <h:outputText value="Description" />
-                <h:outputText value="#{projectBean.project.description}" />
+                <h:outputText value="#{projectBean.project.description}" />      
+
+                <h:outputText value="Author" />
+                <h:link outcome="/user/detail" value="#{projectBean.project.author.nick}">
+                    <f:param name="id" value="#{projectBean.project.author.id}" />
+                </h:link>
             </h:panelGrid>
         </h:form>
 
