@@ -36,13 +36,8 @@ public class User implements Serializable {
     private String email;
 
     @NotNull
-    private Role role;
+    private Role role = Role.User;
 
-
-    @PrePersist
-    private void onCreate() {
-        role = Role.User;
-    }
     public User() {
     }
 

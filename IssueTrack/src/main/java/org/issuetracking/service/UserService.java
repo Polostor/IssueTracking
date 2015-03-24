@@ -16,4 +16,8 @@ public class UserService extends GenericService<User, UserDAO> {
     protected UserDAO getDAO() {
         return gDAO;
     }
+
+    public User find(String username) {
+        return gDAO.findByNick(username);
+    }
 }
