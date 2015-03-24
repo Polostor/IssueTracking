@@ -20,17 +20,17 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "looserId")
-    private User author;
+    @NotNull
+    @Size(min = 4, max = 40)
+    private String name;
     
     @NotNull
     @Size(min = 10, max = 100)
     private String description;
     
-    @NotNull
-    @Size(min = 4, max = 40)
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "looserId")
+    private User author;
 
     public Long getId() {
         return id;

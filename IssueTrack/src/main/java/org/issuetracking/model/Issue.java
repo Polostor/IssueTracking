@@ -30,7 +30,7 @@ public class Issue implements Serializable {
     private String description;
     
     @NotNull
-    private Issue status;
+    private Status status;
     
     @NotNull
     private Priority priority;
@@ -72,11 +72,11 @@ public class Issue implements Serializable {
         this.description = desc;
     }
 
-    public Issue getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Issue status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
