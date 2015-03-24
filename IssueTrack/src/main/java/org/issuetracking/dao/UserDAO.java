@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 import org.issuetracking.model.User;
 
@@ -20,7 +21,9 @@ public class UserDAO extends GenericDAO<User> {
     }
 
     public User findByNick(String s) {
-        User user = em.find(User.class, s);
+        Query q = em.createQuery("SELECT c FROM Looser c WHERE c.nick = :nick", User.class);
+        q.setParameter("nick", s);
+        User user = (User) q.getSingleResult();
         if (user == null) {
             user = new User();
         }
