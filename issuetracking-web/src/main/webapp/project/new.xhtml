@@ -1,0 +1,46 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:define name="title">Create new project</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">Create new project</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Project details</h2>
+        <ul>
+            <li>ID: none</li>
+            <li>Name: none</li>
+            <li>E-mail: none</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="project list" outcome="/projects"/> &#124; 
+            <h:link value="create new" outcome="new"/>
+        </p>     
+        
+        <h:form>        
+            <h:panelGrid columns="2">     
+                <h:outputLabel for="author" value="Author" />
+                <h:selectOneMenu id="author" value="#{projectBean.project.author}" label="Author">
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="name" value="Name" />
+                <h:inputText id="name" value="#{projectBean.project.name}" label="Name" />
+
+                <h:outputLabel for="description" value="Description" />
+                <h:inputTextarea id="description" value="#{projectBean.project.description}" label="Description"  />
+
+                <h:commandButton action="#{projectBean.saveProject()}" value="Save" />
+            </h:panelGrid>
+        </h:form>
+
+        <p>Get back to <h:link value="project list" outcome="/projects"/></p>
+    </ui:define>
+</ui:composition>

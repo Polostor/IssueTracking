@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{userBean.id}" />
+            <f:event type="preRenderView" listener="#{userBean.getUserById()}" />
+        </f:metadata>
+    </ui:define>
+
+
+    <ui:define name="title">User detail</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{userBean.id} - User detail</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>User details</h2>
+        <ul>
+            <li>ID: #{userBean.user.id}</li>
+            <li>Name: #{userBean.user.nick}</li>
+            <li>E-mail: #{userBean.user.email}</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="user list" outcome="/users"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="edit" outcome="edit" >
+                <f:param name="id" value="#{userBean.id}" />
+            </h:link>
+        </p>
+
+        <h:form>        
+            <h:panelGrid columns="2">  
+                <h:outputText value="Nickname" />
+                <h:outputText value="#{userBean.user.nick}" />
+                
+                <h:outputText value="Email" />
+                <h:outputText value="#{userBean.user.email}" />
+                
+                <h:outputText value="Password" />
+                <h:outputText value="#{userBean.user.pass}" />
+            </h:panelGrid>
+        </h:form>
+
+        <p>Get back to <h:link value="user list" outcome="/users"/></p>
+    </ui:define>
+</ui:composition>

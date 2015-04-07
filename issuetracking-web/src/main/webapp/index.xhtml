@@ -1,0 +1,64 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">Official Bc. work</ui:define>
+
+    <ui:define name="header_1">IssueTracking website - Home</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">JSF made IssueTracking website</ui:define>
+
+    <ui:define name="sidebar">
+        <c:if test="${empty user}"><h2>Login</h2>
+            <h:form>     
+                <h:panelGrid columns="2">    
+                    <h:outputLabel for="username" value="Username" />
+                    <h:inputText id="username" value="#{userBean.username}" required="true" />
+
+                    <h:outputLabel for="password" value="Password" />
+                    <h:inputSecret id="password" value="#{userBean.password}" required="true" />
+
+                    <h:message for="username" />
+                    <h:message for="password" />
+
+                    <h:commandButton value="Login" action="#{userBean.login()}" />
+                    <h:messages globalOnly="false" />
+                </h:panelGrid>
+            </h:form></c:if>
+        <c:if test="${not empty user}"><h2>Logged in</h2>
+            <ul>
+                <li>ID: <h:outputText value="#{user.id}" /> </li>
+                <li>Name: <h:outputText value="#{user.nick}" /> </li>
+                <li>Role: <h:outputText value="#{user.role}" /> </li>
+            </ul>
+            <h:form> 
+                <h:commandButton value="Log Out" action="#{userBean.logout()}" />
+            </h:form>
+        </c:if></ui:define>
+
+
+    <ui:define name="content">
+        <p>Lists: <a href="comments.xhtml">Comments</a> &#124;
+            <a href="issues.xhtml">Issues</a> &#124; 
+            <a href="projects.xhtml">Projects</a> &#124; 
+            <a href="users.xhtml">Users</a>
+        </p>
+
+        <p>Aliquam erat volutpat. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Cum sociis natoque penatibus et magnis dis 
+            parturient montes, nascetur ridiculus mus. In rutrum. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. 
+            Donec iaculis gravida nulla. Etiam posuere lacus quis dolor. Duis viverra diam non justo. Quis autem vel eum iure reprehenderit 
+            qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? 
+            Aliquam erat volutpat. In rutrum.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis viverra diam non justo. Phasellus rhoncus. Fusce tellus odio, 
+            dapibus id fermentum quis, suscipit id erat. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Morbi leo mi, 
+            nonummy eget tristique non, rhoncus non leo. Fusce tellus. Nulla pulvinar eleifend sem. Mauris dolor felis, sagittis at, 
+            luctus sed, aliquam non, tellus. Vestibulum fermentum tortor id mi. Sed ac dolor sit amet purus malesuada congue. Etiam bibendum 
+            elit eget erat. Duis condimentum augue id magna semper rutrum. Curabitur vitae diam non enim vestibulum interdum. Cum sociis 
+            natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis viverra diam non justo. Sed ac dolor sit amet 
+            purus malesuada congue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas libero.</p>
+    </ui:define>
+</ui:composition>

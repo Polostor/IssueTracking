@@ -1,0 +1,61 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{commentBean.id}" />
+            <f:event type="preRenderView" listener="#{commentBean.getCommentById()}" />
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="title">Comment detail</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{commentBean.id} - Comment detail</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Comment details</h2>
+        <ul>
+            <li>ID: #{commentBean.id}</li>
+            <li>Author: #{commentBean.comment.author.id}</li>
+            <li>Issue: #{commentBean.comment.issue.id}</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="comment list" outcome="/comments"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="edit" outcome="edit" >
+                <f:param name="id" value="#{commentBean.id}" />
+            </h:link>
+        </p>
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputText value="Author" />
+                <h:link outcome="/user/detail" value="#{commentBean.comment.author.nick}">
+                    <f:param name="id" value="#{commentBean.comment.author.id}" />
+                </h:link>
+
+                <h:outputText value="Issue" />
+                <h:link outcome="/issue/detail" value="#{commentBean.comment.issue.id}"> 
+                    <f:param name="id" value="#{commentBean.comment.issue.id}" />
+                </h:link>
+
+                <h:outputText value="Date" />
+                <h:outputText value="#{commentBean.comment.commentdate}" >
+                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                </h:outputText>
+
+                <h:outputText value="Comment" />
+                <h:outputText value="#{commentBean.comment.comment}" />
+            </h:panelGrid>
+        </h:form>
+
+        <p>Get back to <h:link value="comment list" outcome="/comments"/></p>
+    </ui:define>
+</ui:composition>

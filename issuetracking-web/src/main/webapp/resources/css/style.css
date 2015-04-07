@@ -1,0 +1,161 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: #F2F2F2;
+    font-family: "Lato",Tahoma,Arial,Geneva;
+    color: #000;
+    font-size: 1.3eM;
+}
+
+#head-bg {
+    height: 40px;
+    max-width: 100%;
+    margin: 0 0;
+    background-color: #5BAFA8;
+}
+
+header {
+    height: 40px;
+    max-width: 1188px;
+    margin: 0 auto;
+    color: #66EBF2;
+    background-color: #2B6F73;
+}
+
+nav{
+    height: 100%;
+}
+
+#middle {
+    max-width: 1188px;
+    margin: 0px auto;
+    padding: 25px 0;
+    background-color: #FFFFFF;
+    min-height: 400px;
+}
+
+#bottom {
+    max-width: 1168px;
+    margin: 0px auto;
+    padding: 30px 0 0 20px;
+    color: #FFFFFF;
+    background-color: #000;
+    text-align: center;
+    min-height: 150px;
+}
+
+#logo {
+    font-weight: bold;
+    float: left;
+    margin: 7px 10px;
+}
+
+ul {
+    height: 35px;
+}
+
+ul li {
+    padding: 5px 25px 0 25px;
+    float: right;
+    display: inline;
+    height: 100%;
+}
+
+ul li:hover {
+    font-size: 1.0eM;
+    font-weight: normal;
+    color: #2B6F73;
+    background-color: #66EBF2;
+}
+
+ #middle h1 ,#middle h2, #middle h3 {
+    padding: 1px 30px;
+}
+
+#middle p {
+    font-size: 1.0eM;
+    padding: 7px 30px;
+}
+
+#middle a {
+    color: #3B7F77;
+    font-size: 1.0eM;
+    padding: 7px 10px;
+}
+
+#middle table {
+    font-size: 1.0eM;
+    margin: 10px 30px;
+}
+
+#menu {
+    float: right;
+    padding: 10px 15px;
+    margin-left: 10px;
+    width: 340px;
+    min-height: 150px;
+    font-weight: bold;
+    font-size: 1.0eM;
+    color: #2B6F73;
+    background-color: #6BBFB8;
+    -webkit-border-radius: 10px 0 0 10px;
+    -moz-border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+#menu:hover{
+    background-color: #66EBF2;
+}
+    
+#menu h2 {
+    font-size: 1.1eM;
+}
+
+#menu table {
+    padding: 15px 0;
+    margin: 0;
+    font-size: 0.8eM;
+}
+
+#menu table tr {
+    padding: 5px 0;
+    margin: 0;
+}
+
+#menu table tr td {
+    padding: 0 5px;
+    margin: 0;
+}
+
+#menu ul li {
+    background-color: transparent;
+    font-weight: normal;
+    padding: 0px 5px;
+    float: left;
+    display: block;
+    height: 25px;
+    width: 320px;
+}
+
+#menu ul li:hover {
+    background-color: transparent;
+}
+
+a {
+    font-size: 1.0eM;
+    font-weight: normal;
+    color: #66EBF2;
+    text-decoration: none;
+}
+
+input[type="submit"] {
+    width: 80px;
+}
+
+#middle td, #middle th{
+    padding: 0px 8px;
+    min-height: 25px;
+}

@@ -1,0 +1,76 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{issueBean.id}" />
+            <f:event type="preRenderView" listener="#{issueBean.getIssueById()}" />
+        </f:metadata>
+    </ui:define>
+
+
+    <ui:define name="title">Issue detail</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{issueBean.id} - Issue detail</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Issue details</h2>
+        <ul>
+            <li>ID: #{issueBean.id}</li>
+            <li>Date: <h:outputText value="#{issueBean.issue.issuedate}" >
+                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                </h:outputText> </li>
+            <li>Priority: #{issueBean.issue.priority}</li>
+            <li>Status: #{issueBean.issue.status}</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="issue list" outcome="/issues"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="edit" outcome="edit" >
+                <f:param name="id" value="#{issueBean.id}" />
+            </h:link>
+        </p>
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputText value="Project" />
+                <h:link outcome="/project/detail" value="#{issueBean.issue.project.name}"> 
+                    <f:param name="id" value="#{issueBean.issue.project.id}" />
+                </h:link>
+
+                <h:outputText value="Date" />
+                <h:outputText value="#{issueBean.issue.issuedate}" >
+                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                </h:outputText>                
+
+                <h:outputText value="Assignee" />
+                <h:link outcome="/user/detail" value="#{issueBean.issue.assignee.nick}">
+                    <f:param name="id" value="#{issueBean.issue.assignee.id}" />
+                </h:link>
+
+                <h:outputText value="Reporter" />
+                <h:link outcome="/user/detail" value="#{issueBean.issue.reporter.nick}">
+                    <f:param name="id" value="#{issueBean.issue.reporter.id}" />
+                </h:link>
+
+                <h:outputText value="Priority" />
+                <h:outputText value="#{issueBean.issue.priority}" />
+
+                <h:outputText value="Status" />
+                <h:outputText value="#{issueBean.issue.status}" />
+
+                <h:outputText value="Description" />
+                <h:outputText value="#{issueBean.issue.description}" />
+            </h:panelGrid>
+        </h:form>
+
+        <p>Get back to <h:link value="issue list" outcome="/issues"/></p>
+    </ui:define>
+</ui:composition>

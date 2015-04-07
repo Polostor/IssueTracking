@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{projectBean.id}" />
+            <f:event type="preRenderView" listener="#{projectBean.getProjectById()}" />
+        </f:metadata>
+    </ui:define>
+    
+    <ui:define name="title">Project details</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{projectBean.project.id} - Project details</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Project details</h2>
+        <ul>
+            <li>ID: #{projectBean.project.id}</li>
+            <li>Name: #{projectBean.project.name}</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="project list" outcome="/projects"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="edit" outcome="edit" >
+                <f:param name="id" value="#{projectBean.project.id}" />
+            </h:link>
+        </p>     
+        
+        <h:form>        
+            <h:panelGrid columns="2">      
+                <h:outputText value="Name" />
+                <h:outputText value="#{projectBean.project.name}" />
+                
+                <h:outputText value="Description" />
+                <h:outputText value="#{projectBean.project.description}" />      
+
+                <h:outputText value="Author" />
+                <h:link outcome="/user/detail" value="#{projectBean.project.author.nick}">
+                    <f:param name="id" value="#{projectBean.project.author.id}" />
+                </h:link>
+            </h:panelGrid>
+        </h:form>
+
+        <p>Get back to <h:link value="project list" outcome="/projects"/></p>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="meta">
+        <f:metadata>
+            <f:viewParam name="id" value="#{issueBean.id}" />
+            <f:event type="preRenderView" listener="#{issueBean.getIssueById()}" />
+        </f:metadata>
+    </ui:define>
+
+
+    <ui:define name="title">Issue edit</ui:define>
+
+    <ui:define name="header_1">IssueTracking website</ui:define>
+    <ui:define name="header_2">JSF made IssueTracking website</ui:define>
+    <ui:define name="header_3">\##{issueBean.id} - Issue edit</ui:define>
+
+    <ui:define name="sidebar">
+        <h2>Issue details</h2>
+        <ul>
+            <li>ID: #{issueBean.id}</li>
+            <li>Date: <h:outputText value="#{issueBean.issue.issuedate}" >
+                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                </h:outputText> </li>
+            <li>Priority: #{issueBean.issue.priority}</li>
+            <li>Status: #{issueBean.issue.status}</li>
+        </ul>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>Lists: <h:link value="issue list" outcome="/issues"/> &#124; 
+            <h:link value="create new" outcome="new"/> &#124; 
+            <h:link value="detail" outcome="detail" >
+                <f:param name="id" value="#{issueBean.id}" />
+            </h:link>
+        </p>
+
+        <h:form>        
+            <h:panelGrid columns="2">
+                <h:outputLabel for="project" value="Project" />
+                <h:selectOneMenu id="project" value="#{issueBean.issue.project}" label="Project">
+                    <f:selectItems value="#{projectBean.projects}" var="v" itemLabel="#{v.name}" itemValue="#{v}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="assignee" value="Assignee" />
+                <h:selectOneMenu id="assignee" value="#{issueBean.issue.assignee}" label="Assignee">
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="reporter" value="Reporter" />
+                <h:selectOneMenu id="reporter" value="#{issueBean.issue.reporter}" label="Reporter">
+                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
+                </h:selectOneMenu>
+                
+                <h:outputLabel for="priority" value="Priority" />
+                <h:inputText id="priority" value="#{issueBean.issue.priority}" label="Priority" />
+                
+                <h:outputLabel for="status" value="Status" />
+                <h:inputText id="status" value="#{issueBean.issue.status}" label="Status" />
+                
+                <h:outputLabel for="description" value="Description" />
+                <h:inputText id="description" value="#{issueBean.issue.description}" label="Description" />
+
+                <h:inputHidden id="id" value="#{issueBean.issue.id}" /> 
+                <h:commandButton action="#{issueBean.updateIssue()}" value="Save" />
+            </h:panelGrid>
+        </h:form>
+
+        <p>Get back to <h:link value="issue list" outcome="/issues"/></p>
+    </ui:define>
+</ui:composition>
