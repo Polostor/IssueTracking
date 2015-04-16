@@ -20,12 +20,8 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
-    @Size(min = 4, max = 40)
     private String name;
     
-    @NotNull
-    @Size(min = 10, max = 100)
     private String description;
     
     @ManyToOne(fetch = FetchType.LAZY)

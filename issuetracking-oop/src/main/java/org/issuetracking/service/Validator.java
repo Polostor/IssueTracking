@@ -5,6 +5,7 @@
  */
 package org.issuetracking.service;
 
+import java.util.Date;
 import org.issuetracking.model.User;
 
 /**
@@ -16,7 +17,9 @@ public class Validator {
     private static User principal = null;
 
     public static void isLoggedIn(String thing) throws ValidationException {
-        if (principal == null) {
+        // inversed to let all in,
+        // right is if (principal == null) 
+        if (principal != null) {
             throw new ValidationException("You must be logged in to " + thing + ".");
         }
     }
@@ -28,14 +31,41 @@ public class Validator {
     }
 
     public static void isAllowedUser(User user, String thing) throws ValidationException {
-        if (!principal.equals(user)) {
-            throw new ValidationException("You are not allowed to " + thing +".");
+        // inversed to let all in,
+        // right is if (!user.equals(principal))
+        if (user.equals(principal)) {
+            throw new ValidationException("You are not allowed to " + thing + ".");
         }
     }
 
     public static void isOneOfAllowedUsers(User user1, User user2, String thing) throws ValidationException {
-        if (!(principal.equals(user1) || principal.equals(user2))) {
-            throw new ValidationException("You are not allowed to " + thing +".");
+        if (!(user1.equals(principal) || user2.equals(principal))) {
+            throw new ValidationException("You are not allowed to " + thing + ".");
+        }
+    }
+
+    public static void isBetween(String text, int min, int max, String input, String thing) throws ValidationException {
+        if (text == null || text.length() < min || text.length() > max) {
+            throw new ValidationException(input + " length has to be between "
+                    + min + " and " + max + " to " + thing + ".");
+        }
+    }
+
+    public static void isNotNull(Object obj, String input, String thing) throws ValidationException {
+        if (obj == null) {
+            throw new ValidationException("You have to select " + input + " to " + thing + ".");
+        }
+    }
+
+    public static void isNotSame(Object obj1, Object obj2, String input) throws ValidationException {
+        if (obj2.equals(obj1)) {
+            throw new ValidationException(input + " is already set to \"" + obj2.toString() + "\".");
+        }
+    }
+
+    public static void isDateEarlier(Date date, String thing) throws ValidationException {
+        if (date == null || date.before(new Date())) {
+            throw new ValidationException("You have to set date in past to " + thing + ".");
         }
     }
 }

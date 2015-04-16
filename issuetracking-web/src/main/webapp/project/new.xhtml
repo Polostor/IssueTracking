@@ -26,13 +26,13 @@
         
         <h:form>        
             <h:panelGrid columns="2">     
-                <h:outputLabel for="author" value="Author" />
-                <h:selectOneMenu id="author" value="#{projectBean.project.author}" label="Author">
-                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
-                </h:selectOneMenu>
-                
                 <h:outputLabel for="name" value="Name" />
                 <h:inputText id="name" value="#{projectBean.project.name}" label="Name" />
+
+                <h:outputLabel for="author" value="Author" />
+                <h:selectOneMenu id="author" converter="#{userConverterBean}" value="#{projectBean.project.author}" label="Author">
+                    <f:selectItems value="#{userBean.users}" var="user" itemValue="#{user}" itemLabel="#{user.nick}" />
+                </h:selectOneMenu>
 
                 <h:outputLabel for="description" value="Description" />
                 <h:inputTextarea id="description" value="#{projectBean.project.description}" label="Description"  />

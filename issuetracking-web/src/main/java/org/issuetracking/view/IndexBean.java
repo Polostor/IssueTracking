@@ -1,12 +1,12 @@
 package org.issuetracking.view;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import java.io.Serializable;
+import org.issuetracking.model.Priority;
+import org.issuetracking.model.Status;
 
 @ManagedBean
-@SessionScoped
 public class IndexBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,4 +17,11 @@ public class IndexBean implements Serializable {
         return welcome;
     }
 
+    public Priority[] getPriorities(){
+        return Priority.values();
+    }
+
+    public Status[] getStatuses(){
+        return Status.values();
+    }
 }

@@ -20,7 +20,8 @@
     <ui:define name="sidebar">
         <h2>Comment details</h2>
         <ul>
-            <li>ID: #{commentBean.id}</li>
+            <li>ID: #{commentBean.id}</li>>
+            <li>Name: #{commentBean.comment.name}</li>
             <li>Author: #{commentBean.comment.author.id}</li>
             <li>Issue: #{commentBean.comment.issue.id}</li>
         </ul>

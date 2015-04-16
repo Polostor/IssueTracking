@@ -7,11 +7,13 @@ import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.issuetracking.model.Comment;
 import org.issuetracking.service.CommentService;
 import org.issuetracking.service.ValidationException;
 
+@Named
 @RequestScoped
 public class CommentBean {
 
@@ -41,7 +43,7 @@ public class CommentBean {
 
     public Comment getCommentById() {
         if (id < 1) {
-            navigate("comments");
+            navigate("/comments.xhtml");
         }
         try {
             comment = gServ.view(id);
@@ -49,7 +51,7 @@ public class CommentBean {
             showException(ex);
         }
         if (comment == null || comment.getAuthor() == null) {
-            navigate("comments");
+            navigate("/comments.xhtml");
         }
         return comment;
     }
@@ -84,7 +86,7 @@ public class CommentBean {
 
     public void init() {
         if (id < 1) {
-            navigate("comments");
+            navigate("/comments.xhtml");
         }
         try {
             comment = gServ.view(id);
@@ -92,7 +94,7 @@ public class CommentBean {
             showException(ex);
         }
         if (comment == null || comment.getAuthor() == null) {
-            navigate("comments");
+            navigate("/comments.xhtml");
         }
     }
     
@@ -104,7 +106,7 @@ public class CommentBean {
     }
     
     private void showException(Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error", ex.toString()));    
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error - " + ex.getMessage(), ex.toString()));    
     }
 
 }

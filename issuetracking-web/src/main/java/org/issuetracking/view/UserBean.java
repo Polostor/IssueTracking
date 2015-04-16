@@ -1,19 +1,19 @@
 package org.issuetracking.view;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.issuetracking.model.User;
 import org.issuetracking.service.UserService;
 import org.issuetracking.service.ValidationException;
 
+@Named
 @RequestScoped
 public class UserBean {
 
@@ -43,15 +43,15 @@ public class UserBean {
 
     public User getUserById() {
         if (id < 1) {
-            navigate("users");
+            navigate("/users.xhtml");
         }
         try {
             user = gServ.view(id);
         } catch (ValidationException ex) {
             showException(ex);
         }
-        if (user == null || user.getEmail()== null) {
-            navigate("users");
+        if (user == null || user.getEmail() == null) {
+            navigate("/users.xhtml");
         }
         return user;
     }
@@ -86,27 +86,27 @@ public class UserBean {
 
     public void init() {
         if (id < 1) {
-            navigate("users");
+            navigate("/users.xhtml");
         }
         try {
             user = gServ.view(id);
         } catch (ValidationException ex) {
             showException(ex);
         }
-        if (user == null || user.getEmail()== null) {
-            navigate("users");
+        if (user == null || user.getId() == null) {
+            navigate("/users.xhtml");
         }
     }
-    
-    private void navigate(String where){
-            ConfigurableNavigationHandler nav
-                    = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
 
-            nav.performNavigation(where);        
+    private void navigate(String where) {
+        ConfigurableNavigationHandler nav
+                = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
+
+        nav.performNavigation(where);
     }
-    
-    private void showException(Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error", ex.toString()));    
+
+    private void showException(Exception ex) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error - " + ex.getMessage(), ex.toString()));
     }
 
 }

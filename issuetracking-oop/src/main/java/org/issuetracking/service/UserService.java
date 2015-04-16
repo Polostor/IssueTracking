@@ -7,11 +7,10 @@ import javax.inject.Inject;
 import org.issuetracking.dao.UserDAO;
 import org.issuetracking.model.User;
 
-import org.issuetracking.service.generic.GenericService;
 import org.issuetracking.service.generic.GenericUserServiceInterface;
 
 @Stateless
-public class UserService extends GenericService<User, UserDAO>  implements GenericUserServiceInterface{
+public class UserService extends GenericUserServiceInterface{
 
     @Inject
     protected UserDAO gDAO;
@@ -26,6 +25,9 @@ public class UserService extends GenericService<User, UserDAO>  implements Gener
         String s = "create user";
         
         Validator.isNotLoggedIn(s);
+        Validator.isBetween(user.getNick(), 4, 20, "Nickname", s);
+        Validator.isBetween(user.getPass(), 4, 20, "Password", s);
+        Validator.isBetween(user.getEmail(), 8, 32, "Email", s);
         
         create(user);
     }
@@ -36,6 +38,9 @@ public class UserService extends GenericService<User, UserDAO>  implements Gener
         
         Validator.isLoggedIn(s);
         Validator.isAllowedUser(user, s);
+        Validator.isBetween(user.getNick(), 4, 20, "Nickname", s);
+        Validator.isBetween(user.getPass(), 4, 20, "Password", s);
+        Validator.isBetween(user.getEmail(), 8, 32, "Email", s);
         
         update(user);
     }

@@ -7,11 +7,10 @@ import javax.inject.Inject;
 import org.issuetracking.dao.UserDAO;
 import org.issuetracking.model.User;
 
-import org.issuetracking.service.generic.GenericService;
 import org.issuetracking.service.generic.GenericUserServiceInterface;
 
 @Stateless
-public class UserService extends GenericService<User, UserDAO>  implements GenericUserServiceInterface{
+public class UserService extends GenericUserServiceInterface {
 
     @Inject
     protected UserDAO gDAO;
@@ -25,9 +24,17 @@ public class UserService extends GenericService<User, UserDAO>  implements Gener
     public void add(User user) throws ValidationException {
         String s = "create user";
         // null = user session
-        // user is connected
-        if (null == null){
-            throw new ValidationException("You must be logged in to " + s +".");
+        if (null == null) {
+            throw new ValidationException("You cannot be logged in to " + s + ".");
+        }
+        if (user.getEmail() == null || user.getEmail().length() < 8 || user.getEmail().length() > 32) {
+            throw new ValidationException("Email length has to be between 8 and 32 to " + s + ".");
+        }
+        if (user.getNick() == null || user.getNick().length() < 4 || user.getNick().length() > 20) {
+            throw new ValidationException("Nickname length has to be between 4 and 20 to " + s + ".");
+        }
+        if (user.getPass() == null || user.getPass().length() < 4 || user.getPass().length() > 20) {
+            throw new ValidationException("Password length has to be between 4 and 20 to " + s + ".");
         }
         create(user);
     }
@@ -36,12 +43,17 @@ public class UserService extends GenericService<User, UserDAO>  implements Gener
     public void edit(User user) throws ValidationException {
         String s = "edit user";
         // null = user session
-        // user is connected
-        if (null != null){
-            throw new ValidationException("You must be logged in to " + s +".");
+        if (null != null) {
+            throw new ValidationException("You must be logged in to " + s + ".");
         }
-        if (!user.equals(null)) {
-            throw new ValidationException("You are not allowed to  " + s +".");
+        if (user.getEmail() == null || user.getEmail().length() < 8 || user.getEmail().length() > 32) {
+            throw new ValidationException("Email length has to be between 8 and 32 to " + s + ".");
+        }
+        if (user.getNick() == null || user.getNick().length() < 4 || user.getNick().length() > 20) {
+            throw new ValidationException("Nickname length has to be between 4 and 20 to " + s + ".");
+        }
+        if (user.getPass() == null || user.getPass().length() < 4 || user.getPass().length() > 20) {
+            throw new ValidationException("Password length has to be between 4 and 20 to " + s + ".");
         }
         update(user);
     }
@@ -51,11 +63,11 @@ public class UserService extends GenericService<User, UserDAO>  implements Gener
         String s = "edit user password";
         // null = user session
         // user is connected
-        if (null != null){
-            throw new ValidationException("You must be logged in to " + s +".");
+        if (null != null) {
+            throw new ValidationException("You must be logged in to " + s + ".");
         }
-        if (!user.equals(null)) {
-            throw new ValidationException("You are not allowed to  " + s +".");
+        if (user.getPass() == null || user.getPass().length() < 4 || user.getPass().length() > 20) {
+            throw new ValidationException("Password length has to be between 4 and 20 to " + s + ".");
         }
         user.setPass(pass);
         update(user);

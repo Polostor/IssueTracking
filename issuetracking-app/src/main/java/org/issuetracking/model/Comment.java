@@ -25,8 +25,8 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
-    @Size(min = 10, max = 200)
+    private String name;
+    
     private String comment;
     
     @Past
@@ -41,17 +41,20 @@ public class Comment implements Serializable {
     @JoinColumn(name = "issueId")
     private Issue issue;
 
-    @PrePersist
-    private void onCreate() {
-        commentdate = new Date();
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getComment() {

@@ -7,11 +7,13 @@ import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.issuetracking.model.Issue;
 import org.issuetracking.service.IssueService;
 import org.issuetracking.service.ValidationException;
 
+@Named
 @RequestScoped
 public class IssueBean {
 
@@ -41,7 +43,7 @@ public class IssueBean {
 
     public Issue getIssueById() {
         if (id < 1) {
-            navigate("issues");
+            navigate("/issues.xhtml");
         }
         try {
             issue = gServ.view(id);
@@ -49,7 +51,7 @@ public class IssueBean {
             showException(ex);
         }
         if (issue == null || issue.getPriority()== null) {
-            navigate("issues");
+            navigate("/issues.xhtml");
         }
         return issue;
     }
@@ -84,7 +86,7 @@ public class IssueBean {
 
     public void init() {
         if (id < 1) {
-            navigate("issues");
+            navigate("/issues.xhtml");
         }
         try {
             issue = gServ.view(id);
@@ -92,7 +94,7 @@ public class IssueBean {
             showException(ex);
         }
         if (issue == null || issue.getPriority()== null) {
-            navigate("issues");
+            navigate("/issues.xhtml");
         }
     }
     
@@ -104,7 +106,7 @@ public class IssueBean {
     }
     
     private void showException(Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error", ex.toString()));    
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error - " + ex.getMessage(), ex.toString()));    
     }
 
 }

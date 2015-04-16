@@ -12,7 +12,7 @@ import org.issuetracking.model.Project;
 public class ProjectDAO extends GenericDAO<Project> {
 
     @Override
-    public Project find(long id) {
+    public Project find(Long id) {
         Project proj = em.find(Project.class, id);
         if (proj == null) {
             proj = new Project();

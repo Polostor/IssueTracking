@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app
+    id="WebApp_ID" version="3.1"
+    xmlns="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>IssueTrack</display-name>
     <!-- Change to "Production" when you are ready to deploy -->
     <context-param>
@@ -43,21 +48,39 @@
     <security-role>
         <role-name>Admin</role-name>
     </security-role>
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/index.xhtml</location>
+    </error-page>
+    <session-config>
+        <tracking-mode>COOKIE</tracking-mode>
+        <cookie-config>
+            <secure>true</secure>
+            <http-only>true</http-only>
+            <max-age>300</max-age>
+        </cookie-config>
+        <session-timeout>-2</session-timeout>
+    </session-config>
     <security-constraint>
         <display-name>AdminConstraints</display-name>
         <web-resource-collection>
             <web-resource-name>Pages</web-resource-name>
             <description/>
-            <url-pattern>/comment/*</url-pattern>
-            <url-pattern>/issue/*</url-pattern>
-            <url-pattern>/project/*</url-pattern>
+            <url-pattern>/comment/edit.xhtml</url-pattern>
+            <url-pattern>/comment/new.xhtml</url-pattern>
+            <url-pattern>/issue/edit.xhtml</url-pattern>
+            <url-pattern>/issue/new.xhtml</url-pattern>
+            <url-pattern>/project/edit.xhtml</url-pattern>
+            <url-pattern>/project/new.xhtml</url-pattern>
             <url-pattern>/user/edit.xhtml</url-pattern>
-            <url-pattern>/user/new.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>User</role-name>
             <role-name>Admin</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
 </web-app>

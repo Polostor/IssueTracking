@@ -1,19 +1,19 @@
 package org.issuetracking.view;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.issuetracking.model.Project;
 import org.issuetracking.service.ProjectService;
 import org.issuetracking.service.ValidationException;
 
+@Named
 @RequestScoped
 public class ProjectBean {
 
@@ -43,7 +43,7 @@ public class ProjectBean {
 
     public Project getProjectById() {
         if (id < 1) {
-            navigate("projects");
+            navigate("/projects.xhtml");
         }
         try {
             project = gServ.view(id);
@@ -51,7 +51,7 @@ public class ProjectBean {
             showException(ex);
         }
         if (project == null || project.getId() == null) {
-            navigate("projects");
+            navigate("/projects.xhtml");
         }
         return project;
     }
@@ -86,7 +86,7 @@ public class ProjectBean {
 
     public void init() {
         if (id < 1) {
-            navigate("projects");
+            navigate("/projects.xhtml");
         }
         try {
             project = gServ.view(id);
@@ -94,7 +94,7 @@ public class ProjectBean {
             showException(ex);
         }
         if (project == null || project.getId() == null) {
-            navigate("projects");
+            navigate("/projects.xhtml");
         }
     }
 
@@ -104,9 +104,9 @@ public class ProjectBean {
 
         nav.performNavigation(where);
     }
-
-    private void showException(Exception ex) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error", ex.toString()));
+    
+    private void showException(Exception ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error - " + ex.getMessage(), ex.toString()));    
     }
 
 }

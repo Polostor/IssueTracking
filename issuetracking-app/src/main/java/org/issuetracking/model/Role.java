@@ -11,5 +11,5 @@ package org.issuetracking.model;
  */
 public enum Role {
 
-    Users, Admins;
+    User, Admin;
 }

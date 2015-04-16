@@ -22,6 +22,7 @@
         <h2>Issue details</h2>
         <ul>
             <li>ID: #{issueBean.id}</li>
+            <li>Name: #{issueBean.issue.name}</li>
             <li>Date: <h:outputText value="#{issueBean.issue.issuedate}" >
                     <f:convertDateTime pattern="dd-MM-yyyy" />
                 </h:outputText> </li>
@@ -40,6 +41,9 @@
 
         <h:form>        
             <h:panelGrid columns="2">
+                <h:outputText value="Name" />
+                <h:outputText value="#{issueBean.issue.name}" />
+                
                 <h:outputText value="Project" />
                 <h:link outcome="/project/detail" value="#{issueBean.issue.project.name}"> 
                     <f:param name="id" value="#{issueBean.issue.project.id}" />

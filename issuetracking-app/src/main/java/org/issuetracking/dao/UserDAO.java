@@ -12,7 +12,7 @@ import org.issuetracking.model.User;
 public class UserDAO extends GenericDAO<User> {
 
     @Override
-    public User find(long id) {
+    public User find(Long id) {
         User user = em.find(User.class, id);
         if (user == null) {
             user = new User();

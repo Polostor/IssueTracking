@@ -34,7 +34,7 @@
         </p>     
         
         <h:form>          
-            <h:inputHidden id="author" value="#{projectBean.project.author}" /> 
+            <h:inputHidden id="author" converter="#{userConverterBean}" value="#{projectBean.project.author}" /> 
             <h:panelGrid columns="2">                               
                 <h:outputLabel for="name" value="Name" />
                 <h:inputText id="name" value="#{projectBean.project.name}" label="Name" />

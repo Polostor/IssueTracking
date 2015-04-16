@@ -155,7 +155,19 @@ input[type="submit"] {
     width: 80px;
 }
 
+#middle table{
+    min-width: 700px;
+}
+
 #middle td, #middle th{
     padding: 0px 8px;
     min-height: 25px;
+}
+
+#middle tr td:nth-of-type(1){
+    width: 20px;
+}
+
+#middle tr td:nth-last-of-type(1), #middle tr td:nth-last-of-type(2){
+    width: 50px;
 }

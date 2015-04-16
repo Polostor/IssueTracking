@@ -11,7 +11,7 @@ import org.issuetracking.model.Comment;
 public class CommentDAO extends GenericDAO<Comment> {
 
     @Override
-    public Comment find(long id) {
+    public Comment find(Long id) {
         Comment comm = em.find(Comment.class, id);
         if (comm == null) {
             comm = new Comment();

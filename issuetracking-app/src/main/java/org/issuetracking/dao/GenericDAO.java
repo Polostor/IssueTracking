@@ -17,7 +17,7 @@ public abstract class GenericDAO<E> implements GenericDAOInterface<E> {
     }
 
     @Override
-    public E find(long id) {
+    public E find(Long id) {
         Query query = em.createNamedQuery("SELECT c FROM E c WHERE c.id = :id");
         query.setParameter("id", id);
         return (E) query.getSingleResult();

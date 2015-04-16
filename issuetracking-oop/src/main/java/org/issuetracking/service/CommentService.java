@@ -1,5 +1,6 @@
 package org.issuetracking.service;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -7,11 +8,10 @@ import javax.inject.Inject;
 import org.issuetracking.dao.CommentDAO;
 import org.issuetracking.model.Comment;
 
-import org.issuetracking.service.generic.GenericService;
 import org.issuetracking.service.generic.GenericCommentServiceInterface;
 
 @Stateless
-public class CommentService extends GenericService<Comment, CommentDAO> implements GenericCommentServiceInterface {
+public class CommentService extends GenericCommentServiceInterface {
 
     @Inject
     protected CommentDAO gDAO;
@@ -26,8 +26,13 @@ public class CommentService extends GenericService<Comment, CommentDAO> implemen
         String s = "add comment";
         
         Validator.isLoggedIn(s);
+        Validator.isNotNull(comment.getIssue(), "issue", s);
         Validator.isOneOfAllowedUsers(comment.getIssue().getAssignee(), comment.getIssue().getReporter(), s);
+        Validator.isNotNull(comment.getAuthor(), "author", s);
+        Validator.isBetween(comment.getName(), 4, 40, "Name", s);
+        Validator.isBetween(comment.getComment(), 10, 200, "Comment", s);
         
+        comment.setCommentdate(new Date());
         create(comment);
     }
 
@@ -36,7 +41,12 @@ public class CommentService extends GenericService<Comment, CommentDAO> implemen
         String s = "edit comment";
         
         Validator.isLoggedIn(s);
+        Validator.isNotNull(comment.getIssue(), "issue", s);
         Validator.isOneOfAllowedUsers(comment.getIssue().getAssignee(), comment.getIssue().getReporter(), s);
+        Validator.isNotNull(comment.getAuthor(), "author", s);
+        Validator.isBetween(comment.getName(), 4, 40, "Name", s);
+        Validator.isBetween(comment.getComment(), 10, 200, "Comment", s);
+        Validator.isDateEarlier(comment.getCommentdate(), s);
         
         update(comment);
     }

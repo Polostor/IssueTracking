@@ -27,8 +27,8 @@ public class Issue implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull
-    @Size(min = 4, max = 200)
+    private String name;
+    
     private String description;
     
     @NotNull
@@ -58,6 +58,7 @@ public class Issue implements Serializable {
     @PrePersist
     private void onCreate() {
         issuedate = new Date();
+        status = Status.New;
     }
 
     public Long getId() {
@@ -66,6 +67,14 @@ public class Issue implements Serializable {
 
     public void setId(Long idissue) {
         this.id = idissue;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

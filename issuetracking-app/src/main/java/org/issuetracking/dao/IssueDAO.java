@@ -11,7 +11,7 @@ import org.issuetracking.model.Issue;
 public class IssueDAO extends GenericDAO<Issue> {
 
     @Override
-    public Issue find(long id) {
+    public Issue find(Long id) {
         Issue iss = em.find(Issue.class, id);
         if (iss == null) {
             iss = new Issue();

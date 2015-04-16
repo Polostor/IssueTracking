@@ -9,11 +9,10 @@ import org.issuetracking.model.Issue;
 import org.issuetracking.model.Priority;
 import org.issuetracking.model.Status;
 
-import org.issuetracking.service.generic.GenericService;
 import org.issuetracking.service.generic.GenericIssueServiceInterface;
 
 @Stateless
-public class IssueService extends GenericService<Issue, IssueDAO>  implements GenericIssueServiceInterface{
+public class IssueService extends GenericIssueServiceInterface{
 
     @Inject
     protected IssueDAO gDAO;
@@ -28,8 +27,15 @@ public class IssueService extends GenericService<Issue, IssueDAO>  implements Ge
         String s = "add issue";
         
         Validator.isLoggedIn(s);
-        Validator.isAllowedUser(issue.getProject().getAuthor(), s);
+        Validator.isNotNull(issue.getProject(), "project", s);
+        Validator.isAllowedUser(issue.getAssignee(), s);        
+        Validator.isNotNull(issue.getAssignee(), "assignee", s);
+        Validator.isNotNull(issue.getReporter(), "reporter", s);
+        Validator.isBetween(issue.getName(), 4, 40, "Name", s);
+        Validator.isBetween(issue.getDescription(), 10, 200, "Description", s);
+        Validator.isNotNull(issue.getPriority(), "priority", s);
         
+        issue.setStatus(Status.New);      
         create(issue);
     }
 
@@ -38,8 +44,15 @@ public class IssueService extends GenericService<Issue, IssueDAO>  implements Ge
         String s = "edit issue";
         
         Validator.isLoggedIn(s);
-        Validator.isAllowedUser(issue.getAssignee(), s);
-        
+        Validator.isNotNull(issue.getProject(), "project", s);
+        Validator.isAllowedUser(issue.getAssignee(), s);        
+        Validator.isNotNull(issue.getAssignee(), "assignee", s);
+        Validator.isNotNull(issue.getReporter(), "reporter", s);
+        Validator.isBetween(issue.getName(), 4, 40, "Name", s);
+        Validator.isBetween(issue.getDescription(), 10, 200, "Description", s);
+        Validator.isNotNull(issue.getPriority(), "priority", s);
+        Validator.isNotNull(issue.getStatus(), "status", s);
+         
         update(issue);
     }
 
@@ -49,6 +62,7 @@ public class IssueService extends GenericService<Issue, IssueDAO>  implements Ge
         
         Validator.isLoggedIn(s);
         Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), s);
+        Validator.isNotSame(issue.getStatus(), Status.In_progress, "Status");
         
         issue.setStatus(Status.In_progress);
         update(issue);
@@ -60,6 +74,7 @@ public class IssueService extends GenericService<Issue, IssueDAO>  implements Ge
         
         Validator.isLoggedIn(s);
         Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), s);
+        Validator.isNotSame(issue.getStatus(), Status.Resolved, "Status");
         
         issue.setStatus(Status.Resolved);
         update(issue);
@@ -71,6 +86,7 @@ public class IssueService extends GenericService<Issue, IssueDAO>  implements Ge
         
         Validator.isLoggedIn(s);
         Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), s);
+        Validator.isNotSame(issue.getPriority(), priority, "Priority");
         
         issue.setPriority(priority);
         update(issue);

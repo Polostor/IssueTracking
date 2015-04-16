@@ -26,28 +26,30 @@
         </p>
 
         <h:form>        
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="2">                
+                <h:outputLabel for="name" value="Name" />
+                <h:inputText id="name" value="#{issueBean.issue.name}" label="Name" />
+                
                 <h:outputLabel for="project" value="Project" />
-                <h:selectOneMenu id="project" value="#{issueBean.issue.project}" label="Project">
-                    <f:selectItems value="#{projectBean.projects}" var="v" itemLabel="#{v.name}" itemValue="#{v}" />
+                <h:selectOneMenu id="project" converter="#{projectConverterBean}" value="#{issueBean.issue.project}" label="Project">
+                    <f:selectItems value="#{projectBean.projects}" var="project" itemValue="#{project}" itemLabel="#{project.name}" />
                 </h:selectOneMenu>
-                
+
                 <h:outputLabel for="assignee" value="Assignee" />
-                <h:selectOneMenu id="assignee" value="#{issueBean.issue.assignee}" label="Assignee">
-                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
+                <h:selectOneMenu id="assignee" converter="#{userConverterBean}" value="#{issueBean.issue.assignee}" label="Assignee">
+                    <f:selectItems value="#{userBean.users}" var="user" itemValue="#{user}" itemLabel="#{user.nick}" />
                 </h:selectOneMenu>
-                
+
                 <h:outputLabel for="reporter" value="Reporter" />
-                <h:selectOneMenu id="reporter" value="#{issueBean.issue.reporter}" label="Reporter">
-                    <f:selectItems value="#{userBean.users}" var="u" itemLabel="#{u.nick}" itemValue="#{u}" />
+                <h:selectOneMenu id="reporter" converter="#{userConverterBean}" value="#{issueBean.issue.reporter}" label="Reporter">
+                    <f:selectItems value="#{userBean.users}" var="user" itemValue="#{user}" itemLabel="#{user.nick}" />
                 </h:selectOneMenu>
-                
+
                 <h:outputLabel for="priority" value="Priority" />
-                <h:inputText id="priority" value="#{issueBean.issue.priority}" label="Priority" />
-                
-                <h:outputLabel for="status" value="Status" />
-                <h:inputText id="status" value="#{issueBean.issue.status}" label="Status" />
-                
+                <h:selectOneMenu id="priority" value="#{issueBean.issue.priority}" label="Reporter">
+                    <f:selectItems value="#{indexBean.priorities}" var="prior" itemValue="#{prior}" itemLabel="#{prior}" />
+                </h:selectOneMenu>
+
                 <h:outputLabel for="description" value="Description" />
                 <h:inputTextarea id="description" value="#{issueBean.issue.description}" label="Description" />
 

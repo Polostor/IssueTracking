@@ -6,8 +6,8 @@ import org.issuetracking.model.Priority;
 
 import org.issuetracking.service.ValidationException;
 
-public interface GenericIssueServiceInterface extends GenericSpecificServiceInterface<Issue, IssueDAO> {   
-    public void setInProgress(Issue issue) throws ValidationException;     
-    public void setResolved(Issue issue) throws ValidationException;    
-    public void setPriority(Issue issue, Priority priority) throws ValidationException;
+public abstract class GenericIssueServiceInterface extends GenericSpecificServiceInterface<Issue, IssueDAO> {   
+    public abstract void setInProgress(Issue issue) throws ValidationException;     
+    public abstract void setResolved(Issue issue) throws ValidationException;    
+    public abstract void setPriority(Issue issue, Priority priority) throws ValidationException;
 }

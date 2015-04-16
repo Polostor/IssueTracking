@@ -22,12 +22,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">
-                <h:outputText value="Description"/>
-            </f:facet>
-            <h:outputText value=" #{item.description}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
+                <h:outputText value="D"/>
             </f:facet>
             <h:link value="detail " outcome="project/detail" >
                 <f:param name="id" value="#{item.id}" />
@@ -35,6 +30,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">
+                <h:outputText value="E"/>
             </f:facet>
             <h:link value="edit " outcome="project/edit" >
                 <f:param name="id" value="#{item.id}" />
