@@ -126,6 +126,8 @@ ul li:hover {
 }
 
 #menu table tr td {
+    width: auto;
+    min-width: 0;
     padding: 0 5px;
     margin: 0;
 }
@@ -170,4 +172,13 @@ input[type="submit"] {
 
 #middle tr td:nth-last-of-type(1), #middle tr td:nth-last-of-type(2){
     width: 50px;
+}
+
+#menu table {
+    min-width: 0;
+}
+
+#menu table tr td:nth-of-type(n) {
+    width: auto;
+    min-width: 0;
 }

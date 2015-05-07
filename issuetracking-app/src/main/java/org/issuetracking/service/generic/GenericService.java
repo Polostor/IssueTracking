@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.issuetracking.dao.GenericDAO;
 import org.issuetracking.service.ValidationException;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 public abstract class GenericService<E, TypeOfDAO extends GenericDAO> implements Serializable {
 
@@ -25,9 +26,9 @@ public abstract class GenericService<E, TypeOfDAO extends GenericDAO> implements
         getDAO().update(o);
     }
 
-    public abstract void add(E e) throws ValidationException;
+    public abstract void add(E e, PrincipalBeanInterface pb) throws ValidationException;
 
-    public abstract void edit(E e) throws ValidationException;
+    public abstract void edit(E e, PrincipalBeanInterface pb) throws ValidationException;
 
     public abstract E view(long id) throws ValidationException;
 

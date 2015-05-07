@@ -1,0 +1,18 @@
+package org.issuetracking.model;
+
+global java.util.Set<Object> principal;
+
+
+dialect  "mvel"
+
+rule "You must be logged in"
+    when
+        principal.isLogged()
+    then
+end
+
+rule "You mustn't be logged in"
+    when
+        !principal.isLogged()
+    then
+end

@@ -1,0 +1,34 @@
+package org.issuetracking.model;
+
+global java.util.Set<Object> principal;
+
+dialect  "mvel"
+
+rule "[Project] Name length has to be between 4 and 40"
+    when
+        Project( name != null 
+            && name.length >= 4
+            && name.length <= 40)
+    then
+end
+
+rule "[Project] Description length has to be between 10 and 100"
+    when
+        Project( description != null 
+            && description.length >= 10
+            && description.length <= 100)
+    then
+end
+
+rule "[Project] Author cannot be null"
+    when
+        Project( author != null )
+    then
+end
+
+rule "You are not allowed"
+    ruleflow-group "addition"
+    when
+        Project( author.id == principal.id )
+    then
+end

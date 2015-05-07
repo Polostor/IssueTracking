@@ -1,12 +1,16 @@
 package org.issuetracking.view;
 
-import javax.faces.bean.ManagedBean;
-
 import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
+
+import javax.faces.bean.ApplicationScoped;
+import javax.inject.Named;
+
 import org.issuetracking.model.Priority;
 import org.issuetracking.model.Status;
 
-@ManagedBean
+@Named
+@RequestScoped
 public class IndexBean implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -7,6 +7,7 @@ package org.issuetracking.service;
 
 import java.util.Date;
 import org.issuetracking.model.User;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 /**
  *
@@ -16,56 +17,51 @@ public class Validator {
 
     private static User principal = null;
 
-    public static void isLoggedIn(String thing) throws ValidationException {
-        // inversed to let all in,
-        // right is if (principal == null) 
-        if (principal != null) {
-            throw new ValidationException("You must be logged in to " + thing + ".");
+    public static void isLoggedIn(PrincipalBeanInterface pb) throws ValidationException {
+        if (!pb.isLogged()) {
+            throw new ValidationException("You must be logged in.");
         }
     }
 
-    public static void isNotLoggedIn(String thing) throws ValidationException {
-        if (principal != null) {
-            throw new ValidationException("You can't be logged in to " + thing + ".");
+    public static void isNotLoggedIn(PrincipalBeanInterface pb) throws ValidationException {
+        if (pb.isLogged()) {
+            throw new ValidationException("You can't be logged in.");
         }
     }
 
-    public static void isAllowedUser(User user, String thing) throws ValidationException {
-        // inversed to let all in,
-        // right is if (!user.equals(principal))
-        if (user.equals(principal)) {
-            throw new ValidationException("You are not allowed to " + thing + ".");
+    public static void isAllowedUser(User user, PrincipalBeanInterface pb) throws ValidationException {
+        if (!user.getId().equals(pb.getId())) {
+            throw new ValidationException("You are not allowed.");
         }
     }
 
-    public static void isOneOfAllowedUsers(User user1, User user2, String thing) throws ValidationException {
-        if (!(user1.equals(principal) || user2.equals(principal))) {
-            throw new ValidationException("You are not allowed to " + thing + ".");
+    public static void isOneOfAllowedUsers(User user1, User user2, PrincipalBeanInterface pb) throws ValidationException {
+        if (!(user1.getId().equals(pb.getId()) || user2.getId().equals(pb.getId()))) {
+            throw new ValidationException("You are not allowed.");
         }
     }
 
-    public static void isBetween(String text, int min, int max, String input, String thing) throws ValidationException {
+    public static void isBetween(String text, int min, int max, String input) throws ValidationException {
         if (text == null || text.length() < min || text.length() > max) {
-            throw new ValidationException(input + " length has to be between "
-                    + min + " and " + max + " to " + thing + ".");
+            throw new ValidationException("The " + input + "'s length has to be between " + min + " and " + max + ".");
         }
     }
 
-    public static void isNotNull(Object obj, String input, String thing) throws ValidationException {
+    public static void isNotNull(Object obj, String input) throws ValidationException {
         if (obj == null) {
-            throw new ValidationException("You have to select " + input + " to " + thing + ".");
+            throw new ValidationException("You have to select " + input + ".");
         }
     }
 
     public static void isNotSame(Object obj1, Object obj2, String input) throws ValidationException {
         if (obj2.equals(obj1)) {
-            throw new ValidationException(input + " is already set to \"" + obj2.toString() + "\".");
+            throw new ValidationException("The " + input + " is already set to \"" + obj2.toString() + "\".");
         }
     }
 
-    public static void isDateEarlier(Date date, String thing) throws ValidationException {
+    public static void isDateEarlier(Date date) throws ValidationException {
         if (date == null || date.before(new Date())) {
-            throw new ValidationException("You have to set date in past to " + thing + ".");
+            throw new ValidationException("You have to set date in past.");
         }
     }
 }

@@ -1,0 +1,49 @@
+package org.issuetracking.model;
+
+global java.util.Set<Object> principal;
+
+dialect  "mvel"
+
+rule "[Comment] You have to select issue"
+    when
+        Comment( issue != null )
+    then
+end
+
+rule "[Comment] You have to select author"
+    when
+        Comment( author != null )
+    then
+end
+
+rule "[Comment] Name length has to be between 4 and 40"
+    when
+        Comment( name != null 
+            && name.length >= 4
+            && name.length <= 40)
+    then
+end
+
+rule "[Comment] Comment length has to be between 10 and 200"
+    when
+        Comment( comment != null 
+            && comment.length >= 10
+            && comment.length <= 200)
+    then
+end
+
+rule "[Comment] You are not allowed"
+    when
+        Comment( issue.assignee.id == principal.id 
+            || issue.reporter.id == principal.id)
+    then
+end
+
+
+rule "You have to set date in past"
+    ruleflow-group "addition"
+    when
+        Comment( commentDate != null 
+            && commentDate.before(new Date()) )
+    then
+end

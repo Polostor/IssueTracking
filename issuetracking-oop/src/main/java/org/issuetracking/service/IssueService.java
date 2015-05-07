@@ -10,6 +10,7 @@ import org.issuetracking.model.Priority;
 import org.issuetracking.model.Status;
 
 import org.issuetracking.service.generic.GenericIssueServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class IssueService extends GenericIssueServiceInterface{
@@ -23,45 +24,29 @@ public class IssueService extends GenericIssueServiceInterface{
     }
 
     @Override
-    public void add(Issue issue) throws ValidationException {
-        String s = "add issue";
-        
-        Validator.isLoggedIn(s);
-        Validator.isNotNull(issue.getProject(), "project", s);
-        Validator.isAllowedUser(issue.getAssignee(), s);        
-        Validator.isNotNull(issue.getAssignee(), "assignee", s);
-        Validator.isNotNull(issue.getReporter(), "reporter", s);
-        Validator.isBetween(issue.getName(), 4, 40, "Name", s);
-        Validator.isBetween(issue.getDescription(), 10, 200, "Description", s);
-        Validator.isNotNull(issue.getPriority(), "priority", s);
+    public void add(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        BusinessValidator.validate(issue);
+        Validator.isAllowedUser(issue.getAssignee(), pb);   
         
         issue.setStatus(Status.New);      
         create(issue);
     }
 
     @Override
-    public void edit(Issue issue) throws ValidationException {
-        String s = "edit issue";
-        
-        Validator.isLoggedIn(s);
-        Validator.isNotNull(issue.getProject(), "project", s);
-        Validator.isAllowedUser(issue.getAssignee(), s);        
-        Validator.isNotNull(issue.getAssignee(), "assignee", s);
-        Validator.isNotNull(issue.getReporter(), "reporter", s);
-        Validator.isBetween(issue.getName(), 4, 40, "Name", s);
-        Validator.isBetween(issue.getDescription(), 10, 200, "Description", s);
-        Validator.isNotNull(issue.getPriority(), "priority", s);
-        Validator.isNotNull(issue.getStatus(), "status", s);
+    public void edit(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        BusinessValidator.validate(issue);
+        Validator.isAllowedUser(issue.getAssignee(), pb);   
+        Validator.isNotNull(issue.getStatus(), "status");
          
         update(issue);
     }
 
     @Override
-    public void setInProgress(Issue issue) throws ValidationException {
-        String s = "set status of issue";
-        
-        Validator.isLoggedIn(s);
-        Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), s);
+    public void setInProgress(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), pb);
         Validator.isNotSame(issue.getStatus(), Status.In_progress, "Status");
         
         issue.setStatus(Status.In_progress);
@@ -69,11 +54,9 @@ public class IssueService extends GenericIssueServiceInterface{
     }
 
     @Override
-    public void setResolved(Issue issue) throws ValidationException {
-        String s = "set status of issue";
-        
-        Validator.isLoggedIn(s);
-        Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), s);
+    public void setResolved(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), pb);
         Validator.isNotSame(issue.getStatus(), Status.Resolved, "Status");
         
         issue.setStatus(Status.Resolved);
@@ -81,11 +64,9 @@ public class IssueService extends GenericIssueServiceInterface{
     }
 
     @Override
-    public void setPriority(Issue issue, Priority priority) throws ValidationException {
-        String s = "set priority of issue";
-        
-        Validator.isLoggedIn(s);
-        Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), s);
+    public void setPriority(Issue issue, PrincipalBeanInterface pb, Priority priority) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        Validator.isOneOfAllowedUsers(issue.getAssignee(), issue.getReporter(), pb);
         Validator.isNotSame(issue.getPriority(), priority, "Priority");
         
         issue.setPriority(priority);

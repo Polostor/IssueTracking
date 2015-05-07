@@ -2,12 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>IssueTracking - <ui:insert name="title">Title to add</ui:insert></title>
         <h:outputStylesheet library="css" name="style.css"/>
+        <meta http-equiv="Pragma" content="no-cache"/> 
+        <meta http-equiv="Cache-Control" content="no-cache"/> 
+        <meta http-equiv="Cache-control" content="no-store"/>
+        <meta http-equiv="Expires" content="Sat, 01 Dec 2012 00:00:00 GMT"/>
     </h:head>
     <h:body>
         <div id="head-bg">
@@ -17,7 +21,13 @@
                 </div>    
                 <nav>
                     <ul>
-                        <h:link outcome="/index"> <li>Login</li></h:link>
+
+                        <c:if test="#{!(request.isUserInRole('User') or request.isUserInRole('Admin'))}">
+                            <h:link outcome="/index"> <li>Login</li></h:link>
+                        </c:if>
+                        <c:if test="#{request.isUserInRole('User') or request.isUserInRole('Admin')}">
+                            <h:link outcome="logout"> <li>Logout</li></h:link>
+                        </c:if>
                         <h:link outcome="/users"> <li>People</li></h:link>
                         <h:link outcome="/projects"> <li>Projects</li></h:link>
                     </ul>
