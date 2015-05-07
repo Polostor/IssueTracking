@@ -1,0 +1,41 @@
+package org.issuetracking.model;
+
+dialect  "mvel"
+
+rule "[User] Email length has to be between 8 and 32"
+    when
+        User( email != null 
+            && email.length >= 8
+            && email.length <= 32)
+    then
+end
+
+rule "[User] Nickname length has to be between 4 and 20"
+    when
+        User( nick != null 
+            && nick.length >= 4
+            && nick.length <= 20)
+    then
+end
+
+rule "[User] Password length has to be between 4 and 20"
+    when
+        User( pass != null 
+            && pass.length >= 4
+            && pass.length <= 20)
+    then
+end
+
+rule "[User] New password length has to be between 4 and 20"
+    when
+        pass != null 
+         && pass.length >= 4
+         && pass.length <= 20
+    then
+end
+
+rule "[User] You are not allowed"
+    when
+        User( id == pb.id )
+    then
+end

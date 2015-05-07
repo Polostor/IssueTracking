@@ -10,6 +10,7 @@ import org.issuetracking.model.Priority;
 import org.issuetracking.model.Status;
 
 import org.issuetracking.service.generic.GenericIssueServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class IssueService extends GenericIssueServiceInterface {
@@ -23,16 +24,16 @@ public class IssueService extends GenericIssueServiceInterface {
     }
 
     @Override
-    public void add(Issue issue) throws ValidationException {
+    public void add(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
         String s = "add issue";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
         if (issue.getProject() == null) {
             throw new ValidationException("You have to select a project to  " + s + ".");
         }
-        if (issue.getProject().getAuthor() == null) {
+        if (issue.getProject().getAuthor().getId() != pb.getId()) {
             throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (issue.getAssignee() == null || issue.getReporter() == null) {
@@ -54,16 +55,16 @@ public class IssueService extends GenericIssueServiceInterface {
     }
 
     @Override
-    public void edit(Issue issue) throws ValidationException {
+    public void edit(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
         String s = "edit issue";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
         if (issue.getProject() == null) {
             throw new ValidationException("You have to select a project to  " + s + ".");
         }
-        if (issue.getProject().getAuthor() == null) {
+        if (issue.getProject().getAuthor().getId() != pb.getId()) {
             throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (issue.getAssignee() == null || issue.getReporter() == null) {
@@ -87,13 +88,14 @@ public class IssueService extends GenericIssueServiceInterface {
     }
 
     @Override
-    public void setInProgress(Issue issue) throws ValidationException {
+    public void setInProgress(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
         String s = "set status of issue";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
-        if (issue.getAssignee().equals(null) || issue.getReporter().equals(null)) {
+        if (issue.getAssignee().getId().equals(pb.getId()) 
+                || issue.getReporter().getId().equals(pb.getId())) {
             throw new ValidationException("You are not allowed to  " + s + ".");
         }
         if (issue.getStatus() == Status.In_progress) {
@@ -104,13 +106,14 @@ public class IssueService extends GenericIssueServiceInterface {
     }
 
     @Override
-    public void setResolved(Issue issue) throws ValidationException {
+    public void setResolved(Issue issue, PrincipalBeanInterface pb) throws ValidationException {
         String s = "set status of issue";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
-        if (issue.getAssignee().equals(null) || issue.getReporter().equals(null)) {
+        if (issue.getAssignee().getId().equals(pb.getId()) 
+                || issue.getReporter().getId().equals(pb.getId())) {
             throw new ValidationException("You are not allowed to  " + s + ".");
         }
         if (issue.getStatus() == Status.Resolved) {
@@ -121,14 +124,14 @@ public class IssueService extends GenericIssueServiceInterface {
     }
 
     @Override
-    public void setPriority(Issue issue, Priority priority) throws ValidationException {
+    public void setPriority(Issue issue, PrincipalBeanInterface pb, Priority priority)  throws ValidationException {
         String s = "set priority of issue";
-        // null = user session
-        // user is connected
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
-        if (issue.getAssignee().equals(null) || issue.getReporter().equals(null)) {
+        if (issue.getAssignee().getId().equals(pb.getId()) 
+                || issue.getReporter().getId().equals(pb.getId())) {
             throw new ValidationException("You are not allowed to  " + s + ".");
         }
         if (issue.getPriority() == priority) {

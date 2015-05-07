@@ -8,6 +8,7 @@ import org.issuetracking.model.Project;
 import org.issuetracking.dao.ProjectDAO;
 
 import org.issuetracking.service.generic.GenericProjectServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class ProjectService extends GenericProjectServiceInterface{
@@ -21,27 +22,23 @@ public class ProjectService extends GenericProjectServiceInterface{
     }
 
     @Override
-    public void add(Project project) throws ValidationException {
-        String s = "create project";
-        
-        Validator.isLoggedIn(s);
-        Validator.isAllowedUser(project.getAuthor(), s);
-        Validator.isBetween(project.getName(), 4, 40, "Name", s);
-        Validator.isBetween(project.getDescription(), 10, 100, "Description", s);
-        Validator.isNotNull(project.getAuthor(), "Author", s);
+    public void add(Project project, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        Validator.isAllowedUser(project.getAuthor(), pb);
+        Validator.isBetween(project.getName(), 4, 40, "Name");
+        Validator.isBetween(project.getDescription(), 10, 100, "Description");
+        Validator.isNotNull(project.getAuthor(), "Author");
         
         create(project);
     }
 
     @Override
-    public void edit(Project project) throws ValidationException {
-        String s = "edit project";
-        
-        Validator.isLoggedIn(s);
-        Validator.isAllowedUser(project.getAuthor(), s);
-        Validator.isBetween(project.getName(), 4, 40, "Name", s);
-        Validator.isBetween(project.getDescription(), 10, 100, "Description", s);
-        Validator.isNotNull(project.getAuthor(), "Author", s);
+    public void edit(Project project, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isLoggedIn(pb);
+        Validator.isAllowedUser(project.getAuthor(), pb);
+        Validator.isBetween(project.getName(), 4, 40, "Name");
+        Validator.isBetween(project.getDescription(), 10, 100, "Description");
+        Validator.isNotNull(project.getAuthor(), "Author");
         
         update(project);
     }

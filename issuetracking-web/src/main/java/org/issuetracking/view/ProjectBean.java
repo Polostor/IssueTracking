@@ -3,19 +3,17 @@ package org.issuetracking.view;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.ConfigurableNavigationHandler;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.issuetracking.model.Project;
 import org.issuetracking.service.ProjectService;
 import org.issuetracking.service.ValidationException;
+import org.issuetracking.view.generic.BasicBean;
 
 @Named
 @RequestScoped
-public class ProjectBean {
+public class ProjectBean extends BasicBean {
 
     private long id;
 
@@ -29,6 +27,9 @@ public class ProjectBean {
 
     @Inject
     private ProjectService gServ;
+    
+    @Inject
+    private PrincipalBean pb;
 
     private Project project = new Project();
 
@@ -66,7 +67,7 @@ public class ProjectBean {
 
     public String saveProject() {
         try {
-            gServ.add(project);
+            gServ.add(project, pb);
             return "/projects.xhtml?faces-redirect=true";
         } catch (ValidationException ex) {
             showException(ex);
@@ -76,7 +77,7 @@ public class ProjectBean {
 
     public String updateProject() {
         try {
-            gServ.edit(project);
+            gServ.edit(project, pb);
             return "/projects.xhtml?faces-redirect=true";
         } catch (ValidationException ex) {
             showException(ex);
@@ -96,17 +97,6 @@ public class ProjectBean {
         if (project == null || project.getId() == null) {
             navigate("/projects.xhtml");
         }
-    }
-
-    private void navigate(String where) {
-        ConfigurableNavigationHandler nav
-                = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-
-        nav.performNavigation(where);
-    }
-    
-    private void showException(Exception ex){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error - " + ex.getMessage(), ex.toString()));    
     }
 
 }

@@ -8,6 +8,7 @@ import org.issuetracking.model.Project;
 import org.issuetracking.dao.ProjectDAO;
 
 import org.issuetracking.service.generic.GenericProjectServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class ProjectService extends GenericProjectServiceInterface {
@@ -21,10 +22,10 @@ public class ProjectService extends GenericProjectServiceInterface {
     }
 
     @Override
-    public void add(Project project) throws ValidationException {
+    public void add(Project project, PrincipalBeanInterface pb) throws ValidationException {
         String s = "create project";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
         if (project.getName() == null || 
@@ -42,12 +43,14 @@ public class ProjectService extends GenericProjectServiceInterface {
     }
 
     @Override
-    public void edit(Project project) throws ValidationException {
+    public void edit(Project project, PrincipalBeanInterface pb) throws ValidationException {
         String s = "edit project";
-        // null = user session
-        // user is connected
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
+        }
+        if (pb.getId() != project.getAuthor().getId()) {
+            throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (project.getName() == null || 
                 project.getName().length() < 4 || project.getName().length() > 40) {

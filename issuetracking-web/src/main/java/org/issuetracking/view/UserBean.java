@@ -3,19 +3,17 @@ package org.issuetracking.view;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.ConfigurableNavigationHandler;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.issuetracking.model.User;
 import org.issuetracking.service.UserService;
 import org.issuetracking.service.ValidationException;
+import org.issuetracking.view.generic.BasicBean;
 
 @Named
 @RequestScoped
-public class UserBean {
+public class UserBean extends BasicBean {
 
     private long id;
 
@@ -29,6 +27,9 @@ public class UserBean {
 
     @Inject
     private UserService gServ;
+    
+    @Inject
+    private PrincipalBean pb;
 
     private User user = new User();
 
@@ -66,7 +67,7 @@ public class UserBean {
 
     public String saveUser() {
         try {
-            gServ.add(user);
+            gServ.add(user, pb);
             return "/users.xhtml?faces-redirect=true";
         } catch (ValidationException ex) {
             showException(ex);
@@ -76,7 +77,7 @@ public class UserBean {
 
     public String updateUser() {
         try {
-            gServ.edit(user);
+            gServ.edit(user, pb);
             return "/users.xhtml?faces-redirect=true";
         } catch (ValidationException ex) {
             showException(ex);
@@ -96,17 +97,6 @@ public class UserBean {
         if (user == null || user.getId() == null) {
             navigate("/users.xhtml");
         }
-    }
-
-    private void navigate(String where) {
-        ConfigurableNavigationHandler nav
-                = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance().getApplication().getNavigationHandler();
-
-        nav.performNavigation(where);
-    }
-
-    private void showException(Exception ex) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Validation Error - " + ex.getMessage(), ex.toString()));
     }
 
 }

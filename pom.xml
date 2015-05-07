@@ -7,6 +7,8 @@
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <modules>
         <module>issuetracking-app</module>
@@ -14,5 +16,7 @@
         <module>issuetracking-web</module>
         <module>issuetracking-oop</module>
         <module>issuetracking-mp</module>
+        <module>issuetracking-aop</module>
+        <module>issuetracking-oop-cor</module>
     </modules>
 </project>

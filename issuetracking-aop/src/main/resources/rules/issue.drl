@@ -1,0 +1,68 @@
+package org.issuetracking.model;
+
+dialect  "mvel"
+
+rule "[Issue] You have to select a project"
+    when
+        Issue( project != null )
+    then
+end
+
+rule "[Issue] You are not allowed"
+    when
+        Issue( project.author.id == pb.id )
+    then
+end
+
+rule "[Issue] You have to select assignee and reporter"
+    when
+        Issue( assignee != null 
+             && reporter != null)
+    then
+end
+
+rule "[Issue] Name length has to be between 4 and 40"
+    when
+        Issue( name != null 
+            && name.length >= 4
+            && name.length <= 40)
+    then
+end
+
+rule "[Issue] Description length has to be between 10 and 200"
+    when
+        Issue( description != null 
+            && description.length >= 10
+            && description.length <= 200)
+    then
+end
+
+rule "[Issue] You have to select priority"
+    when
+        Issue( priority != null )
+    then
+end
+
+rule "You have to select status"
+    when
+        Issue( status != null )
+    then
+end
+
+rule "Issue is already in status 'In Progress'"
+    when
+        Issue( status == Status.In_Progress )
+    then
+end
+
+rule "Issue is already in status 'Resolved'"
+    when
+        Issue( status == Status.Resolved )
+    then
+end
+
+rule "Issue already have this priority"
+    when
+        Issue( priority == prior )
+    then
+end

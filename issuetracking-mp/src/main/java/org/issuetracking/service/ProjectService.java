@@ -1,17 +1,23 @@
 package org.issuetracking.service;
 
+import org.issuetracking.service.annotations.NotNull;
+import org.issuetracking.service.annotations.LoggedIn;
+import org.issuetracking.service.annotations.Length;
+import org.issuetracking.service.annotations.AllowedUser;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 
 import org.issuetracking.model.Project;
 import org.issuetracking.dao.ProjectDAO;
 
-import org.issuetracking.service.generic.GenericService;
 import org.issuetracking.service.generic.GenericProjectServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
-public class ProjectService extends GenericService<Project, ProjectDAO>  implements GenericProjectServiceInterface{
+@Interceptors(SecurityIntercept.class)
+public class ProjectService extends GenericProjectServiceInterface{
 
     @Inject
     protected ProjectDAO gDAO;
@@ -22,27 +28,24 @@ public class ProjectService extends GenericService<Project, ProjectDAO>  impleme
     }
 
     @Override
-    public void add(Project project) throws ValidationException {
-        String s = "create project";
-        // null = user session
-        // user is connected
-        if (null != null){
-            throw new ValidationException("You must be logged in to " + s +".");
-        }
+    @LoggedIn
+    @NotNull(object = "getAuthor()", input = "Author")
+    @AllowedUser(id1Method = "getAuthor().getId()")
+    @Length(min = 4, max = 40, param1 = "", input = "Name") // param1 is a project.getName().length()
+    @Length(min = 10, max = 100, param1 = "", input = "Description") 
+        // param1 is a project.getDescription().length()
+    public void add(Project project, PrincipalBeanInterface pb) throws ValidationException {
         create(project);
     }
 
     @Override
-    public void edit(Project project) throws ValidationException {
-        String s = "edit project";
-        // null = user session
-        // user is connected
-        if (null != null){
-            throw new ValidationException("You must be logged in to " + s +".");
-        }
-        if (project.getAuthor().equals(null)) {
-            throw new ValidationException("You are not allowed to  " + s +".");
-        }
+    @LoggedIn
+    @NotNull(object = "getAuthor()", input = "Author")
+    @AllowedUser(id1Method = "getAuthor().getId()")
+    @Length(min = 4, max = 40, param1 = "", input = "Name") // param1 is a project.getName().length()
+    @Length(min = 10, max = 100, param1 = "", input = "Description") 
+        // param1 is a project.getDescription().length()
+    public void edit(Project project, PrincipalBeanInterface pb) throws ValidationException {
         update(project);
     }
 

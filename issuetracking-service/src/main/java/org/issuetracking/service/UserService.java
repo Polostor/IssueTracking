@@ -8,6 +8,7 @@ import org.issuetracking.dao.UserDAO;
 import org.issuetracking.model.User;
 
 import org.issuetracking.service.generic.GenericUserServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class UserService extends GenericUserServiceInterface {
@@ -21,10 +22,10 @@ public class UserService extends GenericUserServiceInterface {
     }
 
     @Override
-    public void add(User user) throws ValidationException {
+    public void add(User user, PrincipalBeanInterface pb) throws ValidationException {
         String s = "create user";
-        // null = user session
-        if (null == null) {
+        
+        if (pb.isLogged()) {
             throw new ValidationException("You cannot be logged in to " + s + ".");
         }
         if (user.getEmail() == null || user.getEmail().length() < 8 || user.getEmail().length() > 32) {
@@ -40,11 +41,14 @@ public class UserService extends GenericUserServiceInterface {
     }
 
     @Override
-    public void edit(User user) throws ValidationException {
+    public void edit(User user, PrincipalBeanInterface pb) throws ValidationException {
         String s = "edit user";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
+        }
+        if (user.getId() != pb.getId()) {
+            throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (user.getEmail() == null || user.getEmail().length() < 8 || user.getEmail().length() > 32) {
             throw new ValidationException("Email length has to be between 8 and 32 to " + s + ".");
@@ -59,12 +63,14 @@ public class UserService extends GenericUserServiceInterface {
     }
 
     @Override
-    public void editPassword(String pass, User user) throws ValidationException {
+    public void editPassword(User user, PrincipalBeanInterface pb, String pass) throws ValidationException {
         String s = "edit user password";
-        // null = user session
-        // user is connected
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
+        }        
+        if (user.getId() != pb.getId()) {
+            throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (user.getPass() == null || user.getPass().length() < 4 || user.getPass().length() > 20) {
             throw new ValidationException("Password length has to be between 4 and 20 to " + s + ".");
@@ -74,8 +80,8 @@ public class UserService extends GenericUserServiceInterface {
     }
 
     @Override
-    public User login(String nick, String pass) throws ValidationException {
-        return null;
+    public User getUserByNickname(String nick) {
+        return gDAO.findByNick(nick);
     }
 
     @Override

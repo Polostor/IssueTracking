@@ -1,17 +1,25 @@
 package org.issuetracking.service;
 
+import org.issuetracking.service.annotations.NotNull;
+import org.issuetracking.service.annotations.LoggedIn;
+import org.issuetracking.service.annotations.DateEarlier;
+import org.issuetracking.service.annotations.Length;
+import org.issuetracking.service.annotations.AllowedUser;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 
 import org.issuetracking.dao.CommentDAO;
 import org.issuetracking.model.Comment;
 
-import org.issuetracking.service.generic.GenericService;
 import org.issuetracking.service.generic.GenericCommentServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
-public class CommentService extends GenericService<Comment, CommentDAO> implements GenericCommentServiceInterface {
+@Interceptors(SecurityIntercept.class)
+public class CommentService extends GenericCommentServiceInterface {
 
     @Inject
     protected CommentDAO gDAO;
@@ -22,30 +30,28 @@ public class CommentService extends GenericService<Comment, CommentDAO> implemen
     }
 
     @Override
-    public void add(Comment comment) throws ValidationException {
-        String s = "add comment";
-        // null = user session
-        // user is connected
-        if (null != null){
-            throw new ValidationException("You must be logged in to " + s +".");
-        }
-        if (comment.getIssue().getAssignee().equals(null) || comment.getIssue().getReporter().equals(null)) {
-            throw new ValidationException("You are not allowed to " + s +".");
-        }
+    @LoggedIn
+    @NotNull(object = "getIssue()", input = "issue")
+    @AllowedUser(id1Method = "getIssue().getAssignee().getId()", 
+                id2Method = "getIssue().getReporter().getId()")
+    @NotNull(object = "getAuthor()", input = "author")
+    @Length(min = 4, max = 40, param1 = "", input = "Name") // param1 is a comment.getName().length()
+    @Length(min = 10, max = 200, param1 = "", input = "Comment") // param1 is a comment.getComment().length()
+    public void add(Comment comment, PrincipalBeanInterface pb) throws ValidationException {
+        comment.setCommentdate(new Date());
         create(comment);
     }
 
     @Override
-    public void edit(Comment comment) throws ValidationException {
-        String s = "edit comment";
-        // null = user session
-        // user is connected
-        if (null != null){
-            throw new ValidationException("You must be logged in to " + s +".");
-        }
-        if (comment.getIssue().getAssignee().equals(null) || comment.getIssue().getReporter().equals(null)) {
-            throw new ValidationException("You are not allowed to " + s +".");
-        }
+    @LoggedIn
+    @NotNull(object = "getIssue()", input = "issue")
+    @AllowedUser(id1Method = "getIssue().getAssignee().getId()", 
+                id2Method = "getIssue().getReporter().getId()")
+    @NotNull(object = "getAuthor()", input = "author")
+    @Length(min = 4, max = 40, param1 = "", input = "Name") // param1 is a comment.getName().length()
+    @Length(min = 10, max = 200, param1 = "", input = "Comment") // param1 is a comment.getComment().length()
+    @DateEarlier(date = ".getCommentdate()") // date is a comment.getCommentdate()
+    public void edit(Comment comment, PrincipalBeanInterface pb) throws ValidationException {
         update(comment);
     }
 

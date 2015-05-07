@@ -12,25 +12,34 @@
     <ui:define name="header_3">JSF made IssueTracking website</ui:define>
 
     <ui:define name="sidebar">
-        <c:if test="${!(request.isUserInRole('User') or request.isUserInRole('Admin'))}">
+        <c:if test="#{!(request.isUserInRole('User') or request.isUserInRole('Admin'))}">
             <h2>Web pages</h2>
+            <form method="post" action="j_security_check">
+
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="j_username" value="Username:"/>
+                    <h:inputText id="j_username" autocomplete="off"/>
+
+                    <h:outputLabel for="j_password" value="Password:"/>
+                    <h:inputSecret id="j_password" autocomplete="off"/>
+
+                    <h:outputText/>
+                    <h:panelGroup layout="block">
+                        <h:commandButton type="submit" value="LogIn"/>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+
+            </form>
         </c:if>
-        <c:if test="${request.isUserInRole('User') or request.isUserInRole('Admin')}">
+        <c:if test="#{request.isUserInRole('User') or request.isUserInRole('Admin')}">
             <h2>Logged in</h2>
             <ul>
-                <li>Name: <h:outputText value="#{request.remoteUser}" /> </li>
-                <li>Role: 
-                    <c:if test="${request.isUserInRole('User')}">
-                        <h:outputText value="User" />
-                    </c:if> 
-                    <c:if test="${request.isUserInRole('Admin')}">
-                        <h:outputText value="Admin" />
-                    </c:if></li>
+                <li>Nick: <h:outputText value="#{principalBean.username}" /> </li>
+                <li>Role: <h:outputText value="#{principalBean.role}" /> </li>
+                <li><h:link outcome="logout">Logout</h:link></li>
             </ul>
-            <h:form> 
-                <h:commandButton value="Log Out" action="#{request.logout()}" />
-                <h:commandButton value="Invalidate" action="#{session.invalidate()}" />
-            </h:form>
         </c:if></ui:define>
 
 

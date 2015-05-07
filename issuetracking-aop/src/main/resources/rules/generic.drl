@@ -1,0 +1,18 @@
+package org.issuetracking.model;
+
+global org.issuetracking.view.iface.PrincipalBeanInterface pb;
+
+
+dialect  "mvel"
+
+rule "You must be logged in"
+    when
+        pb.isLogged()
+    then
+end
+
+rule "You mustn't be logged in"
+    when
+        !pb.isLogged()
+    then
+end

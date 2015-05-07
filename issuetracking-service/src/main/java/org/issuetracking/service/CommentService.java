@@ -9,6 +9,7 @@ import org.issuetracking.dao.CommentDAO;
 import org.issuetracking.model.Comment;
 
 import org.issuetracking.service.generic.GenericCommentServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class CommentService extends GenericCommentServiceInterface {
@@ -22,16 +23,17 @@ public class CommentService extends GenericCommentServiceInterface {
     }
 
     @Override
-    public void add(Comment comment) throws ValidationException {
+    public void add(Comment comment, PrincipalBeanInterface pb) throws ValidationException {
         String s = "add comment";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
         if (comment.getIssue() == null) {
             throw new ValidationException("You have to select issue to  " + s + ".");
         }
-        if (comment.getIssue().getAssignee() == null || comment.getIssue().getReporter() == null) {
+        if (!(comment.getIssue().getAssignee().getId() == pb.getId() 
+                || comment.getIssue().getReporter().getId() == pb.getId())) {
             throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (comment.getAuthor() == null) {
@@ -50,16 +52,17 @@ public class CommentService extends GenericCommentServiceInterface {
     }
 
     @Override
-    public void edit(Comment comment) throws ValidationException {
+    public void edit(Comment comment, PrincipalBeanInterface pb) throws ValidationException {
         String s = "edit comment";
-        // null = user session
-        if (null != null) {
+        
+        if (!pb.isLogged()) {
             throw new ValidationException("You must be logged in to " + s + ".");
         }
         if (comment.getIssue() == null) {
             throw new ValidationException("You have to select issue to  " + s + ".");
         }
-        if (comment.getIssue().getAssignee() == null || comment.getIssue().getReporter() == null) {
+        if (!(comment.getIssue().getAssignee().getId() == pb.getId() 
+                || comment.getIssue().getReporter().getId() == pb.getId())) {
             throw new ValidationException("You are not allowed to " + s + ".");
         }
         if (comment.getAuthor() == null) {

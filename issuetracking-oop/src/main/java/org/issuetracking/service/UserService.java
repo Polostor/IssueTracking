@@ -8,6 +8,7 @@ import org.issuetracking.dao.UserDAO;
 import org.issuetracking.model.User;
 
 import org.issuetracking.service.generic.GenericUserServiceInterface;
+import org.issuetracking.view.iface.PrincipalBeanInterface;
 
 @Stateless
 public class UserService extends GenericUserServiceInterface{
@@ -21,44 +22,42 @@ public class UserService extends GenericUserServiceInterface{
     }
 
     @Override
-    public void add(User user) throws ValidationException {
-        String s = "create user";
-        
-        Validator.isNotLoggedIn(s);
-        Validator.isBetween(user.getNick(), 4, 20, "Nickname", s);
-        Validator.isBetween(user.getPass(), 4, 20, "Password", s);
-        Validator.isBetween(user.getEmail(), 8, 32, "Email", s);
+    public void add(User user, PrincipalBeanInterface pb) throws ValidationException {
+        Validator.isNotLoggedIn(pb);
+        Validator.isBetween(user.getNick(), 4, 20, "Nickname");
+        Validator.isBetween(user.getPass(), 4, 20, "Password");
+        Validator.isBetween(user.getEmail(), 8, 32, "Email");
         
         create(user);
     }
 
     @Override
-    public void edit(User user) throws ValidationException {
+    public void edit(User user, PrincipalBeanInterface pb) throws ValidationException {
         String s = "edit user";
         
-        Validator.isLoggedIn(s);
-        Validator.isAllowedUser(user, s);
-        Validator.isBetween(user.getNick(), 4, 20, "Nickname", s);
-        Validator.isBetween(user.getPass(), 4, 20, "Password", s);
-        Validator.isBetween(user.getEmail(), 8, 32, "Email", s);
+        Validator.isLoggedIn(pb);
+        Validator.isAllowedUser(user, pb);
+        Validator.isBetween(user.getNick(), 4, 20, "Nickname");
+        Validator.isBetween(user.getPass(), 4, 20, "Password");
+        Validator.isBetween(user.getEmail(), 8, 32, "Email");
         
         update(user);
     }
 
     @Override
-    public void editPassword(String pass, User user) throws ValidationException {
+    public User getUserByNickname(String nick) {
+        return gDAO.findByNick(nick);
+    }
+
+    @Override
+    public void editPassword(User user, PrincipalBeanInterface pb, String pass) throws ValidationException {
         String s = "edit user password";
         
-        Validator.isLoggedIn(s);
-        Validator.isAllowedUser(user, s);
+        Validator.isLoggedIn(pb);
+        Validator.isAllowedUser(user, pb);
         
         user.setPass(pass);
         update(user);
-    }
-
-    @Override
-    public User login(String nick, String pass) throws ValidationException {
-        return null;
     }
 
     @Override
